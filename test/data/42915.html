@@ -1,0 +1,613 @@
+<HTML><HEAD><TITLE>[ruby-dev:42915] min(n), max(n), min_by(n), max_by(n)</TITLE>
+<script language="javascript">
+<!--
+  function chk() {
+    var name = navigator.appName;
+    var ver = navigator.appVersion;
+    if (name.charAt(0) == "M") {
+      if (ver.charAt(0) >= 5 ||
+        ver.indexOf(" 5.5") >= 0 ||
+        ver.indexOf(" 6") >= 0
+         )
+        return(true);
+      return(false);
+    } else if (name.charAt(0) == "N") {
+      if (ver.charAt(0) >= 5)
+        return(true);
+      return(false);
+    } else {
+      return(false);
+    }
+  }
+
+  function hilight(x) {
+    if (!chk()) return;
+    if (parent) {
+      try {
+        parent.frames[0].hilight(x);
+      } catch(e) {
+       //alert(e);
+      }
+    }
+  }
+
+  //Navigation Bar
+  var IE = document.all;
+  var PosTimer;
+  function stickNavi() {
+    var y = document.body.scrollTop;
+    var s = document.getElementById('navi').style
+    s.top = y + 7;
+    s.left = 8;
+  }
+  function stickNaviLoop() {
+    if (PosTimer){clearTimeout(PosTimer);}
+    stickNavi();
+    PosTimer = setTimeout("stickNaviLoop()", 10);
+  }
+
+  function setNavi() {
+    if (IE) {document.body.onscroll = stickNavi;}
+    else {stickNaviLoop();}
+  }
+
+//-->
+</script>
+<link rel="stylesheet" href="http://blade.nagaokaut.ac.jp/css/blade.css" type="text/css" title="blade"></HEAD><BODY onLoad="setNavi()">
+<A NAME=head></A><div id="navi" style="position:absolute;top:7px;left:8px;"><A HREF="42914" class="a-button" onclick="hilight(42914)"><span id="normal" title="&lt;">&nbsp;&lt;&nbsp;</span></A><A HREF="/ruby/ruby-dev/42801-43000.shtml#42915" class="a-button" target="_top"><span id="normal" title="^">^</span></A><A HREF="42916" class="a-button" onclick="hilight(42916)"><span id="normal" title="&gt;">&nbsp;&gt;&nbsp;</span></A> <a href="42924" onclick="hilight(42924)" class="a-button"><span id="red" title="[previous]">&nbsp;P&nbsp;</span></a><a href="42916" onclick="hilight(42916)" class="a-button"><span id="green" title="[next]">&nbsp;N&nbsp;</span></a> <a href="42912" onclick="hilight(42912)" class="a-button"><span id="red" title="[previous thread]">|&lt;</span></a><a href="42922" onclick="hilight(42922)" class="a-button"><span id="red" title="[next thread]">&gt;|</span></a><span id="normal" title="[parent]">^</span><a href="42916" onclick="hilight(42916)" class="a-button"><span id="normal" title="[child]">_</span></a><span id="normal" title="[elder]">&gt;</span><span id="normal" title="[younger]">&lt;</span> <a href="/cgi-bin/vframe.rb/ruby/ruby-dev/42915?42780-42969" target="_top" class="a-button"><span id="normal" title="[thread frame]">---</span></a><a href="/cgi-bin/vframe.rb/ruby/ruby-dev/42915?42780-42969+split-mode-vertical" target="_top" class="a-button"><span id="normal" title="[thread frame vertical]">&nbsp;|&nbsp;</span></a><a href="42915" target="_top" onclick="hilight(42915)" class="a-button"><span id="normal" title="[frame close]">&nbsp;~&nbsp;</span></a><a href="/ruby/ruby-dev/index.shtml" target="_top" class="a-button"><span id="normal" title="[index]">.</span></a><a href="/ruby/ruby-dev/../index.shtml" target="_top" class="a-button"><span id="normal" title="[iindex]">..</span></a><a href="/cgi-bin/scat.rb/ruby/ruby-dev/42915?help" class="a-button"><span id="normal" title="[Help]">Help</span></a></div>
+<div id="header"><br>
+Subject: [ruby-dev:<strong>42915</strong>] <strong>min(n), max(n), min_by(n), max_by(n)</strong><br>
+From: <strong>Tanaka Akira </strong>&lt;akr fsij.org&gt;<br>
+Date: Sat, 1 Jan 2011 10:49:22 +0900</div>
+<pre>思ったんですが、
+Enumerable#min
+Enumerable#max
+Enumerable#min_by
+Enumerable#max_by
+に、いくつとりだすか指定できる引数をつけるのはどうでしょうか。
+
+p [3,1,4,1,5,9,2,6,5,3,5].min(3) #=&gt; [1, 1, 2]
+p [3,1,4,1,5,9,2,6,5,3,5].max(3) #=&gt; [5, 6, 9]
+
+first や last も引数をとるようになっていますから、それと似たかんじです。
+
+max_by は <A HREF="/cgi-bin/scat.rb/ruby/ruby-dev/42844">[ruby-dev:42844]</A> で使った Depq.nlargest のかわりに使えます。
+
+% ./ruby -e '
+module Enumerable
+  def sample2(n)
+    self.max_by(n) {|e| rand ** (1.0/(yield(e))) }
+  end
+end
+
+enum = (-20..20).to_a*10000
+a = enum.sample2(20000) {|e| Math.exp(-(e/5.0)**2) }
+h = Hash.new(0)
+a.each {|e| h[e] += 1 }
+-10.upto(10) {|x| puts &quot;*&quot; * (h[x]/30.0).to_i }
+'
+*
+***
+******
+***********
+******************
+***************************
+****************************************
+***************************************************
+*************************************************************
+********************************************************************
+************************************************************************
+************************************************************************
+****************************************************************
+****************************************************
+*****************************************
+****************************
+******************
+************
+******
+***
+*
+
+中身は quick sort をベースにしたやりかたを使っています。
+
+Index: <span style="color: #007700;">enum.c</span>
+===================================================================
+--- enum.c	(revision 30439)
++++ enum.c	(working copy)
+@@ -1104,6 +1104,176 @@ enum_none(VALUE obj)
+     return result;
+ }
+
++struct nmin_data {
++  long n;
++  long bufmax;
++  long curlen;
++  VALUE buf;
++  int (*cmpfunc)(const void *, const void *, void *);
++  int rev; /* max if 1 */
++  int by; /* min_by if 1 */
++  const char *method;
++};
++
++static int
++nmin_cmp(const void *ap, const void *bp, void *_data)
++{
++    struct nmin_data *data = (struct nmin_data *)_data;
++    VALUE a = *(const VALUE *)ap, b = *(const VALUE *)bp;
++    VALUE cmp = rb_funcall(a, id_cmp, 1, b);
++    if (RBASIC(data-&gt;buf)-&gt;klass) {
++	rb_raise(rb_eRuntimeError, &quot;%s reentered&quot;, data-&gt;method);
++    }
++    return rb_cmpint(cmp, a, b);
++}
++
++static int
++nmin_block_cmp(const void *ap, const void *bp, void *_data)
++{
++    struct nmin_data *data = (struct nmin_data *)_data;
++    VALUE a = *(const VALUE *)ap, b = *(const VALUE *)bp;
++    VALUE cmp = rb_yield_values(2, a, b);
++    if (RBASIC(data-&gt;buf)-&gt;klass) {
++	rb_raise(rb_eRuntimeError, &quot;%s reentered&quot;, data-&gt;method);
++    }
++    return rb_cmpint(cmp, a, b);
++}
++
++
++static void
++nmin_filter(struct nmin_data *data)
++{
++    long n;
++    VALUE *beg;
++    int eltsize;
++    long numelts;
++
++    long left, right;
++
++    long i;
++
++    if (data-&gt;curlen &lt;= data-&gt;n)
++	return;
++
++    n = data-&gt;n;
++    beg = RARRAY_PTR(data-&gt;buf);
++    eltsize = data-&gt;by ? 2 : 1;
++    numelts = data-&gt;curlen;
++
++    left = 0;
++    right = numelts-1;
++
++#define GETPTR(i) (beg+(i)*eltsize)
++
++#define SWAP(i, j) do { \
++    VALUE tmp[2]; \
++    memcpy(tmp, GETPTR(i), sizeof(VALUE)*eltsize); \
++    memcpy(GETPTR(i), GETPTR(j), sizeof(VALUE)*eltsize); \
++    memcpy(GETPTR(j), tmp, sizeof(VALUE)*eltsize); \
++} while (0)
++
++    while (1) {
++	long pivot_index = left + (right-left)/2;
++	long store_index;
++
++	SWAP(pivot_index, right);
++	pivot_index = right;
++
++	store_index = left;
++	for (i = left; i &lt; right; i++) {
++	    int c = data-&gt;cmpfunc(GETPTR(i), GETPTR(pivot_index), data);
++	    if (data-&gt;rev)
++		c = -c;
++	    if (c &lt;= 0) {
++		SWAP(i, store_index);
++		store_index++;
++	    }
++	}
++	SWAP(store_index, right);
++
++	if (store_index == n || store_index == n-1)
++	    break;
++
++	if (n &lt; store_index) {
++	    right = store_index-1;
++	}
++	else {
++	    left = store_index+1;
++	}
++    }
++#undef GETPTR
++#undef SWAP
++
++    data-&gt;curlen = data-&gt;n;
++    ary_cutoff(data-&gt;buf, data-&gt;n * eltsize);
++}
++
++static VALUE
++nmin_i(VALUE i, VALUE *_data, int argc, VALUE *argv)
++{
++    struct nmin_data *data = (struct nmin_data *)_data;
++
++    ENUM_WANT_SVALUE();
++
++    if (data-&gt;by)
++	rb_ary_push(data-&gt;buf, rb_yield(i));
++    rb_ary_push(data-&gt;buf, i);
++
++    data-&gt;curlen++;
++
++    if (data-&gt;curlen == data-&gt;bufmax) {
++	nmin_filter(data);
++    }
++
++    return Qnil;
++}
++
++static VALUE
++nmin_run(VALUE obj, VALUE num, int by, int rev)
++{
++    VALUE result;
++    struct nmin_data data;
++
++    data.n = NUM2LONG(num);
++    if (data.n &lt; 0)
++        rb_raise(rb_eArgError, &quot;negative size (%ld)&quot;, data.n);
++    if (data.n == 0)
++        return rb_ary_new2(0);
++    if (LONG_MAX/4/(by ? 2 : 1) &lt; data.n)
++        rb_raise(rb_eArgError, &quot;too big size&quot;);
++    data.bufmax = data.n * 4;
++    data.curlen = 0;
++    data.buf = rb_ary_tmp_new(data.bufmax * (by ? 2 : 1));
++    data.cmpfunc = by ? nmin_cmp :
++                   rb_block_given_p() ? nmin_block_cmp :
++		   nmin_cmp;
++    data.rev = rev;
++    data.by = by;
++    data.method = rev ? (by ? &quot;max_by&quot; : &quot;max&quot;)
++                      : (by ? &quot;min_by&quot; : &quot;min&quot;);
++    rb_block_call(obj, id_each, 0, 0, nmin_i, (VALUE)&amp;data);
++    nmin_filter(&amp;data);
++    result = data.buf;
++    if (by) {
++	long i;
++	ruby_qsort(RARRAY_PTR(result),
++	           RARRAY_LEN(result)/2,
++		   sizeof(VALUE)*2,
++		   data.cmpfunc, (void *)&amp;data);
++	for (i=1; i&lt;RARRAY_LEN(result); i+=2) {
++	    RARRAY_PTR(result)[i/2] = RARRAY_PTR(result)[i];
++	}
++	ary_cutoff(result, RARRAY_LEN(result)/2);
++    }
++    else {
++	ruby_qsort(RARRAY_PTR(result), RARRAY_LEN(result), sizeof(VALUE),
++		   data.cmpfunc, (void *)&amp;data);
++    }
++    RBASIC(result)-&gt;klass = rb_cArray;
++    return result;
++
++}
++
+ static VALUE
+ min_i(VALUE i, VALUE *memo, int argc, VALUE *argv)
+ {
+@@ -1145,8 +1315,10 @@ min_ii(VALUE i, VALUE *memo, int argc, V
+
+ /*
+  *  call-seq:
+- *     enum.min                    -&gt; obj
+- *     enum.min {| a,b | block }   -&gt; obj
++ *     enum.min                     -&gt; obj
++ *     enum.min {| a,b | block }    -&gt; obj
++ *     enum.min(n)                  -&gt; array
++ *     enum.min(n) {| a,b | block } -&gt; array
+  *
+  *  Returns the object in &lt;i&gt;enum&lt;/i&gt; with the minimum value. The
+  *  first form assumes all objects implement &lt;code&gt;Comparable&lt;/code&gt;;
+@@ -1155,12 +1327,25 @@ min_ii(VALUE i, VALUE *memo, int argc, V
+  *     a = %w(albatross dog horse)
+  *     a.min                                  #=&gt; &quot;albatross&quot;
+  *     a.min {|a,b| a.length &lt;=&gt; b.length }   #=&gt; &quot;dog&quot;
++ *
++ *  If the +n+ argument is given, minimum +n+ elements are returned
++ *  as an array.
++ *
++ *     a = %w[albatross dog horse]
++ *     a.min(2)                                  #=&gt; [&quot;albatross&quot;, &quot;dog&quot;]
++ *     a.min(2) {|a, b| a.length &lt;=&gt; b.length }  #=&gt; [&quot;dog&quot;, &quot;horse&quot;]
+  */
+
+ static VALUE
+-enum_min(VALUE obj)
++enum_min(int argc, VALUE *argv, VALUE obj)
+ {
+     VALUE result = Qundef;
++    VALUE num;
++
++    rb_scan_args(argc, argv, &quot;01&quot;, &amp;num);
++
++    if (!NIL_P(num))
++	return nmin_run(obj, num, 0, 0);
+
+     if (rb_block_given_p()) {
+ 	rb_block_call(obj, id_each, 0, 0, min_ii, (VALUE)&amp;result);
+@@ -1214,6 +1399,8 @@ max_ii(VALUE i, VALUE *memo, int argc, V
+  *  call-seq:
+  *     enum.max                   -&gt; obj
+  *     enum.max {|a,b| block }    -&gt; obj
++ *     enum.max(n)                -&gt; obj
++ *     enum.max(n) {|a,b| block } -&gt; obj
+  *
+  *  Returns the object in _enum_ with the maximum value. The
+  *  first form assumes all objects implement &lt;code&gt;Comparable&lt;/code&gt;;
+@@ -1222,12 +1409,25 @@ max_ii(VALUE i, VALUE *memo, int argc, V
+  *     a = %w(albatross dog horse)
+  *     a.max                                  #=&gt; &quot;horse&quot;
+  *     a.max {|a,b| a.length &lt;=&gt; b.length }   #=&gt; &quot;albatross&quot;
++ *
++ *  If the +n+ argument is given, maximum +n+ elements are returned
++ *  as an array.
++ *
++ *     a = %w[albatross dog horse]
++ *     a.max(2)                                  #=&gt; [&quot;dog&quot;, &quot;horse&quot;]
++ *     a.max(2) {|a, b| a.length &lt;=&gt; b.length }  #=&gt; [&quot;horse&quot;, &quot;albatross&quot;]
+  */
+
+ static VALUE
+-enum_max(VALUE obj)
++enum_max(int argc, VALUE *argv, VALUE obj)
+ {
+     VALUE result = Qundef;
++    VALUE num;
++
++    rb_scan_args(argc, argv, &quot;01&quot;, &amp;num);
++
++    if (!NIL_P(num))
++       return nmin_run(obj, num, 0, 1);
+
+     if (rb_block_given_p()) {
+ 	rb_block_call(obj, id_each, 0, 0, max_ii, (VALUE)&amp;result);
+@@ -1410,8 +1610,10 @@ min_by_i(VALUE i, VALUE *memo, int argc,
+
+ /*
+  *  call-seq:
+- *     enum.min_by {|obj| block }   -&gt; obj
+- *     enum.min_by                  -&gt; an_enumerator
++ *     enum.min_by {|obj| block }      -&gt; obj
++ *     enum.min_by                     -&gt; an_enumerator
++ *     enum.min_by(n) {|obj| block }   -&gt; array
++ *     enum.min_by(n)                  -&gt; an_enumerator
+  *
+  *  Returns the object in &lt;i&gt;enum&lt;/i&gt; that gives the minimum
+  *  value from the given block.
+@@ -1420,14 +1622,26 @@ min_by_i(VALUE i, VALUE *memo, int argc,
+  *
+  *     a = %w(albatross dog horse)
+  *     a.min_by {|x| x.length }   #=&gt; &quot;dog&quot;
++ *
++ *  If the +n+ argument is given, minimum +n+ elements are returned
++ *  as an array.
++ *
++ *     a = %w[albatross dog horse]
++ *     p a.min_by(2) {|x| x.length } #=&gt; [&quot;dog&quot;, &quot;horse&quot;]
+  */
+
+ static VALUE
+-enum_min_by(VALUE obj)
++enum_min_by(int argc, VALUE *argv, VALUE obj)
+ {
+     VALUE memo[2];
++    VALUE num;
+
+-    RETURN_ENUMERATOR(obj, 0, 0);
++    rb_scan_args(argc, argv, &quot;01&quot;, &amp;num);
++
++    RETURN_ENUMERATOR(obj, argc, argv);
++
++    if (!NIL_P(num))
++	return nmin_run(obj, num, 1, 0);
+
+     memo[0] = Qundef;
+     memo[1] = Qnil;
+@@ -1456,8 +1670,10 @@ max_by_i(VALUE i, VALUE *memo, int argc,
+
+ /*
+  *  call-seq:
+- *     enum.max_by {|obj| block }   -&gt; obj
+- *     enum.max_by                  -&gt; an_enumerator
++ *     enum.max_by {|obj| block }      -&gt; obj
++ *     enum.max_by                     -&gt; an_enumerator
++ *     enum.max_by(n) {|obj| block }   -&gt; obj
++ *     enum.max_by(n)                  -&gt; an_enumerator
+  *
+  *  Returns the object in &lt;i&gt;enum&lt;/i&gt; that gives the maximum
+  *  value from the given block.
+@@ -1466,14 +1682,26 @@ max_by_i(VALUE i, VALUE *memo, int argc,
+  *
+  *     a = %w(albatross dog horse)
+  *     a.max_by {|x| x.length }   #=&gt; &quot;albatross&quot;
++ *
++ *  If the +n+ argument is given, minimum +n+ elements are returned
++ *  as an array.
++ *
++ *     a = %w[albatross dog horse]
++ *     a.max_by(2) {|x| x.length } #=&gt; [&quot;horse&quot;, &quot;albatross&quot;]
+  */
+
+ static VALUE
+-enum_max_by(VALUE obj)
++enum_max_by(int argc, VALUE *argv, VALUE obj)
+ {
+     VALUE memo[2];
++    VALUE num;
+
+-    RETURN_ENUMERATOR(obj, 0, 0);
++    rb_scan_args(argc, argv, &quot;01&quot;, &amp;num);
++
++    RETURN_ENUMERATOR(obj, argc, argv);
++
++    if (!NIL_P(num))
++       return nmin_run(obj, num, 1, 1);
+
+     memo[0] = Qundef;
+     memo[1] = Qnil;
+@@ -2692,11 +2920,11 @@ Init_Enumerable(void)
+     rb_define_method(rb_mEnumerable, &quot;any?&quot;, enum_any, 0);
+     rb_define_method(rb_mEnumerable, &quot;one?&quot;, enum_one, 0);
+     rb_define_method(rb_mEnumerable, &quot;none?&quot;, enum_none, 0);
+-    rb_define_method(rb_mEnumerable, &quot;min&quot;, enum_min, 0);
+-    rb_define_method(rb_mEnumerable, &quot;max&quot;, enum_max, 0);
++    rb_define_method(rb_mEnumerable, &quot;min&quot;, enum_min, -1);
++    rb_define_method(rb_mEnumerable, &quot;max&quot;, enum_max, -1);
+     rb_define_method(rb_mEnumerable, &quot;minmax&quot;, enum_minmax, 0);
+-    rb_define_method(rb_mEnumerable, &quot;min_by&quot;, enum_min_by, 0);
+-    rb_define_method(rb_mEnumerable, &quot;max_by&quot;, enum_max_by, 0);
++    rb_define_method(rb_mEnumerable, &quot;min_by&quot;, enum_min_by, -1);
++    rb_define_method(rb_mEnumerable, &quot;max_by&quot;, enum_max_by, -1);
+     rb_define_method(rb_mEnumerable, &quot;minmax_by&quot;, enum_minmax_by, 0);
+     rb_define_method(rb_mEnumerable, &quot;member?&quot;, enum_member, 1);
+     rb_define_method(rb_mEnumerable, &quot;include?&quot;, enum_member, 1);
+Index: <span style="color: #007700;">range.c</span>
+===================================================================
+--- range.c	(revision 30439)
++++ range.c	(working copy)
+@@ -612,8 +612,10 @@ range_last(int argc, VALUE *argv, VALUE
+
+ /*
+  *  call-seq:
+- *     rng.min                    -&gt; obj
+- *     rng.min {| a,b | block }   -&gt; obj
++ *     rng.min                       -&gt; obj
++ *     rng.min {| a,b | block }      -&gt; obj
++ *     rng.min(n)                    -&gt; array
++ *     rng.min(n) {| a,b | block }   -&gt; array
+  *
+  *  Returns the minimum value in &lt;i&gt;rng&lt;/i&gt;. The second uses
+  *  the block to compare values.  Returns nil if the first
+@@ -623,10 +625,13 @@ range_last(int argc, VALUE *argv, VALUE
+
+
+ static VALUE
+-range_min(VALUE range)
++range_min(int argc, VALUE *argv, VALUE range)
+ {
+     if (rb_block_given_p()) {
+-	return rb_call_super(0, 0);
++	return rb_call_super(argc, argv);
++    }
++    else if (argc != 0) {
++	return range_first(argc, argv, range);
+     }
+     else {
+ 	VALUE b = RANGE_BEG(range);
+@@ -641,8 +646,10 @@ range_min(VALUE range)
+
+ /*
+  *  call-seq:
+- *     rng.max                    -&gt; obj
+- *     rng.max {| a,b | block }   -&gt; obj
++ *     rng.max                       -&gt; obj
++ *     rng.max {| a,b | block }      -&gt; obj
++ *     rng.max(n)                    -&gt; obj
++ *     rng.max(n) {| a,b | block }   -&gt; obj
+  *
+  *  Returns the maximum value in &lt;i&gt;rng&lt;/i&gt;. The second uses
+  *  the block to compare values.  Returns nil if the first
+@@ -651,13 +658,13 @@ range_min(VALUE range)
+  */
+
+ static VALUE
+-range_max(VALUE range)
++range_max(int argc, VALUE *argv, VALUE range)
+ {
+     VALUE e = RANGE_END(range);
+     int nm = FIXNUM_P(e) || rb_obj_is_kind_of(e, rb_cNumeric);
+
+-    if (rb_block_given_p() || (EXCL(range) &amp;&amp; !nm)) {
+-	return rb_call_super(0, 0);
++    if (rb_block_given_p() || (EXCL(range) &amp;&amp; !nm) || argc) {
++	return rb_call_super(argc, argv);
+     }
+     else {
+ 	VALUE b = RANGE_BEG(range);
+@@ -1041,8 +1048,8 @@ Init_Range(void)
+     rb_define_method(rb_cRange, &quot;end&quot;, range_end, 0);
+     rb_define_method(rb_cRange, &quot;first&quot;, range_first, -1);
+     rb_define_method(rb_cRange, &quot;last&quot;, range_last, -1);
+-    rb_define_method(rb_cRange, &quot;min&quot;, range_min, 0);
+-    rb_define_method(rb_cRange, &quot;max&quot;, range_max, 0);
++    rb_define_method(rb_cRange, &quot;min&quot;, range_min, -1);
++    rb_define_method(rb_cRange, &quot;max&quot;, range_max, -1);
+     rb_define_method(rb_cRange, &quot;to_s&quot;, range_to_s, 0);
+     rb_define_method(rb_cRange, &quot;inspect&quot;, range_inspect, 0);
+
+Index: <span style="color: #007700;">test/ruby/test_range.rb</span>
+===================================================================
+--- test/ruby/test_range.rb	(revision 30439)
++++ test/ruby/test_range.rb	(working copy)
+@@ -58,6 +58,9 @@ class TestRange &lt; Test::Unit::TestCase
+
+     assert_equal(0, (0..0).min)
+     assert_equal(nil, (0...0).min)
++
++    assert_equal([0,1,2], (0..10).min(3))
++    assert_equal([0,1], (0..1).min(3))
+   end
+
+   def test_max
+@@ -73,6 +76,9 @@ class TestRange &lt; Test::Unit::TestCase
+
+     assert_equal(0, (0..0).max)
+     assert_equal(nil, (0...0).max)
++
++    assert_equal([8,9,10], (0..10).max(3))
++    assert_equal([7,8,9], (0...10).max(3))
+   end
+
+   def test_initialize_twice
+Index: <span style="color: #007700;">test/ruby/test_enum.rb</span>
+===================================================================
+--- test/ruby/test_enum.rb	(revision 30439)
++++ test/ruby/test_enum.rb	(working copy)
+@@ -147,6 +147,9 @@ class TestEnumerable &lt; Test::Unit::TestC
+     assert_equal(&quot;albatross&quot;, ary.min)
+     assert_equal(&quot;dog&quot;, ary.min {|a,b| a.length &lt;=&gt; b.length })
+     assert_equal(1, [3,2,1].min)
++    assert_equal(%w[albatross dog], ary.min(2))
++    assert_equal(%w[dog horse],
++                 ary.min(2) {|a,b| a.length &lt;=&gt; b.length })
+   end
+
+   def test_max
+@@ -156,6 +159,9 @@ class TestEnumerable &lt; Test::Unit::TestC
+     assert_equal(&quot;horse&quot;, ary.max)
+     assert_equal(&quot;albatross&quot;, ary.max {|a,b| a.length &lt;=&gt; b.length })
+     assert_equal(1, [3,2,1].max{|a,b| b &lt;=&gt; a })
++    assert_equal(%w[dog horse], ary.max(2))
++    assert_equal(%w[horse albatross],
++                 ary.max(2) {|a,b| a.length &lt;=&gt; b.length })
+   end
+
+   def test_minmax
+@@ -174,6 +180,7 @@ class TestEnumerable &lt; Test::Unit::TestC
+     a = %w(albatross dog horse)
+     assert_equal(&quot;dog&quot;, a.min_by {|x| x.length })
+     assert_equal(3, [2,3,1].min_by {|x| -x })
++    assert_equal(%w[dog horse], a.min_by(2) {|x| x.length })
+   end
+
+   def test_max_by
+@@ -181,6 +188,7 @@ class TestEnumerable &lt; Test::Unit::TestC
+     a = %w(albatross dog horse)
+     assert_equal(&quot;albatross&quot;, a.max_by {|x| x.length })
+     assert_equal(1, [2,3,1].max_by {|x| -x })
++    assert_equal(%w[horse albatross], a.max_by(2) {|x| x.length })
+   end
+
+   def test_minmax_by
+
+-- 
+[田中 哲][たなか あきら][Tanaka Akira]
+
+<a name=tail></a></pre>
+</BODY></HTML>

@@ -4,6 +4,8 @@ require 'blade.rb'
 require 'fakeweb'
 
 {
+  "test/data/42915.html" =>
+    "http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/42915",
   "test/data/42900.html" =>
     "http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/42900",
   "test/data/index.shtml" =>
@@ -50,5 +52,11 @@ class BladeTest < ActiveSupport::TestCase
 
   test "Blade#latest_number returns the latest mail number" do
     assert_equal Blade.latest_number, 42969
+  end
+
+  test "Blade should parse ruby-dev:42915" do
+    assert_nothing_raised do
+      Blade.new(42915).create
+    end
   end
 end

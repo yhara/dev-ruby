@@ -2,6 +2,18 @@ require 'open-uri'
 require 'nokogiri'
 
 class Blade
+  def self.update
+    latest = self.latest_number
+    last = Mail.maximum("number") || (latest - 100)
+
+    puts "last: #{last} latest: #{latest}"
+
+    (last+1).upto(latest) do |i|
+      puts "retrieving #{i}..."
+      Blade.new(i).create
+    end
+  end
+
   def self.latest_number
     doc = Nokogiri::HTML(open(self.latest_index_url).read)
     link = (doc/:a).find_all{|a| a[:href] =~ /scat\.rb/}.last
@@ -20,7 +32,8 @@ class Blade
   end
 
   def get
-    open("http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{@number}").read.encode("utf-8", "euc-jp")
+    html = open("http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{@number}", "r:euc-jp").read
+    html.encode("utf-8")
   end
 
   def parse
