@@ -1,0 +1,107 @@
+<html><head>
+<title>ruby-dev</title>
+<meta http-equiv="Content-Type" content="text/html"; charset="euc-jp">
+</head>
+
+<body LANG="ja" bgcolor="#FFF7F7">
+<h2><a href="..">ruby</a>/ruby-dev</h2>
+
+<form name="form1" method="post" action="/cgi-bin/show-article.rb">
+  Jump to [ruby-dev: 
+  <input type="text" name="article_number" size="7" value="">
+  ] 
+  <input type="submit" name="show" value="Go">
+  <input type="hidden" name="replace" value="/cgi-bin/scat.rb/ruby">
+  <input type="hidden" name="list_name" value="ruby-dev">
+</form>
+
+<form method="get" action="/cgi-bin/vframe.rb" target="_top">
+Search (Namazu): <input type="text" name="key" size="25">
+<input type="hidden" name="cginame" value="namazu.rb">
+<input type="submit" name="submit" value="Search">
+<input type="hidden" name="dbname" value="ruby-dev">
+<input type="hidden" name="max" value="50">
+<input type="hidden" name="whence" value="0">
+</form>
+<p> <a href="threads.html"><font color="#FF0000" size="+1">=&gt; Threading List</font></a></p>
+<p>
+  <table border=1 cellspacing=0 cellpadding=5>
+<tr><td align="right"><a href="42801-43000.shtml#latest">42801-43000</a></td><td align="right"><a href="1-200.shtml">1-200</a></td><td align="right"><a href="201-400.shtml">201-400</a></td><td align="right"><a href="401-600.shtml">401-600</a></td><td align="right"><a href="601-800.shtml">601-800</a></td></tr>
+<tr><td align="right"><a href="801-1000.shtml">801-1000</a></td><td align="right"><a href="1001-1200.shtml">1001-1200</a></td><td align="right"><a href="1201-1400.shtml">1201-1400</a></td><td align="right"><a href="1401-1600.shtml">1401-1600</a></td><td align="right"><a href="1601-1800.shtml">1601-1800</a></td></tr>
+<tr><td align="right"><a href="1801-2000.shtml">1801-2000</a></td><td align="right"><a href="2001-2200.shtml">2001-2200</a></td><td align="right"><a href="2201-2400.shtml">2201-2400</a></td><td align="right"><a href="2401-2600.shtml">2401-2600</a></td><td align="right"><a href="2601-2800.shtml">2601-2800</a></td></tr>
+<tr><td align="right"><a href="2801-3000.shtml">2801-3000</a></td><td align="right"><a href="3001-3200.shtml">3001-3200</a></td><td align="right"><a href="3201-3400.shtml">3201-3400</a></td><td align="right"><a href="3401-3600.shtml">3401-3600</a></td><td align="right"><a href="3601-3800.shtml">3601-3800</a></td></tr>
+<tr><td align="right"><a href="3801-4000.shtml">3801-4000</a></td><td align="right"><a href="4001-4200.shtml">4001-4200</a></td><td align="right"><a href="4201-4400.shtml">4201-4400</a></td><td align="right"><a href="4401-4600.shtml">4401-4600</a></td><td align="right"><a href="4601-4800.shtml">4601-4800</a></td></tr>
+<tr><td align="right"><a href="4801-5000.shtml">4801-5000</a></td><td align="right"><a href="5001-5200.shtml">5001-5200</a></td><td align="right"><a href="5201-5400.shtml">5201-5400</a></td><td align="right"><a href="5401-5600.shtml">5401-5600</a></td><td align="right"><a href="5601-5800.shtml">5601-5800</a></td></tr>
+<tr><td align="right"><a href="5801-6000.shtml">5801-6000</a></td><td align="right"><a href="6001-6200.shtml">6001-6200</a></td><td align="right"><a href="6201-6400.shtml">6201-6400</a></td><td align="right"><a href="6401-6600.shtml">6401-6600</a></td><td align="right"><a href="6601-6800.shtml">6601-6800</a></td></tr>
+<tr><td align="right"><a href="6801-7000.shtml">6801-7000</a></td><td align="right"><a href="7001-7200.shtml">7001-7200</a></td><td align="right"><a href="7201-7400.shtml">7201-7400</a></td><td align="right"><a href="7401-7600.shtml">7401-7600</a></td><td align="right"><a href="7601-7800.shtml">7601-7800</a></td></tr>
+<tr><td align="right"><a href="7801-8000.shtml">7801-8000</a></td><td align="right"><a href="8001-8200.shtml">8001-8200</a></td><td align="right"><a href="8201-8400.shtml">8201-8400</a></td><td align="right"><a href="8401-8600.shtml">8401-8600</a></td><td align="right"><a href="8601-8800.shtml">8601-8800</a></td></tr>
+<tr><td align="right"><a href="8801-9000.shtml">8801-9000</a></td><td align="right"><a href="9001-9200.shtml">9001-9200</a></td><td align="right"><a href="9201-9400.shtml">9201-9400</a></td><td align="right"><a href="9401-9600.shtml">9401-9600</a></td><td align="right"><a href="9601-9800.shtml">9601-9800</a></td></tr>
+<tr><td align="right"><a href="9801-10000.shtml">9801-10000</a></td><td align="right"><a href="10001-10200.shtml">10001-10200</a></td><td align="right"><a href="10201-10400.shtml">10201-10400</a></td><td align="right"><a href="10401-10600.shtml">10401-10600</a></td><td align="right"><a href="10601-10800.shtml">10601-10800</a></td></tr>
+<tr><td align="right"><a href="10801-11000.shtml">10801-11000</a></td><td align="right"><a href="11001-11200.shtml">11001-11200</a></td><td align="right"><a href="11201-11400.shtml">11201-11400</a></td><td align="right"><a href="11401-11600.shtml">11401-11600</a></td><td align="right"><a href="11601-11800.shtml">11601-11800</a></td></tr>
+<tr><td align="right"><a href="11801-12000.shtml">11801-12000</a></td><td align="right"><a href="12001-12200.shtml">12001-12200</a></td><td align="right"><a href="12201-12400.shtml">12201-12400</a></td><td align="right"><a href="12401-12600.shtml">12401-12600</a></td><td align="right"><a href="12601-12800.shtml">12601-12800</a></td></tr>
+<tr><td align="right"><a href="12801-13000.shtml">12801-13000</a></td><td align="right"><a href="13001-13200.shtml">13001-13200</a></td><td align="right"><a href="13201-13400.shtml">13201-13400</a></td><td align="right"><a href="13401-13600.shtml">13401-13600</a></td><td align="right"><a href="13601-13800.shtml">13601-13800</a></td></tr>
+<tr><td align="right"><a href="13801-14000.shtml">13801-14000</a></td><td align="right"><a href="14001-14200.shtml">14001-14200</a></td><td align="right"><a href="14201-14400.shtml">14201-14400</a></td><td align="right"><a href="14401-14600.shtml">14401-14600</a></td><td align="right"><a href="14601-14800.shtml">14601-14800</a></td></tr>
+<tr><td align="right"><a href="14801-15000.shtml">14801-15000</a></td><td align="right"><a href="15001-15200.shtml">15001-15200</a></td><td align="right"><a href="15201-15400.shtml">15201-15400</a></td><td align="right"><a href="15401-15600.shtml">15401-15600</a></td><td align="right"><a href="15601-15800.shtml">15601-15800</a></td></tr>
+<tr><td align="right"><a href="15801-16000.shtml">15801-16000</a></td><td align="right"><a href="16001-16200.shtml">16001-16200</a></td><td align="right"><a href="16201-16400.shtml">16201-16400</a></td><td align="right"><a href="16401-16600.shtml">16401-16600</a></td><td align="right"><a href="16601-16800.shtml">16601-16800</a></td></tr>
+<tr><td align="right"><a href="16801-17000.shtml">16801-17000</a></td><td align="right"><a href="17001-17200.shtml">17001-17200</a></td><td align="right"><a href="17201-17400.shtml">17201-17400</a></td><td align="right"><a href="17401-17600.shtml">17401-17600</a></td><td align="right"><a href="17601-17800.shtml">17601-17800</a></td></tr>
+<tr><td align="right"><a href="17801-18000.shtml">17801-18000</a></td><td align="right"><a href="18001-18200.shtml">18001-18200</a></td><td align="right"><a href="18201-18400.shtml">18201-18400</a></td><td align="right"><a href="18401-18600.shtml">18401-18600</a></td><td align="right"><a href="18601-18800.shtml">18601-18800</a></td></tr>
+<tr><td align="right"><a href="18801-19000.shtml">18801-19000</a></td><td align="right"><a href="19001-19200.shtml">19001-19200</a></td><td align="right"><a href="19201-19400.shtml">19201-19400</a></td><td align="right"><a href="19401-19600.shtml">19401-19600</a></td><td align="right"><a href="19601-19800.shtml">19601-19800</a></td></tr>
+<tr><td align="right"><a href="19801-20000.shtml">19801-20000</a></td><td align="right"><a href="20001-20200.shtml">20001-20200</a></td><td align="right"><a href="20201-20400.shtml">20201-20400</a></td><td align="right"><a href="20401-20600.shtml">20401-20600</a></td><td align="right"><a href="20601-20800.shtml">20601-20800</a></td></tr>
+<tr><td align="right"><a href="20801-21000.shtml">20801-21000</a></td><td align="right"><a href="21001-21200.shtml">21001-21200</a></td><td align="right"><a href="21201-21400.shtml">21201-21400</a></td><td align="right"><a href="21401-21600.shtml">21401-21600</a></td><td align="right"><a href="21601-21800.shtml">21601-21800</a></td></tr>
+<tr><td align="right"><a href="21801-22000.shtml">21801-22000</a></td><td align="right"><a href="22001-22200.shtml">22001-22200</a></td><td align="right"><a href="22201-22400.shtml">22201-22400</a></td><td align="right"><a href="22401-22600.shtml">22401-22600</a></td><td align="right"><a href="22601-22800.shtml">22601-22800</a></td></tr>
+<tr><td align="right"><a href="22801-23000.shtml">22801-23000</a></td><td align="right"><a href="23001-23200.shtml">23001-23200</a></td><td align="right"><a href="23201-23400.shtml">23201-23400</a></td><td align="right"><a href="23401-23600.shtml">23401-23600</a></td><td align="right"><a href="23601-23800.shtml">23601-23800</a></td></tr>
+<tr><td align="right"><a href="23801-24000.shtml">23801-24000</a></td><td align="right"><a href="24001-24200.shtml">24001-24200</a></td><td align="right"><a href="24201-24400.shtml">24201-24400</a></td><td align="right"><a href="24401-24600.shtml">24401-24600</a></td><td align="right"><a href="24601-24800.shtml">24601-24800</a></td></tr>
+<tr><td align="right"><a href="24801-25000.shtml">24801-25000</a></td><td align="right"><a href="25001-25200.shtml">25001-25200</a></td><td align="right"><a href="25201-25400.shtml">25201-25400</a></td><td align="right"><a href="25401-25600.shtml">25401-25600</a></td><td align="right"><a href="25601-25800.shtml">25601-25800</a></td></tr>
+<tr><td align="right"><a href="25801-26000.shtml">25801-26000</a></td><td align="right"><a href="26001-26200.shtml">26001-26200</a></td><td align="right"><a href="26201-26400.shtml">26201-26400</a></td><td align="right"><a href="26401-26600.shtml">26401-26600</a></td><td align="right"><a href="26601-26800.shtml">26601-26800</a></td></tr>
+<tr><td align="right"><a href="26801-27000.shtml">26801-27000</a></td><td align="right"><a href="27001-27200.shtml">27001-27200</a></td><td align="right"><a href="27201-27400.shtml">27201-27400</a></td><td align="right"><a href="27401-27600.shtml">27401-27600</a></td><td align="right"><a href="27601-27800.shtml">27601-27800</a></td></tr>
+<tr><td align="right"><a href="27801-28000.shtml">27801-28000</a></td><td align="right"><a href="28001-28200.shtml">28001-28200</a></td><td align="right"><a href="28201-28400.shtml">28201-28400</a></td><td align="right"><a href="28401-28600.shtml">28401-28600</a></td><td align="right"><a href="28601-28800.shtml">28601-28800</a></td></tr>
+<tr><td align="right"><a href="28801-29000.shtml">28801-29000</a></td><td align="right"><a href="29001-29200.shtml">29001-29200</a></td><td align="right"><a href="29201-29400.shtml">29201-29400</a></td><td align="right"><a href="29401-29600.shtml">29401-29600</a></td><td align="right"><a href="29601-29800.shtml">29601-29800</a></td></tr>
+<tr><td align="right"><a href="29801-30000.shtml">29801-30000</a></td><td align="right"><a href="30001-30200.shtml">30001-30200</a></td><td align="right"><a href="30201-30400.shtml">30201-30400</a></td><td align="right"><a href="30401-30600.shtml">30401-30600</a></td><td align="right"><a href="30601-30800.shtml">30601-30800</a></td></tr>
+<tr><td align="right"><a href="30801-31000.shtml">30801-31000</a></td><td align="right"><a href="31001-31200.shtml">31001-31200</a></td><td align="right"><a href="31201-31400.shtml">31201-31400</a></td><td align="right"><a href="31401-31600.shtml">31401-31600</a></td><td align="right"><a href="31601-31800.shtml">31601-31800</a></td></tr>
+<tr><td align="right"><a href="31801-32000.shtml">31801-32000</a></td><td align="right"><a href="32001-32200.shtml">32001-32200</a></td><td align="right"><a href="32201-32400.shtml">32201-32400</a></td><td align="right"><a href="32401-32600.shtml">32401-32600</a></td><td align="right"><a href="32601-32800.shtml">32601-32800</a></td></tr>
+<tr><td align="right"><a href="32801-33000.shtml">32801-33000</a></td><td align="right"><a href="33001-33200.shtml">33001-33200</a></td><td align="right"><a href="33201-33400.shtml">33201-33400</a></td><td align="right"><a href="33401-33600.shtml">33401-33600</a></td><td align="right"><a href="33601-33800.shtml">33601-33800</a></td></tr>
+<tr><td align="right"><a href="33801-34000.shtml">33801-34000</a></td><td align="right"><a href="34001-34200.shtml">34001-34200</a></td><td align="right"><a href="34201-34400.shtml">34201-34400</a></td><td align="right"><a href="34401-34600.shtml">34401-34600</a></td><td align="right"><a href="34601-34800.shtml">34601-34800</a></td></tr>
+<tr><td align="right"><a href="34801-35000.shtml">34801-35000</a></td><td align="right"><a href="35001-35200.shtml">35001-35200</a></td><td align="right"><a href="35201-35400.shtml">35201-35400</a></td><td align="right"><a href="35401-35600.shtml">35401-35600</a></td><td align="right"><a href="35601-35800.shtml">35601-35800</a></td></tr>
+<tr><td align="right"><a href="35801-36000.shtml">35801-36000</a></td><td align="right"><a href="36001-36200.shtml">36001-36200</a></td><td align="right"><a href="36201-36400.shtml">36201-36400</a></td><td align="right"><a href="36401-36600.shtml">36401-36600</a></td><td align="right"><a href="36601-36800.shtml">36601-36800</a></td></tr>
+<tr><td align="right"><a href="36801-37000.shtml">36801-37000</a></td><td align="right"><a href="37001-37200.shtml">37001-37200</a></td><td align="right"><a href="37201-37400.shtml">37201-37400</a></td><td align="right"><a href="37401-37600.shtml">37401-37600</a></td><td align="right"><a href="37601-37800.shtml">37601-37800</a></td></tr>
+<tr><td align="right"><a href="37801-38000.shtml">37801-38000</a></td><td align="right"><a href="38001-38200.shtml">38001-38200</a></td><td align="right"><a href="38201-38400.shtml">38201-38400</a></td><td align="right"><a href="38401-38600.shtml">38401-38600</a></td><td align="right"><a href="38601-38800.shtml">38601-38800</a></td></tr>
+<tr><td align="right"><a href="38801-39000.shtml">38801-39000</a></td><td align="right"><a href="39001-39200.shtml">39001-39200</a></td><td align="right"><a href="39201-39400.shtml">39201-39400</a></td><td align="right"><a href="39401-39600.shtml">39401-39600</a></td><td align="right"><a href="39601-39800.shtml">39601-39800</a></td></tr>
+<tr><td align="right"><a href="39801-40000.shtml">39801-40000</a></td><td align="right"><a href="40001-40200.shtml">40001-40200</a></td><td align="right"><a href="40201-40400.shtml">40201-40400</a></td><td align="right"><a href="40401-40600.shtml">40401-40600</a></td><td align="right"><a href="40601-40800.shtml">40601-40800</a></td></tr>
+<tr><td align="right"><a href="40801-41000.shtml">40801-41000</a></td><td align="right"><a href="41001-41200.shtml">41001-41200</a></td><td align="right"><a href="41201-41400.shtml">41201-41400</a></td><td align="right"><a href="41401-41600.shtml">41401-41600</a></td><td align="right"><a href="41601-41800.shtml">41601-41800</a></td></tr>
+<tr><td align="right"><a href="41801-42000.shtml">41801-42000</a></td><td align="right"><a href="42001-42200.shtml">42001-42200</a></td><td align="right"><a href="42201-42400.shtml">42201-42400</a></td><td align="right"><a href="42401-42600.shtml">42401-42600</a></td><td align="right"><a href="42601-42800.shtml">42601-42800</a></td></tr>
+<tr><td align="right"><a href="42801-43000.shtml">42801-43000</a></td></tr>
+</table>
+
+</p>
+
+<!-- FORM METHOD="POST" ACTION="/cgi-bin/vframe.rb?/cgi-bin/nph-msearch.rb/ruby/ruby-dev" target="_top">
+(Recent 1000 files, Regular Expression): <INPUT TYPE="TEXT" NAME="search">
+<INPUT TYPE="SUBMIT" VALUE="Search"><p></P>
+<INPUT TYPE="HIDDEN" NAME="opt"
+VALUE="mode=regexp,code=jis,mask=\d+$,view=/cgi-bin/scat.rb,type=mail,timer,window=scat,recent=1000">
+</FORM>
+
+<FORM METHOD="POST" ACTION="/cgi-bin/vframe.rb?/cgi-bin/nph-msearch.rb/ruby/ruby-dev" target="_top">
+(Subjects, Regular Expression): <INPUT TYPE="TEXT" NAME="search">
+<INPUT TYPE="SUBMIT" VALUE="Search"><p></P>
+<INPUT TYPE="HIDDEN" NAME="opt"
+VALUE="mode=regexp,code=jis,view=/cgi-bin/scat.rb,type=html,window=scat,glob=thrt*.html,appear=plain">
+</FORM -->
+
+<a href="../index.html">Ruby</a> / 
+<a href="../ruby-list/index.shtml">ruby-list</a> / 
+<a href="../ruby-ext/index.shtml">ruby-ext</a> / 
+<a href="../ruby-math/index.shtml">ruby-math</a> / 
+<a href="../ruby-talk/index.shtml">ruby-talk</a> / 
+<a href="../ruby-core/index.shtml">ruby-core</a>
+<hr>
+<a href="/ruby/ruby-dev/ruby-dev-help.txt">Help for this mailing list</a><br>
+<a href="mailto:ruby-dev-ctl@ruby-lang.org?subject=Hello&body=# help">Mail to Mailing List's Controller</a><br>
+<a href="mailto:ruby-dev-ctl@ruby-lang.org?subject=subscribe&body=subscribe%20YourFirstName%20YourFamilyName">Join 
+This Mailing List</a>
+
+
+<!-- a href="../fj.comp.lang.ruby/index.shtml">fj.comp.lang.ruby</a> / 
+<a href="../comp.lang.ruby/index.shtml">comp.lang.ruby</a><br -->
+<!--a href="/cgi-bin/vframe.rb?split-mode-toggle">Split Mode (toggle)</a><br-->
+</body></html>

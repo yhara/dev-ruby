@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Number:</b>
+  <%= @mail.number %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @mail.subject %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @mail.from %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @mail.time %>
+</p>
+
+<p>
+  <b>In reply to:</b>
+  <%= @mail.in_reply_to %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @mail.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_mail_path(@mail) %> |
+<%= link_to 'Back', mails_path %>

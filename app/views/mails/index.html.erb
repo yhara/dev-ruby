@@ -1,0 +1,33 @@
+<h1>Listing mails</h1>
+
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Subject</th>
+    <th>From</th>
+    <th>Time</th>
+    <th>In reply to</th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mails.each do |mail| %>
+  <tr>
+    <td><%= mail.number %></td>
+    <td><%= mail.subject %></td>
+    <td><%= mail.from %></td>
+    <td><%= mail.time %></td>
+    <td><%= mail.in_reply_to %></td>
+    <td><%= mail.body %></td>
+    <td><%= link_to 'Show', mail %></td>
+    <td><%= link_to 'Edit', edit_mail_path(mail) %></td>
+    <td><%= link_to 'Destroy', mail, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mail', new_mail_path %>

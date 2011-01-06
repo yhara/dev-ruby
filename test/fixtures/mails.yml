@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  number: 1
+  subject: MyString
+  from: MyString
+  time: 2011-01-07 00:06:19
+  in_reply_to: 1
+  body: MyText
+
+two:
+  number: 1
+  subject: MyString
+  from: MyString
+  time: 2011-01-07 00:06:19
+  in_reply_to: 1
+  body: MyText

@@ -1,0 +1,30 @@
+dev-ruby
+========
+
+[dev-ruby](http://dev-ruby.heroku.com/) provides community translation of
+ruby-dev, the Japanese mailing list of Ruby interpreter development.
+
+Design
+======
+
+Model
+-----
+
+* User(name, ..)
+* Mail(number, subject, from, date, inReplyTo, body)
+* Translation(mail, text)
+* Request(user, mail)
+
+* Badged(user, badgeNo)
+
+URL
+---
+
+* /users Create[login]
+* /user/:id Read Update[login] Delete[login]
+
+* /mails Index Create[admin]
+* /mail/:id Read 
+* /mail/:id/request Create[login] Delete[login]
+* /mail/:id/translation Create[login] Update[login]
+
