@@ -4,14 +4,14 @@ require 'blade.rb'
 require 'fakeweb'
 
 {
-  "42900.html" =>
+  "test/data/42900.html" =>
     "http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/42900",
-  "index.shtml" =>
+  "test/data/index.shtml" =>
     "http://blade.nagaokaut.ac.jp/ruby/ruby-dev/index.shtml",
-  "42801-43000.html" =>
+  "test/data/42801-43000.html" =>
     "http://blade.nagaokaut.ac.jp/ruby/ruby-dev/42801-43000.shtml#latest",
 }.each do |file, url|
-  FakeWeb.register_uri(:get, url, :body => File.read("test/data/#{file}"))
+  FakeWeb.register_uri(:get, url, :body => File.read(file))
 end
 
 class BladeTest < ActiveSupport::TestCase
@@ -42,5 +42,13 @@ class BladeTest < ActiveSupport::TestCase
       mail = Blade.new(42900).create
     end
     assert_instance_of Mail, mail
+  end
+
+  test "Blade#latest_index_url" do
+    assert_equal Blade.latest_index_url, "http://blade.nagaokaut.ac.jp/ruby/ruby-dev/42801-43000.shtml#latest"
+  end
+
+  test "Blade#latest_number returns the latest mail number" do
+    assert_equal Blade.latest_number, 42969
   end
 end

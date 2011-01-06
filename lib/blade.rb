@@ -2,6 +2,19 @@ require 'open-uri'
 require 'nokogiri'
 
 class Blade
+  def self.latest_number
+    doc = Nokogiri::HTML(open(self.latest_index_url).read)
+    link = (doc/:a).find_all{|a| a[:href] =~ /scat\.rb/}.last
+    link.text.to_i
+  end
+
+  def self.latest_index_url
+    url = "http://blade.nagaokaut.ac.jp/ruby/ruby-dev/index.shtml"
+    doc = Nokogiri::HTML(open(url).read)
+    link = (doc/:a).find{|a| a[:href] =~ /\d+-\d+\.shtml/}
+    "#{File.dirname(url)}/#{link[:href]}"
+  end
+
   def initialize(number)
     @number = number
   end
