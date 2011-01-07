@@ -5,7 +5,6 @@ class CreateMails < ActiveRecord::Migration
       t.string :subject, :null => false
       t.string :from, :null => false
       t.datetime :time, :null => false
-      t.integer :in_reply_to, :null => true
       t.text :body, :null => false
     end
     add_index :mails, :number

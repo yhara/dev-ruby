@@ -4,14 +4,12 @@ one:
   number: 1
   subject: MyString
   from: MyString
-  time: 2011-01-07 00:06:19
-  in_reply_to: 1
+  time: 2011-01-07 21:23:35
   body: MyText
 
 two:
   number: 1
   subject: MyString
   from: MyString
-  time: 2011-01-07 00:06:19
-  in_reply_to: 1
+  time: 2011-01-07 21:23:35
   body: MyText

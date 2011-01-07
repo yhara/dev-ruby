@@ -13,12 +13,11 @@
 ActiveRecord::Schema.define(:version => 20110107101419) do
 
   create_table "mails", :force => true do |t|
-    t.integer  "number",      :null => false
-    t.string   "subject",     :null => false
-    t.string   "from",        :null => false
-    t.datetime "time",        :null => false
-    t.integer  "in_reply_to"
-    t.text     "body",        :null => false
+    t.integer  "number",   :null => false
+    t.string   "subject",  :null => false
+    t.string   "from",     :null => false
+    t.datetime "time",     :null => false
+    t.text     "body",     :null => false
     t.string   "ancestry"
   end
 

@@ -12,7 +12,7 @@ class MailTest < ActiveSupport::TestCase
       :subject => "Hi",
       :from => "a@b.cd",
       :time => Time.now,
-      :in_reply_to => nil,
+      :parent => nil,
       :body => "Hello, world!"
     )
   end
