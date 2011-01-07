@@ -1,5 +1,9 @@
 require 'test_helper'
 
+class Mail
+  def inspect; "#<Mail:#{self.number}>"; end
+end
+
 class MailTest < ActiveSupport::TestCase
 
   test "Mail creates instance" do
@@ -13,13 +17,14 @@ class MailTest < ActiveSupport::TestCase
     )
   end
 
-  test "Mail.trees creates trees of mails" do
+  test "Mails should form trees" do
     m1 = Fabricate(:mail)
-      m2 = Fabricate(:mail, :in_reply_to => m1.number)
-        m3 = Fabricate(:mail, :in_reply_to => m2.number)
-      m4 = Fabricate(:mail, :in_reply_to => m1.number)
+      m2 = Fabricate(:mail, parent: m1)
+        m3 = Fabricate(:mail, parent: m2)
+      m4 = Fabricate(:mail, parent: m1)
     m5 = Fabricate(:mail)
 
-    #trees = Mail.trees([m1, m2, m3, m4, m5])
+    assert_equal({m1 => {m2 => {m3 => {}}, m4 => {}}},
+      m1.subtree.arrange)
   end
 end
