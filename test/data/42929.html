@@ -1,0 +1,83 @@
+<HTML><HEAD><TITLE>[ruby-dev:42929] Re: Proc#callの別名の提案</TITLE>
+<script language="javascript">
+<!--
+  function chk() {
+    var name = navigator.appName;
+    var ver = navigator.appVersion;
+    if (name.charAt(0) == "M") {
+      if (ver.charAt(0) >= 5 ||
+        ver.indexOf(" 5.5") >= 0 ||
+        ver.indexOf(" 6") >= 0
+         )
+        return(true);
+      return(false);
+    } else if (name.charAt(0) == "N") {
+      if (ver.charAt(0) >= 5)
+        return(true);
+      return(false);
+    } else {
+      return(false);
+    }
+  }
+
+  function hilight(x) {
+    if (!chk()) return;
+    if (parent) {
+      try {
+        parent.frames[0].hilight(x);
+      } catch(e) {
+       //alert(e);
+      }
+    }
+  }
+
+  //Navigation Bar
+  var IE = document.all;
+  var PosTimer;
+  function stickNavi() {
+    var y = document.body.scrollTop;
+    var s = document.getElementById('navi').style
+    s.top = y + 7;
+    s.left = 8;
+  }
+  function stickNaviLoop() {
+    if (PosTimer){clearTimeout(PosTimer);}
+    stickNavi();
+    PosTimer = setTimeout("stickNaviLoop()", 10);
+  }
+
+  function setNavi() {
+    if (IE) {document.body.onscroll = stickNavi;}
+    else {stickNaviLoop();}
+  }
+
+//-->
+</script>
+<link rel="stylesheet" href="http://blade.nagaokaut.ac.jp/css/blade.css" type="text/css" title="blade"></HEAD><BODY onLoad="setNavi()">
+<A NAME=head></A><div id="navi" style="position:absolute;top:7px;left:8px;"><A HREF="42928" class="a-button" onclick="hilight(42928)"><span id="normal" title="&lt;">&nbsp;&lt;&nbsp;</span></A><A HREF="/ruby/ruby-dev/42801-43000.shtml#42929" class="a-button" target="_top"><span id="normal" title="^">^</span></A><A HREF="42930" class="a-button" onclick="hilight(42930)"><span id="normal" title="&gt;">&nbsp;&gt;&nbsp;</span></A> <a href="42928" onclick="hilight(42928)" class="a-button"><span id="green" title="[previous]">&nbsp;P&nbsp;</span></a><a href="42930" onclick="hilight(42930)" class="a-button"><span id="green" title="[next]">&nbsp;N&nbsp;</span></a> <a href="42926" onclick="hilight(42926)" class="a-button"><span id="green" title="[root]">|&lt;</span></a><a href="42944" onclick="hilight(42944)" class="a-button"><span id="red" title="[next thread]">&gt;|</span></a><a href="42928" onclick="hilight(42928)" class="a-button"><span id="normal" title="[parent]">^</span></a><a href="42930" onclick="hilight(42930)" class="a-button"><span id="normal" title="[child]">_</span></a><span id="normal" title="[elder]">&gt;</span><a href="42931" onclick="hilight(42931)" class="a-button"><span id="normal" title="[younger]">&lt;</span></a> <a href="/cgi-bin/vframe.rb/ruby/ruby-dev/42929?42780-42974" target="_top" class="a-button"><span id="normal" title="[thread frame]">---</span></a><a href="/cgi-bin/vframe.rb/ruby/ruby-dev/42929?42780-42974+split-mode-vertical" target="_top" class="a-button"><span id="normal" title="[thread frame vertical]">&nbsp;|&nbsp;</span></a><a href="42929" target="_top" onclick="hilight(42929)" class="a-button"><span id="normal" title="[frame close]">&nbsp;~&nbsp;</span></a><a href="/ruby/ruby-dev/index.shtml" target="_top" class="a-button"><span id="normal" title="[index]">.</span></a><a href="/ruby/ruby-dev/../index.shtml" target="_top" class="a-button"><span id="normal" title="[iindex]">..</span></a><a href="/cgi-bin/scat.rb/ruby/ruby-dev/42929?help" class="a-button"><span id="normal" title="[Help]">Help</span></a></div>
+<div id="header"><br>
+Subject: [ruby-dev:<strong>42929</strong>] <strong>Re: Proc#callの別名の提案</strong><br>
+From: <strong>hattorihiroaki1 mail.goo.ne.jp</strong><br>
+Date: Mon, 3 Jan 2011 09:12:40 +0900</div>
+<pre>
+ 服部裕暁です。連投ですみません。
+&gt; <span style="color: #007700;">「`」（読みかたがわかりませんが、クオートの逆向きです）はいかがでしょうか。</span>
+&gt; <span style="color: #007700;">私の知る限りではRubyでは使っていないと思うのですが。</span>
+&gt; <span style="color: #007700;">「'」（シングルクオート）と混同しやすいのでしょうか。</span>
+
+２文字でいいのなら「&lt;-」はどうでしょう。
+なぜProc.new{}が-&gt;(){}なのかわかりませんが（特になぜ右向き矢印なのかが知りたいです）対応関係はよいと思います。
+欠点は
+
+fun&lt;-x
+
+と書くと「fun小なりマイナスx」とみわけがつかないことかと。
+＊＊
+いっそ
+
+fun-&gt;x
+
+呼び出せれるようにしますか？
+
+<a name=tail></a></pre>
+</BODY></HTML>

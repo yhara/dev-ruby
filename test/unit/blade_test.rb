@@ -70,4 +70,8 @@ class BladeTest < ActiveSupport::TestCase
     child = Blade.new(42899).create
     assert_equal parent.number, child.in_reply_to
   end
+
+  test "Blade should use blade's [parent] instead of In-reply-to" do
+    assert_equal 42928, Blade.new(42929).parse[:in_reply_to]
+  end
 end

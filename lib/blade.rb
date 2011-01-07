@@ -42,8 +42,10 @@ class Blade
 
     subject = (doc/:strong)[1].text
     header = (doc % "#header").inner_text
-    if (in_reply_to = header[/^In-reply-to: .*?(\d+)/, 1])
-      parent_no = in_reply_to.to_i
+
+    parent = (doc % "span[title='[parent]']").parent
+    if parent.name == "a" # link exists
+      parent_no = parent[:href].to_i
     else
       parent_no = find_parent_no(subject)
     end
