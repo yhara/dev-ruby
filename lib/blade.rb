@@ -40,17 +40,40 @@ class Blade
     html = self.get
     doc = Nokogiri::HTML(html)
 
+    subject = (doc/:strong)[1].text
     header = (doc % "#header").inner_text
-    in_reply_to = header[/^In-reply-to: .*?(\d+)/, 1]
+    if (in_reply_to = header[/^In-reply-to: .*?(\d+)/, 1])
+      parent_no = in_reply_to.to_i
+    else
+      parent_no = find_parent_no(subject)
+    end
 
     { 
       :number => @number,
-      :subject => (doc/:strong)[1].text,
+      :subject => subject, 
       :from => header[/^From: (.*)$/, 1],
       :time => Time.zone.parse(header[/^Date: (.*)$/, 1]),
-      :in_reply_to => (in_reply_to ? in_reply_to.to_i : nil),
+      :in_reply_to => parent_no,
       :body => (doc/:pre).inner_text,
     }
+  end
+
+  # parent: [Ruby 1.8-Bug#4206] failed to set ext option for win32/configure.bat
+  # me: [Ruby 1.8-Bug#4206] failed to set ext option for win32/configure.bat
+  def find_parent_no(subject)
+    return nil if subject !~ /\A(\[(.*)-(.*)#(\d*)\]) /
+    tag = $1
+    print "finding `#{tag}'..."
+
+    parent = Mail.where("subject LIKE (?)", "#{tag}%").order("number DESC").limit(1).first
+
+    if parent
+      puts "found #{parent.number}"
+      parent.number
+    else
+      puts "not found"
+      nil
+    end
   end
 
   def create

@@ -4,17 +4,21 @@ require 'blade.rb'
 require 'fakeweb'
 
 {
-  "test/data/42915.html" =>
-    "http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/42915",
-  "test/data/42900.html" =>
-    "http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/42900",
   "test/data/index.shtml" =>
     "http://blade.nagaokaut.ac.jp/ruby/ruby-dev/index.shtml",
   "test/data/42801-43000.html" =>
     "http://blade.nagaokaut.ac.jp/ruby/ruby-dev/42801-43000.shtml",
-}.each do |file, url|
+}.merge(
+  {}.tap{|h|
+    Dir.entries("test/data/").
+        select{|path| path =~ /\A\d+\.html/}.
+        each{|path|
+          h["test/data/#{path}"] = "http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{path[/\d+/]}"
+    }
+  }
+).each{|file, url|
   FakeWeb.register_uri(:get, url, :body => File.read(file))
-end
+}
 FakeWeb.allow_net_connect = false
 
 class BladeTest < ActiveSupport::TestCase
@@ -59,5 +63,11 @@ class BladeTest < ActiveSupport::TestCase
     assert_nothing_raised do
       Blade.new(42915).create
     end
+  end
+
+  test "Blade should add in_reply_to according to RedMine ticket number" do
+    parent = Blade.new(42897).create
+    child = Blade.new(42899).create
+    assert_equal parent.number, child.in_reply_to
   end
 end
