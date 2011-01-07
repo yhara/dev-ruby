@@ -46,11 +46,9 @@ class BladeTest < ActiveSupport::TestCase
   end
 
   test "Blade#create creates a Mail" do
-    mail = nil
     assert_difference "Mail.count", 1 do
-      mail = Blade.new(42900).create
+      Blade.new(42900).create
     end
-    assert_instance_of Mail, mail
   end
 
   test "Blade#latest_index_url" do
@@ -68,9 +66,9 @@ class BladeTest < ActiveSupport::TestCase
   end
 
   test "Blade should add in_reply_to according to RedMine ticket number" do
-    parent = Blade.new(42897).create
+    mail = Blade.new(42897).create
     child = Blade.new(42899).create
-    assert_equal parent.number, child.in_reply_to
+    assert_equal mail, child.parent
   end
 
   test "Blade should use blade's [parent] instead of In-reply-to" do

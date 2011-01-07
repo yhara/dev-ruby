@@ -82,6 +82,8 @@ class Blade
   end
 
   def create
-    Mail.create(self.parse)
+    attrs = self.parse
+    attrs[:parent] = Mail.first(conditions: {number: attrs.delete(:in_reply_to)})
+    Mail.create(attrs)
   end
 end

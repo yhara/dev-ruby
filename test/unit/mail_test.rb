@@ -12,4 +12,14 @@ class MailTest < ActiveSupport::TestCase
       :body => "Hello, world!"
     )
   end
+
+  test "Mail.trees creates trees of mails" do
+    m1 = Fabricate(:mail)
+      m2 = Fabricate(:mail, :in_reply_to => m1.number)
+        m3 = Fabricate(:mail, :in_reply_to => m2.number)
+      m4 = Fabricate(:mail, :in_reply_to => m1.number)
+    m5 = Fabricate(:mail)
+
+    #trees = Mail.trees([m1, m2, m3, m4, m5])
+  end
 end

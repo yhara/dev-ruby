@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110106150619) do
+ActiveRecord::Schema.define(:version => 20110107101419) do
 
   create_table "mails", :force => true do |t|
     t.integer  "number",      :null => false
@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(:version => 20110106150619) do
     t.datetime "time",        :null => false
     t.integer  "in_reply_to"
     t.text     "body",        :null => false
+    t.string   "ancestry"
   end
 
+  add_index "mails", ["ancestry"], :name => "index_mails_on_ancestry"
   add_index "mails", ["number"], :name => "index_mails_on_number"
 
 end
