@@ -1,0 +1,76 @@
+<HTML><HEAD><TITLE>[ruby-dev:42895] [Ruby 1.9-Bug#4152][Assigned] optparseのzsh compsysでrspecの補完が出来ない</TITLE>
+<script language="javascript">
+<!--
+  function chk() {
+    var name = navigator.appName;
+    var ver = navigator.appVersion;
+    if (name.charAt(0) == "M") {
+      if (ver.charAt(0) >= 5 ||
+        ver.indexOf(" 5.5") >= 0 ||
+        ver.indexOf(" 6") >= 0
+         )
+        return(true);
+      return(false);
+    } else if (name.charAt(0) == "N") {
+      if (ver.charAt(0) >= 5)
+        return(true);
+      return(false);
+    } else {
+      return(false);
+    }
+  }
+
+  function hilight(x) {
+    if (!chk()) return;
+    if (parent) {
+      try {
+        parent.frames[0].hilight(x);
+      } catch(e) {
+       //alert(e);
+      }
+    }
+  }
+
+  //Navigation Bar
+  var IE = document.all;
+  var PosTimer;
+  function stickNavi() {
+    var y = document.body.scrollTop;
+    var s = document.getElementById('navi').style
+    s.top = y + 7;
+    s.left = 8;
+  }
+  function stickNaviLoop() {
+    if (PosTimer){clearTimeout(PosTimer);}
+    stickNavi();
+    PosTimer = setTimeout("stickNaviLoop()", 10);
+  }
+
+  function setNavi() {
+    if (IE) {document.body.onscroll = stickNavi;}
+    else {stickNaviLoop();}
+  }
+
+//-->
+</script>
+<link rel="stylesheet" href="http://blade.nagaokaut.ac.jp/css/blade.css" type="text/css" title="blade"></HEAD><BODY onLoad="setNavi()">
+<A NAME=head></A><div id="navi" style="position:absolute;top:7px;left:8px;"><A HREF="42894" class="a-button" onclick="hilight(42894)"><span id="normal" title="&lt;">&nbsp;&lt;&nbsp;</span></A><A HREF="/ruby/ruby-dev/42801-43000.shtml#42895" class="a-button" target="_top"><span id="normal" title="^">^</span></A><A HREF="42896" class="a-button" onclick="hilight(42896)"><span id="normal" title="&gt;">&nbsp;&gt;&nbsp;</span></A> <a href="42943" onclick="hilight(42943)" class="a-button"><span id="red" title="[previous]">&nbsp;P&nbsp;</span></a><a href="42896" onclick="hilight(42896)" class="a-button"><span id="red" title="[next]">&nbsp;N&nbsp;</span></a> <a href="42894" onclick="hilight(42894)" class="a-button"><span id="red" title="[previous thread]">|&lt;</span></a><a href="42896" onclick="hilight(42896)" class="a-button"><span id="red" title="[next thread]">&gt;|</span></a><span id="normal" title="[parent]">^</span><span id="normal" title="[child]">_</span><span id="normal" title="[elder]">&gt;</span><span id="normal" title="[younger]">&lt;</span> <a href="/cgi-bin/vframe.rb/ruby/ruby-dev/42895?42780-42974" target="_top" class="a-button"><span id="normal" title="[thread frame]">---</span></a><a href="/cgi-bin/vframe.rb/ruby/ruby-dev/42895?42780-42974+split-mode-vertical" target="_top" class="a-button"><span id="normal" title="[thread frame vertical]">&nbsp;|&nbsp;</span></a><a href="42895" target="_top" onclick="hilight(42895)" class="a-button"><span id="normal" title="[frame close]">&nbsp;~&nbsp;</span></a><a href="/ruby/ruby-dev/index.shtml" target="_top" class="a-button"><span id="normal" title="[index]">.</span></a><a href="/ruby/ruby-dev/../index.shtml" target="_top" class="a-button"><span id="normal" title="[iindex]">..</span></a><a href="/cgi-bin/scat.rb/ruby/ruby-dev/42895?help" class="a-button"><span id="normal" title="[Help]">Help</span></a></div>
+<div id="header"><br>
+Subject: [ruby-dev:<strong>42895</strong>] <strong>[Ruby 1.9-Bug#4152][Assigned] optparseのzsh compsysでrspecの補完が出来ない</strong><br>
+From: <strong>Yui NARUSE </strong>&lt;redmine ruby-lang.org&gt;<br>
+Date: Sun, 26 Dec 2010 14:42:54 +0900<br>
+References: <a href="/cgi-bin/scat.rb/ruby/ruby-dev/42754" onclick="hilight(42754)">42754</a></div>
+<pre>チケット #4152 が更新されました。 (by Yui NARUSE)
+
+ステータス OpenからAssignedに変更
+担当者 Kazuhiro NISHIYAMAにセット
+
+コミットしてください
+----------------------------------------
+<A HREF="http://redmine.ruby-lang.org/issues/show/4152" target="_top">http://redmine.ruby-lang.org/issues/show/4152</A>
+
+----------------------------------------
+<A HREF="http://redmine.ruby-lang.org" target="_top">http://redmine.ruby-lang.org</A>
+
+<a name=tail></a></pre>
+</BODY></HTML>

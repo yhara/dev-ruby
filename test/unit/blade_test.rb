@@ -66,9 +66,13 @@ class BladeTest < ActiveSupport::TestCase
   end
 
   test "Blade should add in_reply_to according to RedMine ticket number" do
-    mail = Blade.new(42897).create
-    child = Blade.new(42899).create
-    assert_equal mail, child.parent
+    Blade.new(42897).create
+    assert_equal 42897, Blade.new(42899).parse[:in_reply_to]
+  end
+
+  test "Blade should add in_reply_to according to RedMine ticket number(2)" do
+    Blade.new(42895).create
+    assert_equal 42895, Blade.new(42900).parse[:in_reply_to]
   end
 
   test "Blade should use blade's [parent] instead of In-reply-to" do

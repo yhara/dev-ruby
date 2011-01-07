@@ -65,8 +65,9 @@ class Blade
 
   # parent: [Ruby 1.8-Bug#4206] failed to set ext option for win32/configure.bat
   # me: [Ruby 1.8-Bug#4206] failed to set ext option for win32/configure.bat
+  # [Ruby 1.9-Bug#4152]
   def find_parent_no(subject)
-    return nil if subject !~ /\A(\[(.*)-(.*)#(\d*)\]) /
+    return nil if subject !~ /\A(\[(.*)-(.*)#(\d*)\])/
     tag = $1
     print "finding `#{tag}'..." if Blade.verbose
 
