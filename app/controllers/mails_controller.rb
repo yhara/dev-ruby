@@ -2,7 +2,7 @@ class MailsController < ApplicationController
   # GET /mails
   # GET /mails.xml
   def index
-    @mails = Mail.all
+    @mails = Mail.arrange
 
     respond_to do |format|
       format.html # index.html.erb

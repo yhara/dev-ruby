@@ -1,0 +1,26 @@
+h1 Listing mails
+
+pre == format(@mails)
+
+//table
+//  tr
+//    th Number
+//    th Subject
+//    th From
+//    th Time
+//    th Body
+//    th
+//    th
+//    th
+//  - @mails.each do |mail|
+//    tr
+//      td= mail.number
+//      td= mail.subject
+//      td= mail.from
+//      td= mail.time
+//      td= mail.body
+//      td= link_to 'Show', mail
+//      td= link_to 'Edit', edit_mail_path(mail)
+//      td= link_to 'Destroy', mail, :confirm => 'Are you sure?', :method => :delete
+//br
+//= link_to 'New Mail', new_mail_path
