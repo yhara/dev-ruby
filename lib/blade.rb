@@ -40,16 +40,16 @@ class Blade
     html = self.get
     doc = Nokogiri::HTML(html)
 
-    header = (doc % "#header").inner_html
+    header = (doc % "#header").inner_text
     in_reply_to = header[/^In-reply-to: .*?(\d+)/, 1]
 
     { 
       :number => @number,
       :subject => (doc/:strong)[1].text,
-      :from => header[/^From: (.*)<br>$/, 1],  # <- contains html tag
-      :time => Time.zone.parse(header[/^Date: (.*)(<br>)?$/, 1]),
+      :from => header[/^From: (.*)$/, 1],
+      :time => Time.zone.parse(header[/^Date: (.*)$/, 1]),
       :in_reply_to => (in_reply_to ? in_reply_to.to_i : nil),
-      :body => (doc/:pre).inner_html,           # <- contains html tag
+      :body => (doc/:pre).inner_text,
     }
   end
 
