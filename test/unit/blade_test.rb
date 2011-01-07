@@ -21,6 +21,8 @@ require 'fakeweb'
 }
 FakeWeb.allow_net_connect = false
 
+Blade.verbose = false
+
 class BladeTest < ActiveSupport::TestCase
   test "Blade.new creates an instance" do
     assert_instance_of Blade, Blade.new(42900)

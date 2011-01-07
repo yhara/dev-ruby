@@ -2,14 +2,17 @@ require 'open-uri'
 require 'nokogiri'
 
 class Blade
+  cattr_accessor :verbose
+  self.verbose = true
+
   def self.update
     latest = self.latest_number
     last = Mail.maximum("number") || (latest - 100)
 
-    puts "last: #{last} latest: #{latest}"
+    puts "last: #{last} latest: #{latest}" if Blade.verbose
 
     (last+1).upto(latest) do |i|
-      puts "retrieving #{i}..."
+      puts "retrieving #{i}..." if Blade.verbose
       Blade.new(i).create
     end
   end
@@ -65,15 +68,15 @@ class Blade
   def find_parent_no(subject)
     return nil if subject !~ /\A(\[(.*)-(.*)#(\d*)\]) /
     tag = $1
-    print "finding `#{tag}'..."
+    print "finding `#{tag}'..." if Blade.verbose
 
     parent = Mail.where("subject LIKE (?)", "#{tag}%").order("number DESC").limit(1).first
 
     if parent
-      puts "found #{parent.number}"
+      puts "found #{parent.number}" if Blade.verbose
       parent.number
     else
-      puts "not found"
+      puts "not found" if Blade.verbose
       nil
     end
   end
