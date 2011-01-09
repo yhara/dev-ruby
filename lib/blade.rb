@@ -71,7 +71,7 @@ class Blade
     tag = $1
     print "finding `#{tag}'..." if Blade.verbose
 
-    parent = Mail.where("subject LIKE (?)", "#{tag}%").order("number DESC").limit(1).first
+    parent = Mail.where("subject LIKE (?)", "%#{tag}%").order("number DESC").limit(1).first
 
     if parent
       puts "found #{parent.number}" if Blade.verbose
