@@ -1,6 +1,8 @@
 h1 Listing mails
 
-pre == format(@mails)
+- @mails.each do |mails|
+  = format_mails(mails) do |mail|
+    = mail.number
 
 //table
 //  tr

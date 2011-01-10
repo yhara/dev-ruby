@@ -2,7 +2,8 @@ class MailsController < ApplicationController
   # GET /mails
   # GET /mails.xml
   def index
-    @mails = Mail.arrange
+    @mails = Mail.roots.order("number DESC").limit(100).map{|root| root.subtree.arrange}
+    #arrange #order("number DESC").limit(40).arrange(:order => :time)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class MailsController < ApplicationController
   # GET /mails/1
   # GET /mails/1.xml
   def show
-    @mail = Mail.find(params[:id])
+    @root = Mail.find_by_number(params[:id])
+    @mails = [@root] + @root.descendants
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,0 +1,18 @@
+== @root.to_title
+
+p#notice= notice
+
+- @mails.each do |mail|
+  a name="#{mail.number}"
+  pre
+    = mail.number
+    = mail.subject
+    br
+    = mail.from
+    = mail.time
+    br
+    = mail.body
+
+  = link_to 'Edit', edit_mail_path(mail)
+
+= link_to 'Back', mails_path
