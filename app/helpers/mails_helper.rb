@@ -14,9 +14,11 @@ module MailsHelper
 
   def format_mail(mail)
     if mail.is_root?
-      path = mail_path(mail)
+      link_text = "#{h mail.number} #{h mail.subject} : #{h mail.from}".html_safe
+      link_path = mail_path(mail)
     else
-      path = mail_path(mail.root, :anchor => mail.number)
+      link_text = "#{h mail.number} : #{h mail.from}".html_safe
+      link_path = mail_path(mail.root, :anchor => mail.number)
     end
 
     if mail.translation
@@ -27,7 +29,7 @@ module MailsHelper
 
     [
       "<div class='#{klass}'>",
-      (link_to "#{h mail.number} #{h mail.subject}", path),
+      (link_to link_text, link_path),
       "</div>"
     ].join
   end
