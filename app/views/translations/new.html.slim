@@ -1,5 +1,31 @@
 h1 New translation
 
-= render 'form'
+.left
+  = form_for([@mail, @translation]) do |f|
+    - if @translation.errors.any?
+      #error_explanation
+        h2
+          = pluralize(@translation.errors.count, "error")
+          prohibited this translation from being saved:
+        ul
+          - @translation.errors.full_messages.each do |msg|
+            li= msg
+    .field
+      = f.label :subject
+      br/
+      = f.text_field :subject, :value => @last_subject
+    .field
+      = f.label :body
+      br/
+      = f.text_area :body, :value => @last_body
+    .actions
+      = f.submit :value => "Save"
 
-= link_to 'Back', mail_path(@mail.number)
+.right.clearfix
+  #original_subject
+    = @mail.subject
+    
+  pre = @mail.body
+
+div
+  = link_to 'Back', mail_path(@mail.number)

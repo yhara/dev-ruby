@@ -22,6 +22,9 @@ class TranslationsController < ApplicationController
     @mail = Mail.find(params[:mail_id])
     @translation = Translation.new
 
+    @last_subject = @mail.translation.try(:subject) || @mail.subject
+    @last_body = @mail.translation.try(:body) || @mail.body
+
     respond_to do |format|
       format.html # new.html.erb
     end
