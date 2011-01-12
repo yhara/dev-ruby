@@ -9,10 +9,11 @@ module MailsHelper
 
   def format_mail(mail)
     if mail.parent
-      path = mail_path(mail.root.number, :anchor => mail.number)
+      path = mail_path(mail.root, :anchor => mail.number)
     else
-      path = mail_path(mail.number)
+      path = mail_path(mail)
     end
-    link_to "#{h mail.number} #{h mail.subject}", path
+    tr = if mail.translations.empty? then "" else "*" end
+    link_to "#{h mail.number} #{h mail.subject} #{tr}", path
   end
 end

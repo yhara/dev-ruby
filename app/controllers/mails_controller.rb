@@ -14,13 +14,20 @@ class MailsController < ApplicationController
   # GET /mails/1
   # GET /mails/1.xml
   def show
-    @root = Mail.find_by_number(params[:id])
-    @mails = [@root] + @root.descendants
+    @mail = Mail.find(params[:id])
+    if @mail.is_root?
+      @root = @mail
+      @mails = [@root] + @root.descendants.includes(:translations)
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @mail }
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @mail }
+      end
+    else
+      redirect_to :action => :show, :id => @mail.root.number, :anchor => @mail.number
     end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to "/404.html"
   end
 
   # GET /mails/new
@@ -32,11 +39,6 @@ class MailsController < ApplicationController
       format.html # new.html.erb
       format.xml  { render :xml => @mail }
     end
-  end
-
-  # GET /mails/1/edit
-  def edit
-    @mail = Mail.find(params[:id])
   end
 
   # POST /mails
@@ -52,34 +54,6 @@ class MailsController < ApplicationController
         format.html { render :action => "new" }
         format.xml  { render :xml => @mail.errors, :status => :unprocessable_entity }
       end
-    end
-  end
-
-  # PUT /mails/1
-  # PUT /mails/1.xml
-  def update
-    @mail = Mail.find(params[:id])
-
-    respond_to do |format|
-      if @mail.update_attributes(params[:mail])
-        format.html { redirect_to(@mail, :notice => 'Mail was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @mail.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /mails/1
-  # DELETE /mails/1.xml
-  def destroy
-    @mail = Mail.find(params[:id])
-    @mail.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(mails_url) }
-      format.xml  { head :ok }
     end
   end
 end

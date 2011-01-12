@@ -4,15 +4,25 @@ p#notice= notice
 
 - @mails.each do |mail|
   a name="#{mail.number}"
-  pre
-    = mail.number
-    = mail.subject
-    br
-    = mail.from
-    = mail.time
-    br
-    = mail.body
+  h3
+    span = mail.number
+    = " "
+    span = mail.from
+    = " "
+    span = mail.time
+    = " "
+    span = mail.subject
 
-  = link_to 'Edit', edit_mail_path(mail)
+  pre
+    - if (tr = mail.translation)
+      = tr.body
+      = "---"
+      = mail.body
+
+    - else
+      = mail.body
+
+  div#menu 
+    = link_to 'Edit Translation', new_mail_translation_path(mail.number)
 
 = link_to 'Back', mails_path

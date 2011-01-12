@@ -1,5 +1,8 @@
 DevRuby::Application.routes.draw do
-  resources :mails
+
+  resources :mails do
+    resources :translations, :only => [:new, :create]
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
