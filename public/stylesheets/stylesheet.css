@@ -21,6 +21,9 @@ body {
 #user_nav {
   text-align: right; }
 
+li {
+  margin-left: -2em; }
+
 .translated a {
   color: black; }
 
