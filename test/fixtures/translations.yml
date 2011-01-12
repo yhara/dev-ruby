@@ -1,13 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  mail_id: 1
+  mail: one
+  subject: MyString
+  body: MyText
+  created_at: 2011-01-10 23:17:50
+
+one2:
+  mail: one
   subject: MyString
   body: MyText
   created_at: 2011-01-10 23:17:50
 
 two:
-  mail_id: 1
+  mail: two
   subject: MyString
   body: MyText
   created_at: 2011-01-10 23:17:50

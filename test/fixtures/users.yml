@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  provider: MyString
-  uid: MyString
-  name: MyString
+  provider: twitter
+  uid: 123456
+  name: yhara
 
 two:
-  provider: MyString
-  uid: MyString
-  name: MyString
+  provider: twitter
+  uid: 789012
+  name: yhara_en

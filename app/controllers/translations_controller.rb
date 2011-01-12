@@ -1,21 +1,4 @@
 class TranslationsController < ApplicationController
-#  # GET /translations
-#  def index
-#    @translations = Translation.all
-#
-#    respond_to do |format|
-#      format.html # index.html.erb
-#    end
-#  end
-#
-#  # GET /translations/1
-#  def show
-#    @translation = Translation.find(params[:id])
-#
-#    respond_to do |format|
-#      format.html # show.html.erb
-#    end
-#  end
 
   # GET /translations/new
   def new

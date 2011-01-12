@@ -29,21 +29,13 @@ class MailsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => @mail.to_param
-    assert_response :success
-  end
-
-  test "should update mail" do
-    put :update, :id => @mail.to_param, :mail => @mail.attributes
-    assert_redirected_to mail_path(assigns(:mail))
-  end
-
-  test "should destroy mail" do
-    assert_difference('Mail.count', -1) do
-      delete :destroy, :id => @mail.to_param
-    end
-
-    assert_redirected_to mails_path
-  end
+#  test "should get edit" do
+#    get :edit, :id => @mail.to_param
+#    assert_response :success
+#  end
+#
+#  test "should update mail" do
+#    put :update, :id => @mail.to_param, :mail => @mail.attributes
+#    assert_redirected_to mail_path(assigns(:mail))
+#  end
 end

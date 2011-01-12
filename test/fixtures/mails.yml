@@ -1,15 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  number: 1
-  subject: MyString
-  from: MyString
+  number: 40001
+  subject: Test Mail One
+  from: one@example.jp
   time: 2011-01-07 21:23:35
-  body: MyText
+  body: This is test mail one.
 
 two:
-  number: 1
-  subject: MyString
-  from: MyString
+  number: 40002
+  subject: Test Mail Two
+  from: two@example.jp
   time: 2011-01-07 21:23:35
-  body: MyText
+  body: This is test mail two.
