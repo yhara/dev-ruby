@@ -13,4 +13,12 @@ class Mail < ActiveRecord::Base
       trs.max_by{|tr| tr.created_at}
     end
   end
+
+  def translation_subject
+    translation.try(:subject) or self.subject
+  end
+
+  def translation_body
+    translation.try(:body) or self.body
+  end
 end

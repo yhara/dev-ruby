@@ -14,7 +14,7 @@ module MailsHelper
 
   def format_mail(mail)
     if mail.is_root?
-      link_text = "#{h mail.number} #{h mail.subject} : #{h mail.from}".html_safe
+      link_text = "#{h mail.number} #{h mail.translation_subject} : #{h mail.from}".html_safe
       link_path = mail_path(mail)
     else
       link_text = "#{h mail.number} : #{h mail.from}".html_safe
