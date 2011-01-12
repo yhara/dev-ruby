@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'nokogiri'
 
 gem 'ancestry'
+gem 'friendly_id'
 
 gem 'rails', '3.0.3'
 
