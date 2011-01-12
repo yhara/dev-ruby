@@ -7,7 +7,9 @@ gem 'friendly_id'
 
 gem 'rails', '3.0.3'
 
-gem 'slim', :require => 'slim/rails'
+gem 'slim'
+gem "slim-rails"
+gem 'sass'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

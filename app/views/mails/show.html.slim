@@ -13,16 +13,18 @@ p#notice= notice
     = " "
     span = mail.subject
 
-  pre
+  .left
     - if (tr = mail.translation)
-      = tr.body
-      = "---"
-      = mail.body
+      pre = tr.body
+      = link_to 'Edit Translation', new_mail_translation_path(mail.number)
 
     - else
-      = mail.body
+      pre 
+        | [Translation not available]
+      = link_to 'Translate', new_mail_translation_path(mail.number)
 
-  div#menu 
-    = link_to 'Edit Translation', new_mail_translation_path(mail.number)
+  .right.clearfix
+    pre = mail.body
 
-= link_to 'Back', mails_path
+div
+  = link_to 'Back', mails_path

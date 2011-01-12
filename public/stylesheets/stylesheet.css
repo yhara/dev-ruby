@@ -1,0 +1,26 @@
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0; }
+
+.clearfix {
+  display: inline-block; }
+
+html[xmlns] .clearfix {
+  display: block; }
+
+* html .clearfix {
+  height: 1%; }
+
+.left {
+  float: left;
+  width: 45%; }
+  .left pre {
+    background: white;
+    border: 1px solid black; }
+
+.right {
+  width: 45%; }
