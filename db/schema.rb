@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107101419) do
+ActiveRecord::Schema.define(:version => 20110110141750) do
 
   create_table "mails", :force => true do |t|
     t.integer  "number",   :null => false
@@ -23,5 +23,12 @@ ActiveRecord::Schema.define(:version => 20110107101419) do
 
   add_index "mails", ["ancestry"], :name => "index_mails_on_ancestry"
   add_index "mails", ["number"], :name => "index_mails_on_number"
+
+  create_table "translations", :force => true do |t|
+    t.integer  "mail_id"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at"
+  end
 
 end

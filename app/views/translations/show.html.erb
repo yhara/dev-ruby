@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Mail:</b>
+  <%= @translation.mail_id %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @translation.subject %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @translation.body %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @translation.created_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_translation_path(@translation) %> |
+<%= link_to 'Back', translations_path %>
