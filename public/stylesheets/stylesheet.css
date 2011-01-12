@@ -21,6 +21,12 @@ body {
 #user_nav {
   text-align: right; }
 
+.translated a {
+  color: black; }
+
+.not_translated a {
+  color: #cccccc; }
+
 .left {
   float: left;
   width: 45%; }
