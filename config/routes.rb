@@ -1,5 +1,10 @@
 DevRuby::Application.routes.draw do
 
+  root :to => "mails#index"
+
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy", :as => :signout  
+
   resources :mails do
     resources :translations, :only => [:new, :create]
   end

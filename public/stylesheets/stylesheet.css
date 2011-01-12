@@ -15,6 +15,12 @@ html[xmlns] .clearfix {
 * html .clearfix {
   height: 1%; }
 
+body {
+  margin: 1em 2%; }
+
+#user_nav {
+  text-align: right; }
+
 .left {
   float: left;
   width: 45%; }
