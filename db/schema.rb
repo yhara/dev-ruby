@@ -10,33 +10,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110112105947) do
-
-  create_table "mails", :force => true do |t|
-    t.integer  "number",   :null => false
-    t.string   "subject",  :null => false
-    t.string   "from",     :null => false
-    t.datetime "time",     :null => false
-    t.text     "body",     :null => false
-    t.string   "ancestry"
-  end
-
-  add_index "mails", ["ancestry"], :name => "index_mails_on_ancestry"
-  add_index "mails", ["number"], :name => "index_mails_on_number"
-
-  create_table "translations", :force => true do |t|
-    t.integer  "mail_id"
-    t.string   "subject"
-    t.text     "body"
-    t.datetime "created_at"
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 0) do
 
 end
