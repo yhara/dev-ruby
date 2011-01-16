@@ -1,0 +1,8 @@
+# Typus Roles Configuration File
+#
+# Use the README file as a reference to customize settings.
+
+admin:
+  Mail: create, read, update, delete
+  Translation: create, read, update, delete
+  User: create, read, update, delete

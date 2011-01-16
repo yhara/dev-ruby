@@ -1,0 +1,34 @@
+# Typus Models Configuration File
+#
+# Use the README file as a reference to customize settings.
+
+Mail:
+  fields:
+    default: number, subject, from, time, ancestry
+    form: number, subject, from, time, body, ancestry
+  order_by: 
+  relationships: translations
+  filters: 
+  search: 
+  application: dev-ruby
+
+Translation:
+  fields:
+    default: mail_id, subject, mail
+    form: mail_id, subject, body, mail
+  order_by: 
+  relationships: mail
+  filters: 
+  search: 
+  application: dev-ruby
+
+User:
+  fields:
+    default: provider, uid, name
+    form: provider, uid, name
+  order_by: 
+  relationships: 
+  filters: 
+  search: name
+  application: dev-ruby
+

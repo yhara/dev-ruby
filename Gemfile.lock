@@ -135,7 +135,10 @@ GEM
     tilt (1.2.1)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
+    typus (3.0.2)
+      will_paginate (~> 3.0.pre2)
     tzinfo (0.3.23)
+    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -153,3 +156,4 @@ DEPENDENCIES
   slim-rails
   sqlite3-ruby
   thin
+  typus

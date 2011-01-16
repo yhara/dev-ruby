@@ -7,6 +7,8 @@ gem 'ancestry'
 gem 'friendly_id'
 gem 'omniauth'
 
+gem 'typus'
+
 # view
 gem 'slim'
 gem "slim-rails"
