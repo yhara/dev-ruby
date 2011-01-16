@@ -1,7 +1,7 @@
 h1 New translation
 
 .left
-  = form_for([@mail, @translation]) do |f|
+  = form_for([@post, @translation]) do |f|
     - if @translation.errors.any?
       #error_explanation
         h2
@@ -23,9 +23,9 @@ h1 New translation
 
 .right.clearfix
   #original_subject
-    = @mail.subject
+    = @post.subject
     
-  pre = @mail.body
+  pre = @post.body
 
 div
-  = link_to 'Back', mail_path(@mail.number)
+  = link_to 'Back', post_path(@post.number)

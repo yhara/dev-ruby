@@ -2,29 +2,29 @@
 
 p#notice= notice
 
-- @mails.each do |mail|
-  a name="#{mail.number}"
+- @posts.each do |post|
+  a name="#{post.number}"
   h3
-    span = mail.number
+    span = post.number
     = " "
-    span = mail.from
+    span = post.from
     = " "
-    span = mail.time
+    span = post.time
     = " "
-    span = mail.subject
+    span = post.subject
 
   .left
-    - if (tr = mail.translation)
+    - if (tr = post.translation)
       pre = tr.body
-      = link_to 'Edit Translation', new_mail_translation_path(mail.number)
+      = link_to 'Edit Translation', new_post_translation_path(post.number)
 
     - else
       pre 
         | [Translation not available]
-      = link_to 'Translate', new_mail_translation_path(mail.number)
+      = link_to 'Translate', new_post_translation_path(post.number)
 
   .right.clearfix
-    pre = mail.body
+    pre = post.body
 
 div
-  = link_to 'Back', mails_path
+  = link_to 'Back', posts_path
