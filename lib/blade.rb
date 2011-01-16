@@ -36,7 +36,7 @@ class Blade
 
   def get
     html = open("http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{@number}", "r:euc-jp").read
-    html.encode("utf-8")
+    html.encode("utf-8", invalid: :replace, undef: :replace)
   end
 
   def parse
