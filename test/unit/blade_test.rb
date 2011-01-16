@@ -45,8 +45,8 @@ class BladeTest < ActiveSupport::TestCase
     assert_equal data[:body], "チケット #4152 が更新されました。 (by Anonymous)\n\nステータス AssignedからClosedに変更\n進捗 % 0から100に変更\n\nThis issue was solved with changeset r30394.\nKazuhiro, thank you for reporting this issue.\nYour contribution to Ruby is greatly appreciated.\nMay Ruby be with you.\n\n----------------------------------------\nhttp://redmine.ruby-lang.org/issues/show/4152\n\n----------------------------------------\nhttp://redmine.ruby-lang.org\n\n"
   end
 
-  test "Blade#create creates a Mail" do
-    assert_difference "Mail.count", 1 do
+  test "Blade#create creates a Post" do
+    assert_difference "Post.count", 1 do
       Blade.new(42900).create
     end
   end
@@ -59,18 +59,9 @@ class BladeTest < ActiveSupport::TestCase
     assert_equal 42969, Blade.latest_number
   end
 
-  test "Blade should parse ruby-dev:42915" do
-    assert_nothing_raised do
-      Blade.new(42915).create
-    end
-  end
-
   test "Blade should add in_reply_to according to RedMine ticket number" do
     Blade.new(42897).create
     assert_equal 42897, Blade.new(42899).parse[:in_reply_to]
-  end
-
-  test "Blade should add in_reply_to according to RedMine ticket number(2)" do
     Blade.new(42895).create
     assert_equal 42895, Blade.new(42900).parse[:in_reply_to]
   end
@@ -78,4 +69,12 @@ class BladeTest < ActiveSupport::TestCase
   test "Blade should use blade's [parent] instead of In-reply-to" do
     assert_equal 42928, Blade.new(42929).parse[:in_reply_to]
   end
+
+  test "Blade should parse ruby-dev:42915, 43039" do
+    assert_nothing_raised do
+      Blade.new(42915).create
+      Blade.new(43039).create # contains broken EUC-JP
+    end
+  end
+
 end

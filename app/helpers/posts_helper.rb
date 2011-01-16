@@ -1,27 +1,27 @@
-module MailsHelper
-  def format_mails(tree, &block)
+module PostsHelper
+  def format_posts(tree, &block)
     return "" if tree.empty?
 
     ("<ul>" + tree.map{|parent, children|
       [
         "<li>",
-        format_mail(parent),
-        format_mails(children, &block),
+        format_post(parent),
+        format_posts(children, &block),
         "</li>"
       ].join
     }.join + "</ul>").html_safe
   end
 
-  def format_mail(mail)
-    if mail.is_root?
-      link_text = "#{h mail.number} #{h mail.translation_subject} : #{h mail.from}".html_safe
-      link_path = mail_path(mail)
+  def format_post(post)
+    if post.is_root?
+      link_text = "#{h post.number} #{h post.translation_subject} : #{h post.from}".html_safe
+      link_path = post_path(post)
     else
-      link_text = "#{h mail.number} : #{h mail.from}".html_safe
-      link_path = mail_path(mail.root, :anchor => mail.number)
+      link_text = "#{h post.number} : #{h post.from}".html_safe
+      link_path = post_path(post.root, :anchor => post.number)
     end
 
-    if mail.translation
+    if post.translation
       klass = "translated"
     else
       klass = "not_translated"

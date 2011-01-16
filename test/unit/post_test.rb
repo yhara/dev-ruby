@@ -1,13 +1,13 @@
 require 'test_helper'
 
-class Mail
-  def inspect; "#<Mail:#{self.number}>"; end
+class Post
+  def inspect; "#<Post:#{self.number}>"; end
 end
 
-class MailTest < ActiveSupport::TestCase
+class PostTest < ActiveSupport::TestCase
 
-  test "Mail creates instance" do
-    assert_instance_of Mail, Mail.create(
+  test "Post creates instance" do
+    assert_instance_of Post, Post.create(
       :number => 12345,
       :subject => "Hi",
       :from => "a@b.cd",
@@ -17,12 +17,12 @@ class MailTest < ActiveSupport::TestCase
     )
   end
 
-  test "Mails should form trees" do
-    m1 = Fabricate(:mail)
-      m2 = Fabricate(:mail, parent: m1)
-        m3 = Fabricate(:mail, parent: m2)
-      m4 = Fabricate(:mail, parent: m1)
-    m5 = Fabricate(:mail)
+  test "Posts should form trees" do
+    m1 = Fabricate(:post)
+      m2 = Fabricate(:post, parent: m1)
+        m3 = Fabricate(:post, parent: m2)
+      m4 = Fabricate(:post, parent: m1)
+    m5 = Fabricate(:post)
 
     assert_equal({m1 => {m2 => {m3 => {}}, m4 => {}}},
       m1.subtree.arrange)

@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class MailsControllerTest < ActionController::TestCase
+class PostsControllerTest < ActionController::TestCase
   setup do
-    @mail = mails(:one)
+    @post = posts(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:mails)
+    assert_not_nil assigns(:posts)
   end
 
   test "should get new" do
@@ -16,26 +16,26 @@ class MailsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create mail" do
-    assert_difference('Mail.count') do
-      post :create, :mail => @mail.attributes
+  test "should create post" do
+    assert_difference('Post.count') do
+      post :create, :post => @post.attributes
     end
 
-    assert_redirected_to mail_path(assigns(:mail))
+    assert_redirected_to post_path(assigns(:post))
   end
 
-  test "should show mail" do
-    get :show, :id => @mail.to_param
+  test "should show post" do
+    get :show, :id => @post.to_param
     assert_response :success
   end
 
 #  test "should get edit" do
-#    get :edit, :id => @mail.to_param
+#    get :edit, :id => @post.to_param
 #    assert_response :success
 #  end
 #
-#  test "should update mail" do
-#    put :update, :id => @mail.to_param, :mail => @mail.attributes
-#    assert_redirected_to mail_path(assigns(:mail))
+#  test "should update post" do
+#    put :update, :id => @post.to_param, :post => @post.attributes
+#    assert_redirected_to post_path(assigns(:post))
 #  end
 end

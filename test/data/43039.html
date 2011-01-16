@@ -1,0 +1,91 @@
+<HTML><HEAD><TITLE>[ruby-dev:43039] ext/openssl development repository</TITLE>
+<script language="javascript">
+<!--
+  function chk() {
+    var name = navigator.appName;
+    var ver = navigator.appVersion;
+    if (name.charAt(0) == "M") {
+      if (ver.charAt(0) >= 5 ||
+        ver.indexOf(" 5.5") >= 0 ||
+        ver.indexOf(" 6") >= 0
+         )
+        return(true);
+      return(false);
+    } else if (name.charAt(0) == "N") {
+      if (ver.charAt(0) >= 5)
+        return(true);
+      return(false);
+    } else {
+      return(false);
+    }
+  }
+
+  function hilight(x) {
+    if (!chk()) return;
+    if (parent) {
+      try {
+        parent.frames[0].hilight(x);
+      } catch(e) {
+       //alert(e);
+      }
+    }
+  }
+
+  //Navigation Bar
+  var IE = document.all;
+  var PosTimer;
+  function stickNavi() {
+    var y = document.body.scrollTop;
+    var s = document.getElementById('navi').style
+    s.top = y + 7;
+    s.left = 8;
+  }
+  function stickNaviLoop() {
+    if (PosTimer){clearTimeout(PosTimer);}
+    stickNavi();
+    PosTimer = setTimeout("stickNaviLoop()", 10);
+  }
+
+  function setNavi() {
+    if (IE) {document.body.onscroll = stickNavi;}
+    else {stickNaviLoop();}
+  }
+
+//-->
+</script>
+<link rel="stylesheet" href="http://blade.nagaokaut.ac.jp/css/blade.css" type="text/css" title="blade"></HEAD><BODY onLoad="setNavi()">
+<A NAME=head></A><div id="navi" style="position:absolute;top:7px;left:8px;"><A HREF="43038" class="a-button" onclick="hilight(43038)"><span id="normal" title="&lt;">&nbsp;&lt;&nbsp;</span></A><A HREF="/ruby/ruby-dev/43001-43200.shtml#43039" class="a-button" target="_top"><span id="normal" title="^">^</span></A><A HREF="43040" class="a-button" onclick="hilight(43040)"><span id="normal" title="&gt;">&nbsp;&gt;&nbsp;</span></A> <a href="43036" onclick="hilight(43036)" class="a-button"><span id="red" title="[previous]">&nbsp;P&nbsp;</span></a><a href="43040" onclick="hilight(43040)" class="a-button"><span id="green" title="[next]">&nbsp;N&nbsp;</span></a> <a href="43036" onclick="hilight(43036)" class="a-button"><span id="red" title="[previous thread]">|&lt;</span></a><span id="red" title="[next thread]">&gt;|</span><span id="normal" title="[parent]">^</span><a href="43040" onclick="hilight(43040)" class="a-button"><span id="normal" title="[child]">_</span></a><span id="normal" title="[elder]">&gt;</span><span id="normal" title="[younger]">&lt;</span> <a href="/cgi-bin/vframe.rb/ruby/ruby-dev/43039?42968-43044" target="_top" class="a-button"><span id="normal" title="[thread frame]">---</span></a><a href="/cgi-bin/vframe.rb/ruby/ruby-dev/43039?42968-43044+split-mode-vertical" target="_top" class="a-button"><span id="normal" title="[thread frame vertical]">&nbsp;|&nbsp;</span></a><a href="43039" target="_top" onclick="hilight(43039)" class="a-button"><span id="normal" title="[frame close]">&nbsp;~&nbsp;</span></a><a href="/ruby/ruby-dev/index.shtml" target="_top" class="a-button"><span id="normal" title="[index]">.</span></a><a href="/ruby/ruby-dev/../index.shtml" target="_top" class="a-button"><span id="normal" title="[iindex]">..</span></a><a href="/cgi-bin/scat.rb/ruby/ruby-dev/43039?help" class="a-button"><span id="normal" title="[Help]">Help</span></a></div>
+<div id="header"><br>
+Subject: [ruby-dev:<strong>43039</strong>] <strong>ext/openssl development repository</strong><br>
+From: <strong>Hiroshi Nakamura </strong>&lt;nakahiro gmail.com&gt;<br>
+Date: Fri, 14 Jan 2011 21:50:53 +0900</div>
+<pre><A HREF="/cgi-bin/scat.rb/ruby/ruby-core/34416">[ruby-core:34416]</A>�罨紮�
+最近Martin Boletさんという、ネットワークセキュリティおよび暗号システム
+の専門家の方と、彼がext/openssl向けに作ってくれたタイムスタンプサポート
+パッチ（<A HREF="http://redmine.ruby-lang.org/issues/show/4183" target="_top">http://redmine.ruby-lang.org/issues/show/4183</A>）を本体にマージす
+る方法について相談しています。我々はGitHub上に、ext/openssl開発用リポジ
+トリを作ろうとしています（Rubyリポジトリにマージされる前は&quot;ruby-pki&quot;と呼
+ばれていました: <A HREF="http://www.nongnu.org/rubypki/" target="_top">http://www.nongnu.org/rubypki/</A>）。RubyGemsやRDocのよう
+に、我々はRubyリポジトリのブランチポリシーに囚われずに開発し、CRubyのリ
+リースに囚われずにGemとしてリリースしたいと思っています。
+
+forkのつもりはありません。Rubyリポジトリのext/opensslは引き続き、
+RubyGemsやRDoc同様、従来どおり最新かつ安定したものにしようと思っていま
+す。ext/opensslの開発用リポジトリのmasterブランチは、Rubyリポジトリの
+ext/opensslと同期させたままにするつもりです。また、希望するCRubyコミッタ
+なら誰でもコミットしていただきたいと思います。
+
+そして最終的には、Boletさんにext/opensslメンテナになってもらいたいと
+思っています。
+
+この目的の開発用ブランチにふさわしい場所はどこでしょう？
+github.com/ruby/ruby-opensslは使えますか？そうでなければ、Boletさんが
+すでに作ってくれたgithub.com/emboss/ruby-opensslを使うかもしれません。
+
+（追加）
+
+で、ruby-coreでは特に反対もなかったんですが、
+github.com/ruby/ruby-opensslの利用って可能でしょうか。
+どなたかに作成をお願いすればよい？
+<a name=tail></a></pre>
+</BODY></HTML>

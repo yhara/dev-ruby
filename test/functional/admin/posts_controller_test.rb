@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::MailsControllerTest < ActionController::TestCase
+class Admin::PostsControllerTest < ActionController::TestCase
 
   # Replace this with your real tests.
   test "the truth" do

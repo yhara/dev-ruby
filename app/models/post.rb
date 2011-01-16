@@ -1,4 +1,4 @@
-class Mail < ActiveRecord::Base
+class Post < ActiveRecord::Base
   has_ancestry
   has_friendly_id :number
   has_many :translations

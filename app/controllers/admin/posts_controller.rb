@@ -1,2 +1,2 @@
-class Admin::MailsController < Admin::ResourcesController
+class Admin::PostsController < Admin::ResourcesController
 end

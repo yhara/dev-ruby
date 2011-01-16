@@ -1,4 +1,4 @@
-class CreateMails < ActiveRecord::Migration
+class CreatePosts < ActiveRecord::Migration
   def self.up
     create_table :posts do |t|
       t.integer :number, :null => false

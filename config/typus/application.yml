@@ -2,7 +2,7 @@
 #
 # Use the README file as a reference to customize settings.
 
-Mail:
+Post:
   fields:
     default: number, subject, from, time, ancestry
     form: number, subject, from, time, body, ancestry
@@ -14,10 +14,10 @@ Mail:
 
 Translation:
   fields:
-    default: mail_id, subject, mail
-    form: mail_id, subject, body, mail
+    default: post_id, subject, post
+    form: post_id, subject, body, post
   order_by: 
-  relationships: mail
+  relationships: post
   filters: 
   search: 
   application: dev-ruby

@@ -1,3 +1,3 @@
 class Translation < ActiveRecord::Base
-  belongs_to :mail
+  belongs_to :post
 end

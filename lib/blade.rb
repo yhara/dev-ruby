@@ -7,7 +7,7 @@ class Blade
 
   def self.update
     latest = self.latest_number
-    last = Mail.maximum("number") || (latest - 100)
+    last = Post.maximum("number") || (latest - 100)
 
     puts "last: #{last} latest: #{latest}" if Blade.verbose
 
@@ -71,7 +71,7 @@ class Blade
     tag = $1
     print "finding `#{tag}'..." if Blade.verbose
 
-    parent = Mail.where("subject LIKE (?)", "%#{tag}%").order("number DESC").limit(1).first
+    parent = Post.where("subject LIKE (?)", "%#{tag}%").order("number DESC").limit(1).first
 
     if parent
       puts "found #{parent.number}" if Blade.verbose
@@ -84,7 +84,7 @@ class Blade
 
   def create
     attrs = self.parse
-    attrs[:parent] = Mail.first(conditions: {number: attrs.delete(:in_reply_to)})
-    Mail.create(attrs)
+    attrs[:parent] = Post.first(conditions: {number: attrs.delete(:in_reply_to)})
+    Post.create(attrs)
   end
 end
