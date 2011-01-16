@@ -16,10 +16,23 @@ html[xmlns] .clearfix {
   height: 1%; }
 
 body {
-  margin: 1em 2%; }
+  margin: 0px;
+  padding: 0px; }
+
+#content {
+  padding: 1em 2%; }
+
+#header {
+  width: 100%;
+  background: orange;
+  padding: 1em; }
+  #header h1 a {
+    color: white;
+    text-decoration: none; }
 
 #user_nav {
-  text-align: right; }
+  text-align: right;
+  margin-right: 2em; }
 
 li {
   margin-left: -2em; }
@@ -30,12 +43,22 @@ li {
 .not_translated a {
   color: #cccccc; }
 
-.left {
-  float: left;
-  width: 45%; }
-  .left pre {
-    background: white;
-    border: 1px solid black; }
-
-.right {
-  width: 45%; }
+.post {
+  border: 1px solid #ffeebb;
+  padding: 0px; }
+  .post h3 {
+    background: #ffeebb;
+    margin-top: 0px; }
+    .post h3 .post_from, .post h3 .post_subject, .post h3 .post_time {
+      font-weight: normal; }
+    .post h3 .post_subject, .post h3 .post_time {
+      font-size: 80%; }
+  .post .left {
+    float: left;
+    width: 45%;
+    margin-left: 1em; }
+    .post .left pre {
+      background: white;
+      border: 1px solid black; }
+  .post .right {
+    width: 45%; }

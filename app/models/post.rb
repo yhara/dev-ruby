@@ -4,8 +4,7 @@ class Post < ActiveRecord::Base
   has_many :translations
 
   def to_title
-    "<h2>[ruby-dev:#{self.number}] #{self.subject}</h2>".
-      sub(/\[.*?\]/){|match| "#{match}<br>"}
+    "<h2>[ruby-dev:#{self.number}] #{self.subject}</h2>"
   end
 
   def translation

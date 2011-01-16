@@ -1,3 +1,7 @@
+// sass variables
+
+$lightorange: #feb
+
 // clearfix
 
 .clearfix:after 
@@ -19,13 +23,27 @@ html[xmlns] .clearfix
 
 // all
 body
-  margin: 1em 2%
+  margin: 0px
+  padding: 0px
+
+#content
+  padding: 1em 2%
 
 // header
+#header
+  width: 100%
+  background: orange
+  padding: 1em
+
+  h1 a
+    color: white
+    text-decoration: none
+
 #user_nav
   text-align: right
+  margin-right: 2em
 
-// mails/index
+// posts/index
 li 
   margin-left: -2em
 
@@ -35,15 +53,31 @@ li
 .not_translated a
   color: #ccc
 
-// mails/show
-.left
-  float: left
-  width: 45%
+// posts/show
+.post
+  border: 1px solid $lightorange
+  padding: 0px
+  //border-radius: 5px
 
-  pre
-    background: white
-    border: 1px solid black
+  h3
+    background: $lightorange
+    margin-top: 0px
 
-.right
-  width: 45%
+    .post_from, .post_subject, .post_time
+      font-weight: normal
+    .post_subject, .post_time
+      font-size: 80%
+
+  .left
+    float: left
+    width: 45%
+    margin-left: 1em
+
+    pre
+      background: white
+      border: 1px solid black
+
+  .right
+    width: 45%
   
+// translation/new

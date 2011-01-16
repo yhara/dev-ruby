@@ -7,13 +7,19 @@ html
     = javascript_include_tag :defaults
     = csrf_meta_tag
   body
-    #user_nav
-      - if current_user
-        = "Welcome, #{current_user.name}! "
-        = link_to "Sign Out", signout_path
-      - else
-        = link_to "Sign in with Twitter", "/auth/twitter"
+    #header
+      #user_nav
+        - if current_user
+          = "Welcome, #{current_user.name}! "
+          = link_to "Sign Out", signout_path
+        - else
+          = link_to "Sign in with Twitter", "/auth/twitter"
 
-    h1 = link_to "ruby-dev translation", root_path
+      h1 = link_to "ruby-dev translation", root_path
 
-    = yield
+    #content
+      #flash
+        #error = flash[:notice]
+        #notice = flash[:error]
+
+      = yield
