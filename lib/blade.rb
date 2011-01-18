@@ -51,7 +51,7 @@ class Blade
     if parent_span and parent_span.parent.name == "a" # link exists
       parent_no = parent_span.parent[:href].to_i
     else
-      parent_no = find_parent_no(subject)
+      parent_no = find_parent_no(subject, @number)
     end
 
     { 
@@ -67,12 +67,12 @@ class Blade
   # parent: [Ruby 1.8-Bug#4206] failed to set ext option for win32/configure.bat
   # me: [Ruby 1.8-Bug#4206] failed to set ext option for win32/configure.bat
   # [Ruby 1.9-Bug#4152]
-  def find_parent_no(subject)
+  def find_parent_no(subject, my_number)
     return nil if subject !~ /\A(\[(.*)-(.*)#(\d*)\])/
     tag = $1
     print "finding `#{tag}'..." if Blade.verbose
 
-    parent = Post.where("subject LIKE (?)", "%#{tag}%").order("number DESC").limit(1).first
+    parent = Post.where("subject LIKE (?)", "%#{tag}%").order("number DESC").find{|post| post.number != my_number}
 
     if parent
       puts "found #{parent.number}" if Blade.verbose
@@ -83,9 +83,13 @@ class Blade
     end
   end
 
-  def create
+  def post
     attrs = self.parse
-    attrs[:parent] = Post.first(conditions: {number: attrs.delete(:in_reply_to)})
-    Post.create(attrs)
+    attrs[:parent] = Post.find_by_number(attrs.delete(:in_reply_to))
+    Post.new(attrs)
+  end
+
+  def create
+    self.post.save
   end
 end
