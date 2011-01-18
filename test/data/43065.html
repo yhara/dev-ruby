@@ -1,0 +1,106 @@
+<HTML><HEAD><TITLE>[ruby-dev:43065] [Ruby 1.9-Bug#4238] GC.stress 下で OptionParser で設定のない引数をパースさせると core</TITLE>
+<script language="javascript">
+<!--
+  function chk() {
+    var name = navigator.appName;
+    var ver = navigator.appVersion;
+    if (name.charAt(0) == "M") {
+      if (ver.charAt(0) >= 5 ||
+        ver.indexOf(" 5.5") >= 0 ||
+        ver.indexOf(" 6") >= 0
+         )
+        return(true);
+      return(false);
+    } else if (name.charAt(0) == "N") {
+      if (ver.charAt(0) >= 5)
+        return(true);
+      return(false);
+    } else {
+      return(false);
+    }
+  }
+
+  function hilight(x) {
+    if (!chk()) return;
+    if (parent) {
+      try {
+        parent.frames[0].hilight(x);
+      } catch(e) {
+       //alert(e);
+      }
+    }
+  }
+
+  //Navigation Bar
+  var IE = document.all;
+  var PosTimer;
+  function stickNavi() {
+    var y = document.body.scrollTop;
+    var s = document.getElementById('navi').style
+    s.top = y + 7;
+    s.left = 8;
+  }
+  function stickNaviLoop() {
+    if (PosTimer){clearTimeout(PosTimer);}
+    stickNavi();
+    PosTimer = setTimeout("stickNaviLoop()", 10);
+  }
+
+  function setNavi() {
+    if (IE) {document.body.onscroll = stickNavi;}
+    else {stickNaviLoop();}
+  }
+
+//-->
+</script>
+<link rel="stylesheet" href="http://blade.nagaokaut.ac.jp/css/blade.css" type="text/css" title="blade"></HEAD><BODY onLoad="setNavi()">
+<A NAME=head></A><div id="navi" style="position:absolute;top:7px;left:8px;"><A HREF="43064" class="a-button" onclick="hilight(43064)"><span id="normal" title="&lt;">&nbsp;&lt;&nbsp;</span></A><A HREF="/ruby/ruby-dev/43001-43200.shtml#43065" class="a-button" target="_top"><span id="normal" title="^">^</span></A><A HREF="43066" class="a-button" onclick="hilight(43066)"><span id="normal" title="&gt;">&nbsp;&gt;&nbsp;</span></A> <span id="fade" title="(none)">&nbsp;&nbsp;&nbsp;</span><span id="fade" title="(none)">&nbsp;&nbsp;&nbsp;</span> <span id="fade" title="(none)">&nbsp;&nbsp;</span><span id="fade" title="(none)">&nbsp;&nbsp;</span><span id="fade" title="(none)">&nbsp;</span><span id="fade" title="(none)">&nbsp;</span><span id="fade" title="(none)">&nbsp;</span><span id="fade" title="(none)">&nbsp;</span> <span id="fade" title="(none)">&nbsp;&nbsp;&nbsp;</span><span id="fade" title="(none)">&nbsp;&nbsp;&nbsp;</span><span id="fade" title="(none)">&nbsp;&nbsp;&nbsp;</span><a href="/ruby/ruby-dev/index.shtml" target="_top" class="a-button"><span id="normal" title="[index]">.</span></a><a href="/ruby/ruby-dev/../index.shtml" target="_top" class="a-button"><span id="normal" title="[iindex]">..</span></a><a href="/cgi-bin/scat.rb/ruby/ruby-dev/43065?help" class="a-button"><span id="normal" title="[Help]">Help</span></a></div>
+<div id="header"><br>
+Subject: [ruby-dev:<strong>43065</strong>] <strong>[Ruby 1.9-Bug#4238] GC.stress 下で OptionParser で設定のない引数をパースさせると core</strong><br>
+From: <strong>Tomoyuki Chikanaga </strong>&lt;redmine ruby-lang.org&gt;<br>
+Date: Tue, 18 Jan 2011 22:10:26 +0900<br>
+References: <a href="/cgi-bin/scat.rb/ruby/ruby-dev/42963" onclick="hilight(42963)">42963</a></div>
+<pre>チケット #4238 が更新されました。 (by Tomoyuki Chikanaga)
+
+
+以下のように proc_call() に GC 除けを追加することで、わたしの環境では OptionParser を使った例も、
+縮小版も SEGV が起きなくなりました(ruby 1.9.3dev (2011-01-18 trunk 30590) [i686-linux], gcc-4.3.3 optflags=-O3)。
+いかがでしょうか。
+
+diff --git a/proc.c b/proc.c
+index 9ecf626..18c7393 100644
+--- a/proc.c
++++ b/proc.c
+@@ -543,16 +543,16 @@ proc_call(int argc, VALUE *argv, VALUE procval)
+     rb_proc_t *proc;
+     rb_block_t *blockptr = 0;
+     rb_iseq_t *iseq;
++    VALUE passed_procval;
+     GetProcPtr(procval, proc);
+ 
+     iseq = proc-&gt;block.iseq;
+     if (BUILTIN_TYPE(iseq) == T_NODE || iseq-&gt;arg_block != -1) {
+ 	if (rb_block_given_p()) {
+-	    rb_proc_t *proc;
+-	    VALUE procval;
+-	    procval = rb_block_proc();
+-	    GetProcPtr(procval, proc);
+-	    blockptr = &amp;proc-&gt;block;
++	    rb_proc_t *passed_proc;
++	    RB_GC_GUARD(passed_procval) = rb_block_proc();
++	    GetProcPtr(passed_procval, passed_proc);
++	    blockptr = &amp;passed_proc-&gt;block;
+ 	}
+     }
+ 
+
+
+
+----------------------------------------
+<A HREF="http://redmine.ruby-lang.org/issues/show/4238" target="_top">http://redmine.ruby-lang.org/issues/show/4238</A>
+
+----------------------------------------
+<A HREF="http://redmine.ruby-lang.org" target="_top">http://redmine.ruby-lang.org</A>
+
+<a name=tail></a></pre>
+</BODY></HTML>

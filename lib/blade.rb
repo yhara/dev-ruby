@@ -35,7 +35,8 @@ class Blade
   end
 
   def get
-    html = open("http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{@number}", "r:euc-jp").read
+    html = open("http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{@number}", "r:binary").read
+    html.force_encoding("euc-jp")
     html.encode("utf-8", invalid: :replace, undef: :replace)
   end
 
@@ -46,9 +47,9 @@ class Blade
     subject = (doc/:strong)[1].text
     header = (doc % "#header").inner_text
 
-    parent = (doc % "span[title='[parent]']").parent
-    if parent.name == "a" # link exists
-      parent_no = parent[:href].to_i
+    parent_span = (doc % "span[title='[parent]']")
+    if parent_span and parent_span.parent.name == "a" # link exists
+      parent_no = parent_span.parent[:href].to_i
     else
       parent_no = find_parent_no(subject)
     end

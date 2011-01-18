@@ -74,6 +74,7 @@ class BladeTest < ActiveSupport::TestCase
     assert_nothing_raised do
       Blade.new(42915).create
       Blade.new(43039).create # contains broken EUC-JP
+      Blade.new(43065).create # contains broken EUC-JP
     end
   end
 
