@@ -36,6 +36,8 @@ body {
 
 li {
   margin-left: -2em; }
+  li span.subject {
+    color: black; }
 
 .translated a {
   color: black; }

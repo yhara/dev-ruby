@@ -6,6 +6,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'ancestry'
 gem 'friendly_id'
 gem 'omniauth'
+gem 'will_paginate'
 
 gem 'typus'
 
@@ -42,6 +43,9 @@ end
 group :development, :test do
   gem 'fakeweb'
   gem 'fabrication'
+
+  gem 'cucumber-rails'
+  gem 'capybara'
 
 #  gem 'webrat'
 end

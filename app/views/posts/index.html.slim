@@ -1,3 +1,10 @@
+h2 = "#{@paginated.first.number} - #{@paginated.last.number}"
+
+= will_paginate @paginated
+
 - @posts.each do |posts|
   = format_posts(posts) do |post|
     = post.number
+
+= will_paginate @paginated
+

@@ -14,7 +14,11 @@ module PostsHelper
 
   def format_post(post)
     if post.is_root?
-      link_text = "#{h post.number} #{h post.translation_subject} : #{h post.from}".html_safe
+      link_text = [
+        "<b>#{h post.number} </b>",
+        "<span class='subject'>#{h post.translation_subject}</span>",
+        " : #{h post.from}",
+      ].join.html_safe
       link_path = post_path(post)
     else
       link_text = "#{h post.number} : #{h post.from}".html_safe

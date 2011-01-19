@@ -1,12 +1,12 @@
+require 'blade.rb'
+
 class PostsController < ApplicationController
   # GET /posts
   def index
-    @posts = Post.roots.order("number DESC").limit(100).map{|root| root.subtree.arrange}
-    #arrange #order("number DESC").limit(40).arrange(:order => :time)
+    @paginated = Post.paginate(page: params[:page], order: "number DESC")
+    root_ids = @paginated.map{|post| post.root_id}.uniq.sort
 
-    respond_to do |format|
-      format.html # index.html.erb
-    end
+    @posts = Post.find(*root_ids).sort_by{|post| -post.number}.map{|root| root.subtree.arrange}
   end
 
   # GET /posts/1
