@@ -1,14 +1,11 @@
 DevRuby::Application.routes.draw do
-
-  resources :posts
-
   root :to => "posts#index"
 
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout  
 
   resources :posts do
-    resources :translations, :only => [:new, :create]
+    resources :translations, :only => [:index, :new, :create]
   end
 
   # The priority is based upon order of creation:
