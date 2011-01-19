@@ -1,0 +1,21 @@
+h1 Listing translations
+table
+  tr
+    th Mail
+    th Subject
+    th Body
+    th Created at
+    th
+    th
+    th
+  - @translations.each do |translation|
+    tr
+      td= translation.post_id
+      td= translation.subject
+      td= translation.body
+      td= translation.created_at
+      td= link_to 'Show', translation
+      td= link_to 'Edit', edit_translation_path(translation)
+      td= link_to 'Destroy', translation, :confirm => 'Are you sure?', :method => :delete
+br/
+= link_to 'New Translation', new_translation_path
