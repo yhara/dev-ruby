@@ -23,3 +23,14 @@ html
         #notice = flash[:error]
 
       = yield
+
+    #footer
+      div
+        | ruby-dev translation
+      div
+        a href="http://github.com/yhara/dev-ruby/"
+          | source(github)
+        = " / "
+        a href="http://github.com/yhara/dev-ruby/issues"
+          | issues
+

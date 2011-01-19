@@ -22,6 +22,17 @@ body {
 #content {
   padding: 1em 2%; }
 
+.left {
+  float: left;
+  width: 45%;
+  margin-left: 1em; }
+  .left pre {
+    background: white;
+    border: 1px solid black; }
+
+.right {
+  width: 45%; }
+
 #header {
   width: 100%;
   background: orange;
@@ -29,10 +40,17 @@ body {
   #header h1 a {
     color: white;
     text-decoration: none; }
+  #header #user_nav {
+    text-align: right;
+    margin-right: 2em; }
 
-#user_nav {
-  text-align: right;
-  margin-right: 2em; }
+#footer {
+  width: 100%;
+  background: orange;
+  padding: 1em;
+  color: white;
+  text-align: center;
+  margin-top: 3em; }
 
 li {
   margin-left: -2em; }
@@ -55,12 +73,3 @@ li {
       font-weight: normal; }
     .post h3 .post_subject, .post h3 .post_time {
       font-size: 80%; }
-  .post .left {
-    float: left;
-    width: 45%;
-    margin-left: 1em; }
-    .post .left pre {
-      background: white;
-      border: 1px solid black; }
-  .post .right {
-    width: 45%; }
