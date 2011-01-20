@@ -10,4 +10,9 @@ class SessionsController < ApplicationController
     session[:user_id] = nil  
     redirect_to root_url, :notice => "Signed out!"  
   end 
+
+  def debug_login
+    session[:user_id] = 1
+    redirect_to root_url, :notice => "Signed in!" 
+  end
 end
