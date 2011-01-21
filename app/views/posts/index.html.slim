@@ -2,9 +2,22 @@ h2 = "#{@paginated.first.number} - #{@paginated.last.number}"
 
 = will_paginate @paginated
 
-- @posts.each do |posts|
-  = format_posts(posts) do |post|
-    = post.number
+- @posts.each do |root, tree|
+  ul
+    li
+      = link_to root.translation_subject, root
+
+      - format_posts(tree) do |post|
+        div class="#{post.translation ? 'translated' : 'not_translated'}"
+          a href="#{post_path(post.root, anchor: post.number)}"
+            span.number
+              = post.number
+            '  :
+            span.from
+              = post.from
+            '  @
+            span.time
+              = post.time
 
 = will_paginate @paginated
 

@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     @paginated = Post.paginate(page: params[:page], order: "number DESC")
     root_ids = @paginated.map{|post| post.root_id}.uniq.sort
 
-    @posts = Post.find(*root_ids).sort_by{|post| -post.number}.map{|root| root.subtree.arrange}
+    @posts = Post.find(*root_ids).sort_by{|post| -post.number}.map{|root| [root, root.subtree.arrange]}
   end
 
   # GET /posts/1

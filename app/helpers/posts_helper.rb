@@ -2,39 +2,13 @@ module PostsHelper
   def format_posts(tree, &block)
     return "" if tree.empty?
 
-    ("<ul>" + tree.map{|parent, children|
-      [
-        "<li>",
-        format_post(parent),
-        format_posts(children, &block),
-        "</li>"
-      ].join
-    }.join + "</ul>").html_safe
-  end
-
-  def format_post(post)
-    if post.is_root?
-      link_text = [
-        "<b>#{h post.number} </b>",
-        "<span class='subject'>#{h post.translation_subject}</span>",
-        " : #{h post.from}",
-      ].join.html_safe
-      link_path = post_path(post)
-    else
-      link_text = "#{h post.number} : #{h post.from}".html_safe
-      link_path = post_path(post.root, :anchor => post.number)
-    end
-
-    if post.translation
-      klass = "translated"
-    else
-      klass = "not_translated"
-    end
-
-    [
-      "<div class='#{klass}'>",
-      (link_to link_text, link_path),
-      "</div>"
-    ].join
+    concat "<ul>".html_safe
+    tree.each{|parent, children|
+      concat "<li>".html_safe
+      yield parent
+      format_posts(children, &block)
+      concat "</li>".html_safe
+    }
+    concat "</ul>".html_safe
   end
 end
