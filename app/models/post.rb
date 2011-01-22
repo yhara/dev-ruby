@@ -18,7 +18,12 @@ class Post < ActiveRecord::Base
   end
 
   def translation_subject
-    translation.try(:subject) or self.subject
+    s = translation.try(:subject) || self.subject
+    if s =~ /\A(\[.*\])(.*)/
+      "#{$2.lstrip} (#{$1})"
+    else
+      s
+    end
   end
 
   def translation_body
