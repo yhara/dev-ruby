@@ -1,4 +1,5 @@
 class TranslationsController < ApplicationController
+  before_filter :require_login, :only => [:new, :create]
 
   def index
     @post = Post.find(params[:post_id])
