@@ -1,6 +1,7 @@
 // sass variables
 
 $lightorange: #feb
+$darkorange: #b96
 
 // clearfix
 
@@ -69,17 +70,29 @@ body
 
 // posts/index
 
-li 
-  margin-left: -2em
+.post_tree
+  li
+    margin-left: -2em
 
-  span.subject
-    color: black
+    span.subject
+      color: black
+    span.redmine_tags
+      font-weight: normal
 
-.translated a
-  color: black
+    .translated a
+      color: #333
 
-.not_translated a
-  color: #ccc
+    .not_translated a
+      color: #ccc
+      text-decoration: none
+
+    .root
+      a
+        color: black
+        text-decoration: none
+
+    .root.translated
+      font-weight: bold
 
 // posts/show
 

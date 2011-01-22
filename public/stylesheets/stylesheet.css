@@ -53,16 +53,22 @@ body {
   text-align: center;
   margin-top: 3em; }
 
-li {
+.post_tree li {
   margin-left: -2em; }
-  li span.subject {
+  .post_tree li span.subject {
     color: black; }
-
-.translated a {
-  color: black; }
-
-.not_translated a {
-  color: #cccccc; }
+  .post_tree li span.redmine_tags {
+    font-weight: normal; }
+  .post_tree li .translated a {
+    color: #333333; }
+  .post_tree li .not_translated a {
+    color: #cccccc;
+    text-decoration: none; }
+  .post_tree li .root a {
+    color: black;
+    text-decoration: none; }
+  .post_tree li .root.translated {
+    font-weight: bold; }
 
 .post {
   width: 100%;

@@ -1,7 +1,9 @@
 class Post < ActiveRecord::Base
-  has_ancestry
-  has_friendly_id :number
   has_many :translations
+
+  has_friendly_id :number
+
+  has_ancestry
 
   # will_paginate
   cattr_reader :per_page
@@ -18,15 +20,18 @@ class Post < ActiveRecord::Base
   end
 
   def translation_subject
-    s = translation.try(:subject) || self.subject
-    if s =~ /\A(\[.*\])(.*)/
-      "#{$2.lstrip} (#{$1})"
-    else
-      s
-    end
+    translation.try(:subject) || self.subject
   end
 
   def translation_body
     translation.try(:body) or self.body
+  end
+
+  def css_class
+    if self.translation 
+      "translated" 
+    else
+      "not_translated"
+    end
   end
 end
