@@ -3,10 +3,16 @@ require 'blade.rb'
 class PostsController < ApplicationController
   # GET /posts
   def index
-    @paginated = Post.paginate(page: params[:page], order: "number DESC")
+    @paginated = Post.paginate(page: params[:page],
+                               order: "number DESC")
     root_ids = @paginated.map{|post| post.root_id}.uniq.sort
 
-    @posts = Post.find(*root_ids).sort_by{|post| -post.number}.map{|root| [root, root.subtree.arrange]}
+    @posts = Post.where(id: root_ids).
+                  sort_by{|post| -post.number}.
+                  map{|root|
+      tree = root.subtree.includes(:translations).arrange
+      [tree.keys.first, tree]
+    }
   end
 
   # GET /posts/1
