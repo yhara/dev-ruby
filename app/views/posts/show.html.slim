@@ -1,7 +1,7 @@
 == @root.to_title
 
 - @posts.each do |post|
-  .post
+  .post.clearfix
     a name="#{post.number}"
     h3
       span.post_number = post.number
@@ -24,7 +24,7 @@
           | [Translation not available]
         = link_to 'Translate!', new_post_translation_path(post.number)
 
-    .right.clearfix
+    .right
       pre = post.body
 
 div
