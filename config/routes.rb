@@ -6,6 +6,7 @@ DevRuby::Application.routes.draw do
 
   resources :posts do
     resources :translations, :only => [:index, :new, :create]
+    resources :translation_requests, :only => [:index, :create, :destroy]
   end
 
   # The priority is based upon order of creation:
