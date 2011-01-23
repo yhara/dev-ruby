@@ -74,6 +74,9 @@ body {
     text-decoration: none; }
   .post_tree li .root.translated {
     font-weight: bold; }
+  .post_tree li span.star a {
+    color: orange;
+    text-decoration: none; }
 
 .post {
   width: 100%;
