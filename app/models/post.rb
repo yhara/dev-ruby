@@ -1,6 +1,10 @@
 class Post < ActiveRecord::Base
   has_many :translations
 
+  has_many :translation_requests
+  has_many :users, :through => :translation_requests
+  alias requesting_users users
+
   has_friendly_id :number
 
   has_ancestry
