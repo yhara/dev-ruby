@@ -41,13 +41,11 @@ end
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'fakeweb'
-
   gem 'fabrication'
+end
+
+group :test do
+  gem 'turn'
+  gem 'fakeweb'
   gem 'shoulda-context'
-
-  gem 'cucumber-rails'
-  gem 'capybara'
-
-#  gem 'webrat'
 end
