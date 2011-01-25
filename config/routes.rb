@@ -9,6 +9,8 @@ DevRuby::Application.routes.draw do
     resources :translation_requests, :only => [:index, :create, :destroy]
   end
 
+  delete '/posts/:post_id/translation_request' => "translation_requests#destroy", :as => :destroy_post_translation_request
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
