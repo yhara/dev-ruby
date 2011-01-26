@@ -25,7 +25,7 @@ h2 = "#{@paginated.first.number} - #{@paginated.last.number}"
             - if signed_in?
               '
               a.star href="#" data-number="#{post.number}"
-                | ☆
+                = white_star
 
 .pagination
   = will_paginate @paginated
