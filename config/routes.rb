@@ -11,6 +11,8 @@ DevRuby::Application.routes.draw do
 
   delete '/posts/:post_id/translation_request' => "translation_requests#destroy", :as => :destroy_post_translation_request
 
+  #match "/debug" => "sessions#debug_login"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
