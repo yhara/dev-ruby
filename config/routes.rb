@@ -6,10 +6,8 @@ DevRuby::Application.routes.draw do
 
   resources :posts do
     resources :translations, :only => [:index, :new, :create]
-    resources :translation_requests, :only => [:index, :create, :destroy]
+    resource :translation_request, :only => [:create, :destroy]
   end
-
-  delete '/posts/:post_id/translation_request' => "translation_requests#destroy", :as => :destroy_post_translation_request
 
   #match "/debug" => "sessions#debug_login"
 
