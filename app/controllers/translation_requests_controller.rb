@@ -12,16 +12,19 @@ class TranslationRequestsController < ApplicationController
   def create
     req = TranslationRequest.new(user: current_user,
                                  post: @post)
-    req.save
-    respond_with req
+    if req.save
+      render :json => {ok: true}
+    else
+      render :json => {error: true}
+    end
   end
 
   def destroy
-    req = TranslationRequest.where(user_id:current_user.id, post_id:@post.id).first
-    if req
+    if (req = TranslationRequest.where(user_id:current_user.id, post_id:@post.id).first)
       req.destroy
+      render :json => {ok: true}
     else
-      redirect_to "/404.html"
+      not_found
     end
   end
 
@@ -30,7 +33,7 @@ class TranslationRequestsController < ApplicationController
   def find_post
     @post = Post.find(params[:post_id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to "/404.html"
+    not_found
   end
 
 end
