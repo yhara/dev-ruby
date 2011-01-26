@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     current_user
   end
 
+  def not_found
+    render text: "NOT FOUND", status: 404
+  end
+
 end
