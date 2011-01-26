@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
       user.name = auth["user_info"]["name"]  
     end  
   end  
+
+  def requesting?(post)
+    post.translation_requests.any?{|req| req.user == self}
+  end
 end

@@ -24,8 +24,12 @@ h2 = "#{@paginated.first.number} - #{@paginated.last.number}"
 
             - if signed_in?
               '
-              a.star href="#" data-number="#{post.number}"
-                = white_star
+              - if current_user.requesting?(post)
+                span.black_star
+                  = link_to black_star, post_translation_request_path(post), method: "delete", remote: true
+              - else
+                span.white_star
+                  = link_to white_star, post_translation_request_path(post), method: "post", remote: true
 
 .pagination
   = will_paginate @paginated

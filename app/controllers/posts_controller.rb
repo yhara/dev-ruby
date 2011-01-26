@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @posts = Post.where(id: root_ids).
                   sort_by{|post| -post.number}.
                   map{|root|
-      tree = root.subtree.includes(:translations).arrange
+      tree = root.subtree.includes(:translations, :translation_requests).arrange
       [tree.keys.first, tree]
     }
   end
