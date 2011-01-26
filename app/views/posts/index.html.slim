@@ -12,7 +12,7 @@ h2 = "#{@paginated.first.number} - #{@paginated.last.number}"
 
         - format_posts(tree) do |post|
           div class="#{post.css_class}"
-            a href="#{post_path(post.root, anchor: post.number)}"
+            a href="#{post_path(root, anchor: post.number)}"
               span.number
                 = post.number
               '  :

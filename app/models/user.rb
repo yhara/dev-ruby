@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   end  
 
   def requesting?(post)
-    post.translation_requests.any?{|req| req.user == self}
+    post.translation_requests.any?{|req| req.user_id == self.id}
   end
 end
