@@ -3,7 +3,12 @@ class Post < ActiveRecord::Base
 
   has_many :translation_requests
   has_many :users, :through => :translation_requests
-  alias requesting_users users
+
+  # Note: you may think 'alias requesting_users users' is better, but
+  # it spoils eager loading (see also: posts#index)
+  def requesting_users
+    self.translation_requests.map &:user
+  end
 
   has_friendly_id :number
 
