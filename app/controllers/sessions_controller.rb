@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
   end 
 
   def debug_login
-    session[:user_id] = 1
+    name = params[:name]
+    session[:user_id] = User.where(name: name).first.id
     redirect_to root_url, :notice => "Signed in!" 
   end
 end

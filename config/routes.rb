@@ -9,7 +9,7 @@ DevRuby::Application.routes.draw do
     resource :translation_request, :only => [:create, :destroy]
   end
 
-  #match "/debug" => "sessions#debug_login"
+  #match "/debug/:name" => "sessions#debug_login"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
