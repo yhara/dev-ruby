@@ -5,13 +5,29 @@ class TranslationRequestsControllerTest < ActionController::TestCase
     @post = posts(:one)
   end
 
+  context "Routing" do
+    should "should route to TranslationRequestsController" do
+      assert_recognizes({controller: "translation_requests", action: "create", post_id: "1" },
+                        {path: '/posts/1/translation_request', method: "post"})
+
+      assert_recognizes({controller: "translation_requests", action: "destroy", post_id: "1" },
+                        {path: '/posts/1/translation_request', method: "delete"})
+
+      assert_raise ActionController::RoutingError do
+        assert_recognizes({},
+                          {path: '/posts/1/translation_request', method: "get"})
+      end
+ 
+    end
+  end
+
   context "logged in user" do
-    should "get create" do
+    should "post create" do
       login_as users(:two)
       assert_difference "TranslationRequest.count", 1 do
-        post :create, :post_id => @post.number.to_s
+        post :create, post_id: @post.number.to_s, format: "js"
         assert_response :success
-        assert_equal true, JSON.parse(@response.body)["ok"]
+        assert_match /location/, @response.body
       end
     end
 
@@ -19,8 +35,8 @@ class TranslationRequestsControllerTest < ActionController::TestCase
       login_as users(:one)
       assert_difference "TranslationRequest.count", -1 do
         delete :destroy, post_id: @post.number.to_s, format: "json"
-        assert_equal true, JSON.parse(@response.body)["ok"]
         assert_response :success
+        assert_match /location/, @response.body
       end
     end
   end

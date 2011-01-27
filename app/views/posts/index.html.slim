@@ -26,10 +26,10 @@ h2 = "#{@paginated.first.number} - #{@paginated.last.number}"
               '
               - if current_user.requesting?(post)
                 span.black_star
-                  = link_to black_star, post_translation_request_path(post), method: "delete", remote: true
+                  = link_to black_star, post_translation_request_path(post), method: "delete", remote: true, id: "star_#{post.number}"
               - else
                 span.white_star
-                  = link_to white_star, post_translation_request_path(post), method: "post", remote: true
+                  = link_to white_star, post_translation_request_path(post), method: "post", remote: true, id: "star_#{post.number}"
 
 .pagination
   = will_paginate @paginated
