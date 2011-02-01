@@ -94,3 +94,10 @@ body {
       font-weight: normal; }
     .post h3 .post_subject, .post h3 .post_time {
       font-size: 80%; }
+
+#translation_main {
+  width: 100%; }
+  #translation_main .field input, #translation_main textarea {
+    width: 90%; }
+  #translation_main textarea {
+    font-family: monospace; }

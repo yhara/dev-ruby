@@ -1,29 +1,30 @@
-.left
-  = form_for([@post, @translation]) do |f|
-    - if @translation.errors.any?
-      #error_explanation
-        h2
-          = pluralize(@translation.errors.count, "error")
-          prohibited this translation from being saved:
-        ul
-          - @translation.errors.full_messages.each do |msg|
-            li= msg
-    .field
-      = f.label :subject
-      br/
-      = f.text_field :subject, :value => @last_subject
-    .field
-      = f.label :body
-      br/
-      = f.text_area :body, :value => @last_body
-    .actions
-      = f.submit :value => "Save"
+#translation_main.clearfix
+  .left
+    = form_for([@post, @translation]) do |f|
+      - if @translation.errors.any?
+        #error_explanation
+          h2
+            = pluralize(@translation.errors.count, "error")
+            prohibited this translation from being saved:
+          ul
+            - @translation.errors.full_messages.each do |msg|
+              li= msg
+      .field
+        = f.label :subject
+        br/
+        = f.text_field :subject, :value => @last_subject
+      .field
+        = f.label :body
+        br/
+        = f.text_area :body, :value => @last_body
+      .actions
+        = f.submit :value => "Save"
 
-.right.clearfix
-  #original_subject
-    = @post.subject
-    
-  pre = @post.body
+  .right
+    #original_subject
+      = @post.subject
+      
+    pre = @post.body
 
 div
   = link_to 'Back', post_path(@post.number)
