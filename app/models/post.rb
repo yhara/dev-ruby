@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
   has_friendly_id :number
 
   has_ancestry
+  alias root? is_root?
 
   # will_paginate
   cattr_reader :per_page

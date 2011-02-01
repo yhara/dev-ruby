@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    if @post.is_root?
+    if @post.root?
       @root = @post
       @posts = [@root] + @root.descendants.includes(:translations)
 
