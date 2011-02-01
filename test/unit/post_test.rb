@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'test_helper'
 
 class Post
@@ -26,5 +27,10 @@ class PostTest < ActiveSupport::TestCase
 
     assert_equal({m1 => {m2 => {m3 => {}}, m4 => {}}},
       m1.subtree.arrange)
+  end
+
+  test "Post should know needs subject translation" do
+    m1 = Fabricate(:post, subject: "あ", translations: [])
+    assert m1.needs_subject_translation?
   end
 end

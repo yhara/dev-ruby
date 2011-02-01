@@ -35,13 +35,20 @@ class Post < ActiveRecord::Base
       trs.max_by{|tr| tr.created_at}
     end
   end
+  alias last_translation translation
 
   def translation_subject
-    translation.try(:subject) || self.subject
+    last_translation.try(:subject) || self.subject
   end
 
   def translation_body
-    translation.try(:body) or self.body
+    last_translation.try(:body) or self.body
+  end
+
+  def needs_subject_translation?
+    self.root? and
+    (not self.subject.ascii_only?) and
+      translations.empty?
   end
 
   def css_class

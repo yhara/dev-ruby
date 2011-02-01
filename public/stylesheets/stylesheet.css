@@ -72,6 +72,9 @@ body {
   .post_tree li .root a {
     color: black;
     text-decoration: none; }
+  .post_tree li .root a.edit_subject {
+    color: orange;
+    text-decoration: underline; }
   .post_tree li .root.translated {
     font-weight: bold; }
   .post_tree li span.black_star, .post_tree li span.white_star {

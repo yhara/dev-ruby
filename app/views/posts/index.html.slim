@@ -10,6 +10,11 @@ h2 = "#{@paginated.first.number} - #{@paginated.last.number}"
         div class="root #{root.css_class}"
           = link_to format_subject(root), root
 
+          - if signed_in? and root.needs_subject_translation?
+            '
+            a.edit_subject href="#{new_post_translation_path(root)}"
+              | (edit)
+
         - format_posts(tree) do |post|
           div class="#{post.css_class}"
             a href="#{post_path(root, anchor: post.number)}"
