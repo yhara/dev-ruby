@@ -9,14 +9,14 @@
           ul
             - @translation.errors.full_messages.each do |msg|
               li= msg
+
+      - if @post.root?
+        .field
+          = f.text_field :subject, :value => @last_subject
+
       .field
-        = f.label :subject
-        br/
-        = f.text_field :subject, :value => @last_subject
-      .field
-        = f.label :body
-        br/
-        = f.text_area :body, :value => @last_body
+        = f.text_area :body, :value => @last_body, :rows => 40
+
       .actions
         = f.submit :value => "Save"
 

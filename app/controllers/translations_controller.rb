@@ -16,6 +16,8 @@ class TranslationsController < ApplicationController
   def create
     @translation = Translation.new(params[:translation])
     @translation.post = @post
+    # Clear subject if it is not the first post of the thread
+    @translation.subject = nil if not @post.root?
 
     if @translation.save
       redirect_to(@translation.post, :notice => 'Translation was successfully created.')
