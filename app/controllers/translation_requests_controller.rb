@@ -20,13 +20,4 @@ class TranslationRequestsController < ApplicationController
       not_found
     end
   end
-
-  private
-
-  def find_post
-    @post = Post.find(params[:post_id])
-  rescue ActiveRecord::RecordNotFound
-    not_found
-  end
-
 end

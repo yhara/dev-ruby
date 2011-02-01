@@ -1,6 +1,8 @@
 require 'blade.rb'
 
 class PostsController < ApplicationController
+  before_filter :find_post, :only => [:show]
+
   # GET /posts
   def index
     @paginated = Post.paginate(page: params[:page],
@@ -17,7 +19,6 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    @post = Post.find(params[:id])
     if @post.is_root?
       @root = @post
       @posts = [@root] + @root.descendants.includes(:translations)
@@ -28,8 +29,6 @@ class PostsController < ApplicationController
     else
       redirect_to :action => :show, :id => @post.root.number, :anchor => @post.number
     end
-  rescue ActiveRecord::RecordNotFound
-    redirect_to "/404.html"
   end
 
   # GET /posts/new

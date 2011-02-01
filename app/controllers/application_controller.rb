@@ -23,4 +23,10 @@ class ApplicationController < ActionController::Base
     render text: "NOT FOUND", status: 404
   end
 
+  def find_post
+    @post = Post.find(params[:post_id] || params[:id])
+  rescue ActiveRecord::RecordNotFound
+    not_found
+  end
+
 end
