@@ -18,6 +18,13 @@ class Post < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 100
 
+  # validations
+  validates :number, presence: true
+  validates :subject, presence: true
+  validates :from, presence: true
+  validates :time, presence: true
+  validates :body, presence: true
+
   def to_title
     "<h2>[ruby-dev:#{self.number}] #{self.subject}</h2>"
   end
