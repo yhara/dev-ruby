@@ -24,10 +24,13 @@ class TranslationsControllerTest < ActionController::TestCase
     end
 
     should "create translation (subject only)" do
+      post1 = Fabricate(:post)
+      translation = {post: post1, subject: "hi", body: "hi"}
+
       login_as users(:one)
       assert_difference('Translation.count') do
-        post :create, :post_id => @post.number.to_s,
-                      :translation => @translation.attributes,
+        post :create, :post_id => post1.number.to_s,
+                      :translation => translation,
                       :subject_only => "true"
       end
 

@@ -21,7 +21,7 @@ class TranslationsController < ApplicationController
     # Clear subject if it is not the first post of the thread
     @translation.subject = nil if not @post.root?
     # Clear body if the checkbox is checked
-    @translation.body = nil if params[:subject_only] && not @post.body_translated?
+    @translation.body = nil if params[:subject_only] && !@post.body_translated?
 
     if @translation.save
       redirect_to(@translation.post, :notice => 'Translation was successfully created.')
