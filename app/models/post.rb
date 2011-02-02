@@ -26,10 +26,6 @@ class Post < ActiveRecord::Base
   validates :time, presence: true
   validates :body, presence: true
 
-  def to_title
-    "<h2>[ruby-dev:#{self.number}] #{self.subject}</h2>"
-  end
-
   def translation
     if (trs = self.translations)
       trs.max_by{|tr| tr.created_at}
@@ -45,6 +41,10 @@ class Post < ActiveRecord::Base
     last_translation.try(:body) or self.body
   end
 
+  def body_translated?
+    last_translation.try(:body)
+  end
+
   def needs_subject_translation?
     self.root? and
     (not self.subject.ascii_only?) and
@@ -52,7 +52,7 @@ class Post < ActiveRecord::Base
   end
 
   def css_class
-    if self.translation 
+    if self.body_translated? 
       "translated" 
     else
       "not_translated"

@@ -22,6 +22,18 @@ class TranslationsControllerTest < ActionController::TestCase
 
       assert_redirected_to post_path(assigns(:translation).post)
     end
+
+    should "create translation (subject only)" do
+      login_as users(:one)
+      assert_difference('Translation.count') do
+        post :create, :post_id => @post.number.to_s,
+                      :translation => @translation.attributes,
+                      :subject_only => "true"
+      end
+
+      assert_redirected_to post_path(assigns(:translation).post)
+      assert_nil assigns(:translation).body
+    end
   end
 
   context "guest user" do

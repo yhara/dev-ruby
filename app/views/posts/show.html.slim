@@ -1,4 +1,5 @@
-== @root.to_title
+h2
+  = @root.translation_subject
 
 - @posts.each do |post|
   .post.clearfix
@@ -13,7 +14,7 @@
       span.post_subject = post.subject
 
     .left
-      - if (tr = post.translation)
+      - if post.body_translated? and (tr = post.translation)
         pre = tr.body
         = link_to 'Refine translation', new_post_translation_path(post.number)
         = " / "

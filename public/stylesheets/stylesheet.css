@@ -100,7 +100,7 @@ body {
 
 #translation_main {
   width: 100%; }
-  #translation_main .field input, #translation_main textarea {
+  #translation_main .field input[type=text], #translation_main textarea {
     width: 90%; }
   #translation_main textarea {
     font-family: monospace; }
