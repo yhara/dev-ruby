@@ -5,9 +5,9 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @paginated = Post.paginate(page: params[:page],
-                               order: "number DESC")
-    root_ids = @paginated.map{|post| post.root_id}.uniq.sort
+    @paginated = Topic.paginate(page: params[:page],
+                                order: "last_update DESC")
+    root_ids = @paginated.map{|topic| topic.root.id}
 
     @posts = Post.where(id: root_ids).
                   sort_by{|post| -post.number}.
