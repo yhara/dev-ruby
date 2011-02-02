@@ -17,15 +17,6 @@ class TranslationTest < ActiveSupport::TestCase
       assert_equal false, Translation.new(post_id: nil).valid?
     end
 
-    should "check subject" do
-      attrs = {
-        post_id: posts(:one).id,
-        subject: "",
-        body: "hi"
-      }
-      assert_equal false, Translation.new(attrs).valid?
-    end
-
     should "check body" do
       attrs = {
         post_id: posts(:one).id,
