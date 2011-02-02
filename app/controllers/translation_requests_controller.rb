@@ -11,7 +11,12 @@ class TranslationRequestsController < ApplicationController
   end
 
   def destroy
-    if (req = TranslationRequest.where(user_id:current_user.id, post_id:@post.id).first)
+    req = TranslationRequest.where(
+      user_id: current_user.id,
+      post_id: @post.id
+    ).first
+
+    if req
       req.destroy
       @success = true
       @created = false
