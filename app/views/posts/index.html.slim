@@ -6,9 +6,9 @@
     ul.post_tree
       li
         div class="root #{root.css_class}"
-          = link_to format_subject(root), root
+          = link_to format_subject(root.topic.subject), root
 
-          - if signed_in? and root.needs_subject_translation?
+          - if signed_in?
             '
             a.edit_subject href="#{edit_topic_path(root.topic)}"
               | (edit)

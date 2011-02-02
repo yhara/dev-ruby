@@ -12,9 +12,7 @@ module PostsHelper
     concat "</ul>".html_safe
   end
 
-  def format_subject(post)
-    s = post.translated_subject
-
+  def format_subject(s)
     if s =~ /\A(\[.*\])(.*)/
       "#{h $2.lstrip} <span class='redmine_tags'> - #{h $1}</span>".html_safe
     else

@@ -35,22 +35,8 @@ class Post < ActiveRecord::Base
   end
   alias last_translation translation
 
-  def translated_subject
-    last_translation.try(:subject) || self.subject
-  end
-
-  def translated_body
-    last_translation.try(:body) or self.body
-  end
-
   def body_translated?
     last_translation.try(:body)
-  end
-
-  def needs_subject_translation?
-    self.root? and
-    (not self.subject.ascii_only?) and
-      translations.empty?
   end
 
   def css_class
