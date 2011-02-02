@@ -33,11 +33,11 @@ class Post < ActiveRecord::Base
   end
   alias last_translation translation
 
-  def translation_subject
+  def translated_subject
     last_translation.try(:subject) || self.subject
   end
 
-  def translation_body
+  def translated_body
     last_translation.try(:body) or self.body
   end
 
