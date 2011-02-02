@@ -1,7 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  id: 1
   number: 40001
   subject: Test Mail One
   from: one@example.jp
@@ -9,7 +8,6 @@ one:
   body: This is test mail one.
 
 two:
-  id: 2
   number: 40002
   subject: Test Mail Two
   from: two@example.jp

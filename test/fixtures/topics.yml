@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  post_id: 1
+  root: one
   subject: MyString
   last_update: 2011-02-02 19:14:06
 
 two:
-  post_id: 2
+  root: two
   subject: MyString
   last_update: 2011-02-02 19:14:06
