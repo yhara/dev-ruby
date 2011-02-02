@@ -34,7 +34,7 @@ class TranslationRequestsControllerTest < ActionController::TestCase
     should "get destroy" do
       login_as users(:one)
       assert_difference "TranslationRequest.count", -1 do
-        delete :destroy, post_id: @post.number.to_s, format: "json"
+        delete :destroy, post_id: @post.number.to_s, format: "js"
         assert_response :success
         assert_match /location/, @response.body
       end
