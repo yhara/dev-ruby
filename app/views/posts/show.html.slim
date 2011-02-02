@@ -14,7 +14,7 @@ h2
       span.post_subject = post.subject
 
     .left
-      - if post.body_translated? and (tr = post.translation)
+      - if (tr = post.translation)
         pre = tr.body
         = link_to 'Refine translation', new_post_translation_path(post.number)
         = " / "

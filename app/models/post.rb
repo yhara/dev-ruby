@@ -34,13 +34,14 @@ class Post < ActiveRecord::Base
     end
   end
   alias last_translation translation
+  alias translated? translation
 
-  def body_translated?
-    last_translation.try(:body)
+  def translated_body
+    translation ? translation.body : body
   end
 
   def css_class
-    if self.body_translated? 
+    if self.translated? 
       "translated" 
     else
       "not_translated"

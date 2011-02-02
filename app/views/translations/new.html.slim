@@ -10,17 +10,8 @@
             - @translation.errors.full_messages.each do |msg|
               li= msg
 
-      - if @post.root?
-        .field
-          = f.text_field :subject, :value => @last_subject
-
-      - if not @post.body_translated?
-        .field
-          = check_box_tag :subject_only, "true", @subject_only, onclick: "javascript: $('translation_body').enable();"
-          = f.label :subject_only
-
       .field
-        = f.text_area :body, :value => @last_body, rows: 40, disabled: @subject_only
+        = f.text_area :body, :value => @post.translated_body, rows: 40
 
       .actions
         = f.submit :value => "Save"
