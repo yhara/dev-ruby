@@ -4,6 +4,8 @@ class Post < ActiveRecord::Base
   has_many :translation_requests
   has_many :users, :through => :translation_requests
 
+  has_one :topic
+
   # Note: you may think 'alias requesting_users users' is better, but
   # it spoils eager loading (see also: posts#index)
   def requesting_users

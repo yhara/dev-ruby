@@ -9,6 +9,8 @@ DevRuby::Application.routes.draw do
     resource :translation_request, :only => [:create, :destroy]
   end
 
+  resources :topics, :only => [:edit, :update]
+
   #match "/debug/:name" => "sessions#debug_login"
 
   # The priority is based upon order of creation:

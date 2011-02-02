@@ -1,0 +1,19 @@
+h1 Edit subject
+
+= form_for(@topic) do |f|
+  - if @topic.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@topic.errors.count, "error")
+        prohibited this translation from being saved:
+      ul
+        - @topic.errors.full_messages.each do |msg|
+          li= msg
+
+  .field
+    = f.text_field :subject, value: @topic.subject, size: 100
+
+  .actions
+    = f.submit :value => "Save"
+
+= link_to "back", :back
