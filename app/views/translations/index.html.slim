@@ -6,7 +6,6 @@ h2
 - @translations.each_with_index do |translation, i|
   h3 = "Revision #{@translations.size - i - 1}"
   div = translation.created_at
-  div = translation.subject
   pre = translation.body
   
 p

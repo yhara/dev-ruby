@@ -1,5 +1,8 @@
 #translation_main.clearfix
   .left
+    #translated_subject
+      = @post.root.topic.subject
+
     = form_for([@post, @translation]) do |f|
       - if @translation.errors.any?
         #error_explanation

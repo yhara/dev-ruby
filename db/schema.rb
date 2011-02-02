@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202101406) do
+ActiveRecord::Schema.define(:version => 20110202114935) do
 
   create_table "posts", :force => true do |t|
     t.integer  "number",   :null => false
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20110202101406) do
 
   create_table "translations", :force => true do |t|
     t.integer  "post_id"
-    t.string   "subject"
     t.text     "body"
     t.datetime "created_at"
   end
