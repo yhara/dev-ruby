@@ -1,10 +1,6 @@
 # coding: utf-8
 require 'test_helper'
 
-class Post
-  def inspect; "#<Post:#{self.number}>"; end
-end
-
 class PostTest < ActiveSupport::TestCase
 
   test "Post creates instance" do

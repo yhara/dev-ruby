@@ -22,7 +22,7 @@ class Post < ActiveRecord::Base
   @@per_page = 100
 
   # validations
-  validates :number, presence: true
+  validates :number, presence: true, uniqueness: true
   validates :subject, presence: true
   validates :from, presence: true
   validates :time, presence: true
