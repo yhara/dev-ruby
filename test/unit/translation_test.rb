@@ -5,7 +5,6 @@ class TranslationTest < ActiveSupport::TestCase
     should "create an instance" do
       attrs = {
         post_id: posts(:one).id,
-        subject: "hello",
         body: "world"
       }
       assert_equal true, Translation.new(attrs).valid?
@@ -20,7 +19,6 @@ class TranslationTest < ActiveSupport::TestCase
     should "check body" do
       attrs = {
         post_id: posts(:one).id,
-        subject: nil,
         body: ""
       }
       assert_equal false, Translation.new(attrs).valid?
