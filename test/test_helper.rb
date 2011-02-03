@@ -20,3 +20,6 @@ class ActiveSupport::TestCase
     session[:user_id] = nil
   end
 end
+
+# For debugging
+module Enumerable; def each_p; each{|x| p x} end end
