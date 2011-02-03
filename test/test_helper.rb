@@ -47,4 +47,10 @@ class ActiveSupport::TestCase
 end
 
 # For debugging
-module Enumerable; def each_p; each{|x| p x} end end
+module Enumerable
+  def each_p
+    puts "[each_p]"
+    each{|x| print "  "; p x}
+    puts "[/each_p]"
+  end
+end
