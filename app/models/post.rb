@@ -47,7 +47,7 @@ class Post < ActiveRecord::Base
         topic.last_update = self.time
         topic.save
       else
-        raise "this mail (#{self}) is older than last_update" 
+        puts "warning: this mail (#{self.inspect}) is older than last_update" 
       end
     end
   end

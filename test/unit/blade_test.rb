@@ -70,12 +70,15 @@ class BladeTest < ActiveSupport::TestCase
     assert_equal 42928, Blade.new(42929).parse[:in_reply_to]
   end
 
-  test "Blade should parse ruby-dev:42915, 43039" do
+  test "Blade should parse ruby-dev:42915, 43039, etc" do
     assert_nothing_raised do
       Blade.new(42915).create
       Blade.new(43039).create # contains broken EUC-JP
       Blade.new(43065).create # contains broken EUC-JP
     end
+    post = Blade.new(41447).post
+    p post
+    assert post.valid?
   end
 
 end

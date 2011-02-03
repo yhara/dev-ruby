@@ -30,18 +30,21 @@ class Blade
     "#{File.dirname(url)}/#{link[:href]}"
   end
 
-  def initialize(number)
-    @number = number
+  def initialize(number, html=nil)
+    @number, @html = number, html
   end
 
   def get
-    html = open("http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{@number}", "r:binary").read
-    html.force_encoding("euc-jp")
-    html.encode("utf-8", invalid: :replace, undef: :replace)
+    @html ||= begin
+      html = open("http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/#{@number}", "r:binary").read
+      html.force_encoding("euc-jp")
+      html.encode("utf-8", invalid: :replace, undef: :replace)
+    end
   end
 
   def parse
     html = self.get
+    html.gsub!(/\u0000/, "")  # for ruby-dev:41447
     doc = Nokogiri::HTML(html)
 
     subject = (doc/:strong)[1].text
