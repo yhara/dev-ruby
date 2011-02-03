@@ -11,14 +11,6 @@ class PostsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:posts)
   end
 
-  test "should create post" do
-    assert_difference('Post.count') do
-      post :create, :post => @post.attributes
-    end
-
-    assert_redirected_to post_path(assigns(:post))
-  end
-
   test "should show post" do
     get :show, :id => @post.to_param
     assert_response :success
