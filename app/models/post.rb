@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  # Associations
   has_many :translations
 
   has_many :translation_requests
@@ -12,22 +13,46 @@ class Post < ActiveRecord::Base
     self.translation_requests.map &:user
   end
 
+  # Plugins
   has_friendly_id :number
 
   has_ancestry
   alias root? is_root?
 
-  # will_paginate
-  cattr_reader :per_page
+  cattr_reader :per_page # will_paginate
   @@per_page = 100
 
-  # validations
+  # Validations
   validates :number, presence: true, uniqueness: true
   validates :subject, presence: true
   validates :from, presence: true
   validates :time, presence: true
   validates :body, presence: true
 
+  # Callbacks
+  
+  after_save :update_topic
+
+  def update_topic
+    if self.root?
+      topic = Topic.new
+      topic.post_id = self.id
+      topic.subject = self.subject
+      topic.last_update = self.time
+
+      raise "failed to create topic" unless topic.save
+    else
+      topic = Topic.find_by_post_id(self.root.id)
+      if topic.last_update < self.time
+        topic.last_update = self.time
+        topic.save
+      else
+        raise "this mail (#{self}) is older than last_update" 
+      end
+    end
+  end
+
+  # Methods
   def translation
     if (trs = self.translations)
       trs.max_by{|tr| tr.created_at}
