@@ -8,7 +8,7 @@
         div class="root #{root.css_class}"
           = link_to format_subject(root.topic.subject), root
 
-          - if signed_in?
+          - if signed_in? and root.topic.needs_subject_translation?
             '
             a.edit_subject href="#{edit_topic_path(root.topic)}"
               | (edit)

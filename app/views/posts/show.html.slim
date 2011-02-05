@@ -1,5 +1,9 @@
 h2
   = @root.topic.subject
+  - if signed_in?
+    '
+    a.edit_subject href="#{edit_topic_path(@root.topic)}"
+      | (edit subject)
 
 - @posts.each do |post|
   .post.clearfix

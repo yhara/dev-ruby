@@ -4,4 +4,9 @@ class Topic < ActiveRecord::Base
   validates_presence_of :post_id, :subject, :last_update
 
   attr_accessible :subject
+
+  def needs_subject_translation?
+    not self.subject.ascii_only?
+  end
+
 end
