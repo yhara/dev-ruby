@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 
   def debug_login
     name = params[:name]
-    session[:user_id] = User.where(name: name).first.id
+    session[:user_id] = User.find_by_name(name).id
     redirect_to root_url, :notice => "Signed in!" 
   end
 end
