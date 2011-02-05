@@ -22,7 +22,7 @@ div class="#{post.css_class}"
   - post.requesting_users.each do |user|
     - next if user == current_user
     span.black_star title="#{user.name}"
-      = black_star
+      = link_to black_star, user_path(user)
 
   - if signed_in?
     - if current_user.requesting?(post)

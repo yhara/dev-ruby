@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :translation_requests
   has_many :posts, :through => :translation_requests
   alias requesting_posts posts
-
+  
   def self.create_with_omniauth(auth)  
     create! do |user|  
       user.provider = auth["provider"]  

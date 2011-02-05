@@ -11,6 +11,8 @@ DevRuby::Application.routes.draw do
 
   resources :topics, :only => [:edit, :update]
 
+  resources :users, :only => [:show]
+
   #match "/debug/:name" => "sessions#debug_login"
 
   # The priority is based upon order of creation:

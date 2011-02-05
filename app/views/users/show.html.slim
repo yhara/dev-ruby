@@ -1,0 +1,8 @@
+h1 = @user.name
+
+h2 Requests
+ul
+  - @user.requesting_posts.each do |post|
+    li 
+      = render post, with_title: true
+
