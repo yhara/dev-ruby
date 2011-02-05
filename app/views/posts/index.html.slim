@@ -1,5 +1,29 @@
+- if signed_in?
+  h2 Top requested
+
+  ul
+    - @top_requested.each do |post|
+      li 
+        = render post, with_title: true
+
+  h2 Recent requests
+
+  ul
+    - @recent_requested.each do |post|
+      li 
+        = render post, with_title: true
+
+h2 Recently translated
+
+ul
+  - @recent_translated.each do |post|
+    li 
+      = render post, with_title: true
+
+h2 Recently posted
+
 .pagination
-  = will_paginate @paginated
+  = will_paginate @topics
 
 .post_index
   - @posts.each do |root, tree|
@@ -14,32 +38,9 @@
               | (edit)
 
         - format_posts(tree) do |post|
-          div class="#{post.css_class}"
-            a href="#{post_path(root, anchor: post.number)}"
-              span.number
-                = post.number
-              '  :
-              span.from
-                = post.from
-              '  @
-              span.time
-                = post.time
+          = render post, with_title: false
 
-            '
-
-            - post.requesting_users.each do |user|
-              - next if user == current_user
-              span.black_star title="#{user.name}"
-                = black_star
-
-            - if signed_in?
-              - if current_user.requesting?(post)
-                span.black_star
-                  = link_to black_star, post_translation_request_path(post), method: "delete", remote: true, id: "star_#{post.number}"
-              - else
-                span.white_star
-                  = link_to white_star, post_translation_request_path(post), method: "post", remote: true, id: "star_#{post.number}"
 
 .pagination
-  = will_paginate @paginated
+  = will_paginate @topics
 

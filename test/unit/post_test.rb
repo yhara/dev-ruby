@@ -25,4 +25,23 @@ class PostTest < ActiveSupport::TestCase
       m1.subtree.arrange)
   end
 
+  context "class method" do
+    should "find recent requested posts" do
+      m1, m2, m3, m4, m5 = *Array.new(5){ Fabricate(:post) }
+      TranslationRequest.create(post_id: m4.id, user: users(:one))
+      TranslationRequest.create(post_id: m2.id, user: users(:two))
+
+      assert_equal [m2, m4], Post.recent_requested(2)
+    end
+
+    should "find top requested posts" do
+      m1, m2, m3, m4, m5 = *Array.new(5){ Fabricate(:post) }
+      TranslationRequest.create(post_id: m4.id, user: users(:one))
+      TranslationRequest.create(post_id: m2.id, user: users(:one))
+      TranslationRequest.create(post_id: m2.id, user: users(:two))
+
+      assert_equal [m2, m4], Post.recent_requested(2)
+    end
+  end
+
 end

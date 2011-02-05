@@ -19,9 +19,6 @@ class Post < ActiveRecord::Base
   has_ancestry
   alias root? is_root?
 
-  cattr_reader :per_page # will_paginate
-  @@per_page = 100
-
   # Validations
   validates :number, presence: true, uniqueness: true
   validates :subject, presence: true
@@ -52,7 +49,21 @@ class Post < ActiveRecord::Base
     end
   end
 
-  # Methods
+  # Class methods
+  
+  def self.recent_requested(n)
+    Post.includes(:translations, {translation_requests: :user}).order('(SELECT created_at FROM "translation_requests" where post_id = posts.id) DESC').limit(n)
+  end
+
+  def self.top_requested(n)
+    Post.includes(:translations, {translation_requests: :user}).order('(SELECT COUNT(*) FROM "translation_requests" where post_id = posts.id) DESC').limit(n)
+  end
+
+  def self.recent_translated(n)
+    Post.includes(:translations, {translation_requests: :user}).order('(SELECT created_at FROM "translations" where post_id = posts.id) DESC').limit(n)
+  end
+
+  # Instance methods
   def translation
     if (trs = self.translations)
       trs.max_by{|tr| tr.created_at}
