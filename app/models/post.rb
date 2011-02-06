@@ -52,18 +52,30 @@ class Post < ActiveRecord::Base
   # Class methods
   
   def self.recent_requested(n)
-    Post.includes(:translations, {translation_requests: :user}).order('(SELECT created_at FROM "translation_requests" where post_id = posts.id) DESC').limit(n)
+    Post.includes(:translations, {translation_requests: :user}).
+      where('(SELECT 1 FROM "translation_requests"
+             WHERE post_id = posts.id)').
+      order('(SELECT created_at FROM "translation_requests"
+              WHERE post_id = posts.id) DESC').
+      limit(n)
   end
 
   def self.top_requested(n)
-    Post.includes(:translations, {translation_requests: :user}).order('(SELECT COUNT(*) FROM "translation_requests" where post_id = posts.id) DESC').limit(n)
+    Post.includes(:translations, {translation_requests: :user}).
+      where('(SELECT 1 FROM "translation_requests"
+             WHERE post_id = posts.id)').
+      order('(SELECT COUNT(*) FROM "translation_requests"
+              WHERE post_id = posts.id) DESC').
+      limit(n)
   end
 
   def self.recent_translated(n)
     Post.includes(:translations, {translation_requests: :user}).
-      order('(SELECT created_at FROM "translations" where post_id = posts.id) DESC').
-      limit(n).
-      select(&:translated?)
+      where('(SELECT 1 FROM "translations"
+              WHERE post_id = posts.id)').
+      order('(SELECT created_at FROM "translations"
+              WHERE post_id = posts.id) DESC').
+      limit(n)
   end
 
   # Instance methods
