@@ -6,3 +6,9 @@ ul
     li 
       = render post, with_title: true
 
+h2 Translated
+ul
+  - @user.translations.each do |tr|
+    li 
+      = render tr.post, with_title: true
+

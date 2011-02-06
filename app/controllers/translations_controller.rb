@@ -13,6 +13,7 @@ class TranslationsController < ApplicationController
   def create
     @translation = Translation.new(params[:translation])
     @translation.post = @post
+    @translation.user = current_user
 
     if @translation.save
       redirect_to(@translation.post, :notice => 'Translation was successfully created.')

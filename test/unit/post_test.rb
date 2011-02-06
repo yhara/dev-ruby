@@ -44,6 +44,17 @@ class PostTest < ActiveSupport::TestCase
 
       assert_equal [m2, m4], Post.recent_requested(5)
     end
+
+    should "find recently translated posts" do
+      Post.destroy_all
+      Translation.destroy_all
+      m1, m2, m3, m4, m5 = *Array.new(5){ Fabricate(:post) }
+      Translation.create(post: m2, user: users(:one), body: "-")
+      Translation.create(post: m4, user: users(:one), body: "-")
+      Translation.create(post: m2, user: users(:two), body: "-")
+
+      assert_equal [m2, m4], Post.recent_translated(5)
+    end
   end
 
 end

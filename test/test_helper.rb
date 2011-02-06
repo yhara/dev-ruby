@@ -45,6 +45,9 @@ class ActiveSupport::TestCase
 end
 
 # For debugging
+
+class Post; def inspect; "#<Post #{self.number}>"; end; end
+
 module Enumerable
   def each_p
     puts "[each_p]"

@@ -73,7 +73,7 @@ class Post < ActiveRecord::Base
     Post.includes(:translations, {translation_requests: :user}).
       where('(SELECT 1 FROM "translations"
               WHERE post_id = posts.id)').
-      order('(SELECT created_at FROM "translations"
+      order('(SELECT MAX(created_at) FROM "translations"
               WHERE post_id = posts.id) DESC').
       limit(n)
   end
