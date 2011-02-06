@@ -14,11 +14,11 @@ Typus.setup do |config|
 
   # Authentication: +:none+, +:http_basic+
   # Run `rails g typus:migration` if you need an advanced authentication system.
-  # config.authentication = :none
+  config.authentication = :http_basic
 
   # Define username and password for +:http_basic+ authentication
-  # config.username = "admin"
-  # config.password = "columbia"
+  config.username = ENV["ADMIN_USER"]
+  config.password = ENV["ADMIN_PASS"] or raise "Admin pass not set!"
 
   # Define available languages on the admin interface.
   # config.available_locales = [:en]

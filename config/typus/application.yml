@@ -14,10 +14,10 @@ Post:
 
 Translation:
   fields:
-    default: post_id, subject, post
-    form: post_id, subject, body, post
+    default: post_id, user_id, post
+    form: post_id, user_id, body, post
   order_by: 
-  relationships: post
+  relationships: post, user
   filters: 
   search: 
   application: dev-ruby
@@ -27,7 +27,7 @@ User:
     default: provider, uid, name
     form: provider, uid, name
   order_by: 
-  relationships: 
+  relationships: translations
   filters: 
   search: name
   application: dev-ruby
