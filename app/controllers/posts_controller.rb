@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 
     @recent_requested = Post.recent_requested(5)
     @top_requested = Post.top_requested(5)
-    @recent_translated = Post.top_requested(5)
+    @recent_translated = Post.recent_translated(5)
   end
 
   # GET /posts/1

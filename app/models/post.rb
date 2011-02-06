@@ -60,7 +60,10 @@ class Post < ActiveRecord::Base
   end
 
   def self.recent_translated(n)
-    Post.includes(:translations, {translation_requests: :user}).order('(SELECT created_at FROM "translations" where post_id = posts.id) DESC').limit(n)
+    Post.includes(:translations, {translation_requests: :user}).
+      order('(SELECT created_at FROM "translations" where post_id = posts.id) DESC').
+      limit(n).
+      select(&:translated?)
   end
 
   # Instance methods
