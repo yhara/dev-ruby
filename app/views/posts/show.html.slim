@@ -27,7 +27,7 @@ h2
       - else
         pre 
           | [Translation not available]
-        = link_to 'Translate!', new_post_translation_path(post.number)
+        = link_to 'Add translation', new_post_translation_path(post.number)
 
     .right
       pre = post.body
