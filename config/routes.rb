@@ -3,6 +3,7 @@ DevRuby::Application.routes.draw do
 
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout  
+  match "/restricted" => "sessions#login_required", :as => :login_required
 
   resources :posts do
     resources :translations, :only => [:index, :new, :create]

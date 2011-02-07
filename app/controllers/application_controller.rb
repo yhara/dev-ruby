@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if not signed_in?
-      redirect_to root_path, flash: {error: "Login required!"}
+      redirect_to login_required_path(path: request.fullpath),
+        flash: {error: "Login required!"}
     end
   end
 
