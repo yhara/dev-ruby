@@ -19,10 +19,13 @@ body {
   margin: 0px;
   padding: 0px; }
 
-#flash #error {
-  color: red; }
-#flash #notice {
-  color: green; }
+#flash {
+  border: 1px solid black;
+  padding: 1em; }
+  #flash #error {
+    color: red; }
+  #flash #notice {
+    color: green; }
 
 #content {
   padding: 1em 2%; }
@@ -57,6 +60,10 @@ body {
   color: white;
   text-align: center;
   margin-top: 3em; }
+
+#about {
+  border: 1px dashed black;
+  padding: 1em; }
 
 .post_tree li {
   margin-left: -2em; }

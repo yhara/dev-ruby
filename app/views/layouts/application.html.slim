@@ -20,9 +20,10 @@ html
       h1 = link_to "ruby-dev translation", root_path
 
     #content
-      #flash
-        #error = flash[:error]
-        #notice = flash[:notice]
+      - if flash[:error] or flash[:notice]
+        #flash
+          #error = flash[:error]
+          #notice = flash[:notice]
 
       = yield
 
