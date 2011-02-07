@@ -28,8 +28,6 @@ class PostsController < ApplicationController
           tree = topic.root.subtree.includes(:translations, {translation_requests: :user}).arrange
           [tree.keys.first, tree]
       }
-
-      @recent_translated = Post.recent_translated.limit(5)
     end
   end
 

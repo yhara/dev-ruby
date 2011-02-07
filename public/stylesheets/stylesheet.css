@@ -83,7 +83,8 @@ ul#menu {
 
 #about {
   border: 1px dashed black;
-  padding: 1em; }
+  margin-bottom: 1.5em;
+  padding: 0.2em; }
 
 .post_tree li {
   margin-left: -2em; }
