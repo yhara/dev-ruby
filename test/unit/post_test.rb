@@ -32,7 +32,7 @@ class PostTest < ActiveSupport::TestCase
       TranslationRequest.create(post_id: m4.id, user: users(:one))
       TranslationRequest.create(post_id: m2.id, user: users(:two))
 
-      assert_equal [m2, m4], Post.recent_requested(5)
+      assert_equal [m2, m4], Post.recent_requested.limit(5)
     end
 
     should "find top requested posts" do
@@ -42,7 +42,7 @@ class PostTest < ActiveSupport::TestCase
       TranslationRequest.create(post_id: m2.id, user: users(:one))
       TranslationRequest.create(post_id: m2.id, user: users(:two))
 
-      assert_equal [m2, m4], Post.recent_requested(5)
+      assert_equal [m2, m4], Post.recent_requested.limit(5)
     end
 
     should "find recently translated posts" do
@@ -53,7 +53,7 @@ class PostTest < ActiveSupport::TestCase
       Translation.create(post: m4, user: users(:one), body: "-")
       Translation.create(post: m2, user: users(:two), body: "-")
 
-      assert_equal [m2, m4], Post.recent_translated(5)
+      assert_equal [m2, m4], Post.recent_translated.limit(5)
     end
   end
 

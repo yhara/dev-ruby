@@ -7,49 +7,42 @@
     ul
       li 
         = link_to "Sign in with Twitter", "/auth/twitter"
-        |  and add stars to mails you want to read in English.
-      li Correct English of mails that are already translated.
-
-- if signed_in?
-  h2 Top requested
-
-  ul
-    - @top_requested.each do |post|
-      li 
-        = render post, with_title: true
-
-  h2 Recent requests
-
-  ul
-    - @recent_requested.each do |post|
-      li 
-        = render post, with_title: true
-
-h2 Recently translated
-
-ul
-  - @recent_translated.each do |post|
-    li 
-      = render post, with_title: true
-
-h2 Recently posted
-
-.post_index
-  - @posts.each do |root, tree|
-    ul.post_tree
+        '  and add
+        = link_to "stars", posts_path(view: :top_requested)
+        '  to mails you want to read in English.
       li
-        div class="root #{root.css_class}"
-          = link_to format_subject(root.topic.subject), root
+        ' Correct English of mails that are
+        = link_to "already translated", posts_path(view: :recent_translated)
+        '  .
 
-          - if signed_in? and root.topic.needs_subject_translation?
-            '
-            a.edit_subject href="#{edit_topic_path(root.topic)}"
-              | (edit)
+h2 = @title
 
-        - format_posts(tree) do |post|
-          = render post, with_title: false
+- if params[:view] 
 
+  ul
+    - @posts.each do |post|
+      li 
+        = render post, with_title: true
 
-.pagination
-  = will_paginate @topics
+  .pagination
+    = will_paginate @posts
+
+- else
+  .post_index
+    - @posts.each do |root, tree|
+      ul.post_tree
+        li
+          div class="root #{root.css_class}"
+            = link_to format_subject(root.topic.subject), root
+
+            - if signed_in? and root.topic.needs_subject_translation?
+              '
+              a.edit_subject href="#{edit_topic_path(root.topic)}"
+                | (edit)
+
+          - format_posts(tree) do |post|
+            = render post, with_title: false
+
+  .pagination
+    = will_paginate @topics
 

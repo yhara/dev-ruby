@@ -11,9 +11,9 @@ div class="#{post.css_class}"
       
     span.from
       = post.from
-    '  @
 
-    - unless with_title
+    - if not with_title
+      '  @
       span.time
         = post.time
 

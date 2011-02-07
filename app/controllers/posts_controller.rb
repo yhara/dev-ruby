@@ -5,18 +5,32 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @topics = Topic.includes(:root).
-      paginate(page: params[:page],
-               per_page: 10,
-               order: "last_update DESC")
-    @posts = @topics.map{|topic|
-        tree = topic.root.subtree.includes(:translations, {translation_requests: :user}).arrange
-        [tree.keys.first, tree]
-    }
+    case params[:view]
+    when "recent_requested"
+      @posts = Post.recent_requested.paginate(page: params[:page],
+                                              per_page: 20)
+      @title = "Recently requested"
+    when "top_requested"
+      @posts = Post.top_requested.paginate(page: params[:page],
+                                           per_page: 20)
+      @title = "Top requested"
+    when "recent_translated"
+      @posts = Post.recent_translated.paginate(page: params[:page],
+                                               per_page: 20)
+      @title = "Recent translated"
+    else
+      @title = "Recent posts"
+      @topics = Topic.includes(:root).
+        paginate(page: params[:page],
+                 per_page: 25,
+                 order: "last_update DESC")
+      @posts = @topics.map{|topic|
+          tree = topic.root.subtree.includes(:translations, {translation_requests: :user}).arrange
+          [tree.keys.first, tree]
+      }
 
-    @recent_requested = Post.recent_requested(5)
-    @top_requested = Post.top_requested(5)
-    @recent_translated = Post.recent_translated(5)
+      @recent_translated = Post.recent_translated.limit(5)
+    end
   end
 
   # GET /posts/1

@@ -49,34 +49,31 @@ class Post < ActiveRecord::Base
     end
   end
 
-  # Class methods
+  # scopes
   
-  def self.recent_requested(n)
-    Post.includes(:translations, {translation_requests: :user}).
-      where('(SELECT 1 FROM "translation_requests"
-             WHERE post_id = posts.id)').
-      order('(SELECT created_at FROM "translation_requests"
-              WHERE post_id = posts.id) DESC').
-      limit(n)
-  end
+  scope :recent_requested, lambda{
+    where('(SELECT 1 FROM "translation_requests"
+           WHERE post_id = posts.id)').
+    order('(SELECT created_at FROM "translation_requests"
+            WHERE post_id = posts.id) DESC').
+    includes(:translations, {translation_requests: :user})
+  }
 
-  def self.top_requested(n)
-    Post.includes(:translations, {translation_requests: :user}).
-      where('(SELECT 1 FROM "translation_requests"
-             WHERE post_id = posts.id)').
-      order('(SELECT COUNT(*) FROM "translation_requests"
-              WHERE post_id = posts.id) DESC').
-      limit(n)
-  end
+  scope :top_requested, lambda{
+    where('(SELECT 1 FROM "translation_requests"
+           WHERE post_id = posts.id)').
+    order('(SELECT COUNT(*) FROM "translation_requests"
+            WHERE post_id = posts.id) DESC').
+    includes(:translations, {translation_requests: :user})
+  }
 
-  def self.recent_translated(n)
-    Post.includes(:translations, {translation_requests: :user}).
-      where('(SELECT 1 FROM "translations"
-              WHERE post_id = posts.id)').
-      order('(SELECT MAX(created_at) FROM "translations"
-              WHERE post_id = posts.id) DESC').
-      limit(n)
-  end
+  scope :recent_translated, lambda{
+    where('(SELECT 1 FROM "translations"
+            WHERE post_id = posts.id)').
+    order('(SELECT MAX(created_at) FROM "translations"
+            WHERE post_id = posts.id) DESC').
+    includes(:translations, {translation_requests: :user})
+  }
 
   # Instance methods
   def translation
