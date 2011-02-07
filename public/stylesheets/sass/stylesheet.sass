@@ -1,5 +1,6 @@
 // sass variables
 
+$orange: orange
 $lightorange: #feb
 $darkorange: #b96
 
@@ -67,6 +68,30 @@ body
   #user_nav
     text-align: right
     margin-right: 2em
+
+ul#menu
+  width: 100%
+  border: 1px solid $orange
+  margin: 0px
+  padding: 0px
+  background: $lightorange
+
+  li
+    border-right: 1px solid $orange
+    margin: 0px
+    padding: 0.5em
+    display: inline
+    float: left
+
+    a
+      text-decoration: none
+
+    a:hover
+      color: inherit
+      background: inherit
+
+  li:hover
+    background: white
 
 #footer
   width: 100%

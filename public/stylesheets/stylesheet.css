@@ -53,6 +53,26 @@ body {
     text-align: right;
     margin-right: 2em; }
 
+ul#menu {
+  width: 100%;
+  border: 1px solid orange;
+  margin: 0px;
+  padding: 0px;
+  background: #ffeebb; }
+  ul#menu li {
+    border-right: 1px solid orange;
+    margin: 0px;
+    padding: 0.5em;
+    display: inline;
+    float: left; }
+    ul#menu li a {
+      text-decoration: none; }
+    ul#menu li a:hover {
+      color: inherit;
+      background: inherit; }
+  ul#menu li:hover {
+    background: white; }
+
 #footer {
   width: 100%;
   background: orange;

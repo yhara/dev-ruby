@@ -19,6 +19,13 @@ html
 
       h1 = link_to "ruby-dev translation", root_path
 
+    ul#menu.clearfix
+      li = link_to "Top", root_path
+      li = link_to "Recently translated", posts_path(view: :recent_translated)
+      li = link_to "Top requested", posts_path(view: :top_requested)
+      - if signed_in?
+        li = link_to "Recently requested", posts_path(view: :recent_requested)
+
     #content
       - if flash[:error] or flash[:notice]
         #flash
