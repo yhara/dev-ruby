@@ -1,35 +1,36 @@
-div class="#{post.css_class}"
-  a href="#{post_path(post)}"
-    span.number
-      = post.number
-    '  :
+.post_link
+  div class="#{post.css_class}"
+    a href="#{post_path(post)}"
+      span.number
+        = post.number
+      '  :
 
-    - if with_title
-      span.title
-        = format_subject(post.root.topic.subject, no_tags: true)
-        '  /
-      
-    span.from
-      = post.from
+      - if with_title
+        span.title
+          = format_subject(post.root.topic.subject, no_tags: true)
+          '  /
+        
+      span.from
+        = post.from
 
-    - if not with_title
-      '  @
-      span.time
-        = post.time
+      - if not with_title
+        '  @
+        span.time
+          = post.time
 
-  '
+    '
 
-  - post.requesting_users.each do |user|
-    - next if user == current_user
-    span.black_star title="#{user.name}"
-      = link_to black_star, user_path(user)
+    - post.requesting_users.each do |user|
+      - next if user == current_user
+      span.black_star title="#{user.name}"
+        = link_to black_star, user_path(user)
 
-  - if signed_in?
-    - if current_user.requesting?(post)
-      span.black_star
-        = link_to black_star, post_translation_request_path(post), method: "delete", remote: true, id: "star_#{post.number}"
-    - else
-      span.white_star
-        = link_to white_star, post_translation_request_path(post), method: "post", remote: true, id: "star_#{post.number}"
+    - if signed_in?
+      - if current_user.requesting?(post)
+        span.black_star
+          = link_to black_star, post_translation_request_path(post), method: "delete", remote: true, id: "star_#{post.number}"
+      - else
+        span.white_star
+          = link_to white_star, post_translation_request_path(post), method: "post", remote: true, id: "star_#{post.number}"
 
 

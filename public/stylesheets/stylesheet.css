@@ -81,6 +81,24 @@ ul#menu {
   text-align: center;
   margin-top: 3em; }
 
+.post_link span.subject {
+  color: black; }
+.post_link span.redmine_tags {
+  font-weight: normal; }
+.post_link .translated a {
+  color: #333333; }
+.post_link .not_translated a {
+  color: #cccccc;
+  text-decoration: none; }
+.post_link span.black_star, .post_link span.white_star {
+  font-size: 90%; }
+.post_link span.black_star, .post_link span.black_star a {
+  color: orange;
+  text-decoration: none; }
+.post_link span.white_star a {
+  color: #ffeebb;
+  text-decoration: none; }
+
 #about {
   border: 1px dashed black;
   margin-bottom: 1.5em;
@@ -88,15 +106,6 @@ ul#menu {
 
 .post_tree li {
   margin-left: -2em; }
-  .post_tree li span.subject {
-    color: black; }
-  .post_tree li span.redmine_tags {
-    font-weight: normal; }
-  .post_tree li .translated a {
-    color: #333333; }
-  .post_tree li .not_translated a {
-    color: #cccccc;
-    text-decoration: none; }
   .post_tree li .root a {
     color: black;
     text-decoration: none; }
@@ -105,14 +114,6 @@ ul#menu {
     text-decoration: underline; }
   .post_tree li .root.translated {
     font-weight: bold; }
-  .post_tree li span.black_star, .post_tree li span.white_star {
-    font-size: 90%; }
-  .post_tree li span.black_star, .post_tree li span.black_star a {
-    color: orange;
-    text-decoration: none; }
-  .post_tree li span.white_star a {
-    color: #ffeebb;
-    text-decoration: none; }
 
 h2 a.edit_subject {
   font-size: 50%; }

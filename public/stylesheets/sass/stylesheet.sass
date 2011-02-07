@@ -32,6 +32,7 @@ body
 #flash
   border: 1px solid black
   padding: 1em
+  margin-bottom: 1em
 
   #error
     color: red
@@ -101,6 +102,33 @@ ul#menu
   text-align: center
   margin-top: 3em
 
+// posts
+
+.post_link
+  span.subject
+    color: black
+  span.redmine_tags
+    font-weight: normal
+
+  .translated a
+    color: #333
+
+  .not_translated a
+    color: #ccc
+    text-decoration: none
+
+  span.black_star, span.white_star
+    font-size: 90%
+
+  span.black_star, span.black_star a
+    color: orange
+    text-decoration: none
+
+  span.white_star a
+    color: $lightorange
+    text-decoration: none
+
+
 // posts/index
 
 #about
@@ -111,18 +139,6 @@ ul#menu
 .post_tree
   li
     margin-left: -2em
-
-    span.subject
-      color: black
-    span.redmine_tags
-      font-weight: normal
-
-    .translated a
-      color: #333
-
-    .not_translated a
-      color: #ccc
-      text-decoration: none
 
     .root
       a
@@ -136,17 +152,6 @@ ul#menu
 
     .root.translated
       font-weight: bold
-
-    span.black_star, span.white_star
-      font-size: 90%
-
-    span.black_star, span.black_star a
-      color: orange
-      text-decoration: none
-
-    span.white_star a
-      color: $lightorange
-      text-decoration: none
 
 // posts/show
 
