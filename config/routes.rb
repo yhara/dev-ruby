@@ -1,6 +1,7 @@
 DevRuby::Application.routes.draw do
   root :to => "home#index"
   match "/activities" => "home#activities", :as => :activities
+  match "/about" => "home#about", :as => :about
 
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout  

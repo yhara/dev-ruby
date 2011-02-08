@@ -30,6 +30,11 @@ body {
 
 #content {
   padding: 1em 2%; }
+  #content h2 {
+    border-bottom: 1px dashed orange;
+    margin-left: -10px;
+    padding-bottom: 3px;
+    line-height: 150%; }
 
 .left {
   float: left;
@@ -71,8 +76,6 @@ ul#menu {
     ul#menu li a:hover {
       color: inherit;
       background: inherit; }
-  ul#menu li:hover {
-    background: white; }
 
 #footer {
   width: 100%;

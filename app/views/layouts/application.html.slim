@@ -35,6 +35,7 @@ html
 
     ul#menu.clearfix
       li = link_to "Top", root_path
+      li = link_to "About", about_path
       li = link_to "Recently translated", posts_path(view: :recent_translated)
       li = link_to "Top requested", posts_path(view: :top_requested)
       - if signed_in?

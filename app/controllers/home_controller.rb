@@ -15,4 +15,7 @@ class HomeController < ApplicationController
     @events = current_user.activity.events(10)
   end
 
+  def about
+  end
+
 end

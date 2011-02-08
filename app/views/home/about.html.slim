@@ -1,0 +1,31 @@
+h2 What's this?
+
+p ruby-dev translation provides community translation of ruby-dev, the Japanese mailing-list for Ruby(MRI) developers.
+
+h3 How to participate
+
+ul
+  li 
+    = link_to "Sign in with Twitter", "/auth/twitter"
+    '  and add
+    = link_to "stars", posts_path(view: :top_requested)
+    '  to mails you want to read in English.
+  li
+    ' Correct English of mails that are
+    = link_to "already translated", posts_path(view: :recent_translated)
+    '  .
+
+h2 Source code
+
+p 
+  = link_to "github:yhara/dev-ruby", "https://github.com/yhara/dev-ruby/"
+  |  patches welcome!
+
+h2 Issue tracker
+
+p 
+  = link_to "github Issues", "https://github.com/yhara/dev-ruby/issues"
+
+h2 Contact
+p 
+  = link_to "@yhara_en", "http://twitter.com/yhara_en"
