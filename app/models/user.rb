@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
     end  
   end  
 
+  def activity
+    @activity ||= Activity.new(self)
+  end
+
   def requesting?(post)
     post.translation_requests.any?{|req| req.user_id == self.id}
   end

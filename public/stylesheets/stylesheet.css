@@ -21,7 +21,8 @@ body {
 
 #flash {
   border: 1px solid black;
-  padding: 1em; }
+  padding: 1em;
+  margin-bottom: 1em; }
   #flash #error {
     color: red; }
   #flash #notice {

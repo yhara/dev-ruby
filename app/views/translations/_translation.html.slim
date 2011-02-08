@@ -1,0 +1,15 @@
+.translation_link
+  a href="#{post_translations_path(translation.post, anchor: translation.revision)}"
+    span.number
+      = translation.post.number
+    '  :
+
+    span.title
+      = format_subject(translation.post.root.topic.subject, no_tags: true)
+      '  /
+      
+    span.from
+      = translation.post.from
+
+    span.revision
+      = " (Revision #{translation.revision})"

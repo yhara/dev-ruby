@@ -39,6 +39,7 @@ html
       li = link_to "Top requested", posts_path(view: :top_requested)
       - if signed_in?
         li = link_to "Recently requested", posts_path(view: :recent_requested)
+        li = link_to "Your activities", activities_path
 
     #content
       - if flash[:error] or flash[:notice]

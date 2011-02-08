@@ -1,0 +1,28 @@
+h2 Activities
+
+- @events.each do |event|
+  .event
+    - case event
+    - when Translation
+        .time
+          h3 = event.created_at
+
+        - if event.user == current_user
+          - if event.revision == 0
+            | You translated:
+          - else
+            | You edited translation of:
+        - else
+          = link_to event.user.name, event.user
+          |  edited your translation:
+
+        ul
+          li = render event
+
+    - when TranslationRequest
+      .time
+        h3 = event.updated_at
+      | You requested translation of:
+      ul
+        li = render event.post, with_title: true
+

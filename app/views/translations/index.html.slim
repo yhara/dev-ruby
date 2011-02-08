@@ -4,9 +4,14 @@ h2
   | ]
 
 - @translations.each_with_index do |translation, i|
+  a name="#{translation.revision}"
   h3 = "Revision #{@translations.size - i - 1}"
-  div = translation.created_at
-  pre = translation.body
+  .translated_by
+    = link_to translation.user.name, translation.user
+  .translated_at
+    = translation.created_at
+  pre
+    = translation.body
   
 p
   = link_to 'back', @post
