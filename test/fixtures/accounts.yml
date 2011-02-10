@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  provider: twitter
+  uid: 123456
+  name: yhara
+  user: one
+
+two:
+  provider: twitter
+  uid: 789789
+  name: yhara2
+  user: two
+
+two:
+  provider: twitter
+  uid: 777777
+  name: yhara2b
+  user: two

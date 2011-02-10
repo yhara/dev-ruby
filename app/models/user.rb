@@ -1,15 +1,28 @@
 class User < ActiveRecord::Base
+  has_many :accounts
   has_many :translations
   has_many :translation_requests
   has_many :posts, :through => :translation_requests
   alias requesting_posts posts
+
+  validates_presence_of :name
   
   def self.create_with_omniauth(auth)  
-    create! do |user|  
-      user.provider = auth["provider"]  
-      user.uid = auth["uid"]  
-      user.name = auth["user_info"]["name"]  
-    end  
+    name = auth["user_info"]["name"]  
+    user = User.create(name: name)
+    if user
+      account = Account.create(provider: auth["provider"],
+                               uid: auth["uid"],
+                               name: auth["user_info"]["name"],
+                               user_id: user.id)
+      if account
+        user
+      else
+        nil
+      end
+    else
+      nil
+    end
   end  
 
   def activity
