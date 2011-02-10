@@ -74,7 +74,7 @@ ul#menu {
     ul#menu li a {
       text-decoration: none; }
     ul#menu li a:hover {
-      color: inherit;
+      color: orange;
       background: inherit; }
 
 #footer {
