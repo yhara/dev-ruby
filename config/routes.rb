@@ -3,6 +3,7 @@ DevRuby::Application.routes.draw do
   match "/activities" => "home#activities", :as => :activities
   match "/about" => "home#about", :as => :about
 
+  resources :sessions, :only => [:create, :destroy]
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout  
   match "/restricted" => "sessions#login_required", :as => :login_required
