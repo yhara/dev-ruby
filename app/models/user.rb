@@ -5,7 +5,15 @@ class User < ActiveRecord::Base
   has_many :posts, :through => :translation_requests
   alias requesting_posts posts
 
-  validates_presence_of :name
+  attr_protected :name
+
+  validates_presence_of :name, :timezone
+
+  validates_each :timezone do |user, attr, timezone|
+    unless ActiveSupport::TimeZone[timezone]
+      user.errors.add(:timeone, "Unknown timezone name")
+    end
+  end
 
   def activity
     @activity ||= Activity.new(self)

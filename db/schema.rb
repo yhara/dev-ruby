@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209014541) do
+ActiveRecord::Schema.define(:version => 20110210135611) do
 
   create_table "accounts", :force => true do |t|
     t.string  "provider"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20110209014541) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "timezone",   :default => "UTC", :null => false
   end
 
 end

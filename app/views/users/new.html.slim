@@ -1,4 +1,4 @@
-h2 Sign up
+h2 = "Welcome, #{@account.name}!"
 
 .user_form
   = form_for(@user) do |f|
@@ -11,12 +11,14 @@ h2 Sign up
           - @user.errors.full_messages.each do |msg|
             li= msg
 
-    .field
-      = f.label :name
-      = f.text_field :name , :value => @account.name
+    img src="#{@profile_image}"
+
+    div
+      = "Name: #{@account.name}"
 
     .field
       = f.label :timezone
+      ' :
       = f.select :timezone, timezones
 
     .actions
