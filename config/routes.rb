@@ -15,7 +15,7 @@ DevRuby::Application.routes.draw do
 
   resources :topics, :only => [:edit, :update]
 
-  resources :users, :only => [:show]
+  resources :users, :only => [:show, :new, :create]
 
   #match "/debug/:name" => "sessions#debug_login"
 

@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def login_as(user)
+    session[:user_id] = user.id  
+  end
+
   def require_login
     if not signed_in?
       redirect_to login_required_path(path: request.fullpath),
