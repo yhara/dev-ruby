@@ -6,9 +6,9 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'ancestry'
 gem 'friendly_id'
 gem 'omniauth'
-gem 'will_paginate'
+gem 'will_paginate', '3.0.pre2'
 
-gem 'typus'
+gem 'typus', '3.0.6'
 
 # view
 gem 'slim'
