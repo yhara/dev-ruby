@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @account = Account.find(session[:account_id])
     @user = User.new(params[:user])
     @user.name = @account.name
+    @profile_image = profile_image_url
 
     if @user.save
       @account.user = @user
@@ -21,7 +22,6 @@ class UsersController < ApplicationController
       login_as @user
       redirect_to root_path
     else
-      @profile_image = profile_image_url
       render action: "new"
     end
   rescue ActiveRecord::RecordNotFound
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   private
 
   def profile_image_url
-    Twitter.profile_image(@account.name)
+    session[:profile_image_url] ||= Twitter.profile_image(@account.name)
   end
 
 end

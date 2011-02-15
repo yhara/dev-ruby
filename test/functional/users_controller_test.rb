@@ -1,5 +1,9 @@
 require 'test_helper'
 
+url = "https://api.twitter.com/1/users/profile_image/account1.json"
+body = "http://img.twitter.com/a.png"
+FakeWeb.register_uri(:get, url, body: body)
+
 class UsersControllerTest < ActionController::TestCase
   context "when has no account" do
     should "not view new or create directly" do
@@ -22,12 +26,12 @@ class UsersControllerTest < ActionController::TestCase
       session[:account_id] = account.id
 
       assert_difference "User.count" do
-        post :create, user: {name: "xxx"}
+        post :create, user: {timezone: "Tokyo"}
         assert_redirected_to root_path
       end
 
       user = assigns[:user]
-      assert_equal "xxx", user.name
+      assert_equal "Tokyo", user.timezone
       assert_equal account, user.accounts.first
     end
   end

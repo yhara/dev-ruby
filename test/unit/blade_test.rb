@@ -1,7 +1,6 @@
 # coding: utf-8
 require 'test_helper'
 require 'blade.rb'
-require 'fakeweb'
 
 {
   "test/data/index.shtml" =>
@@ -19,7 +18,6 @@ require 'fakeweb'
 ).each{|file, url|
   FakeWeb.register_uri(:get, url, :body => File.read(file))
 }
-FakeWeb.allow_net_connect = false
 
 Blade.verbose = false
 
