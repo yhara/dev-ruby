@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20110210135611) do
     t.datetime "time",     :null => false
     t.text     "body",     :null => false
     t.string   "ancestry"
-    t.integer  "topic_id"
   end
 
   add_index "posts", ["ancestry"], :name => "index_posts_on_ancestry"
