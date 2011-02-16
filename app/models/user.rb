@@ -1,16 +1,19 @@
 class User < ActiveRecord::Base
+  has_many :accounts
   has_many :translations
   has_many :translation_requests
   has_many :posts, :through => :translation_requests
   alias requesting_posts posts
-  
-  def self.create_with_omniauth(auth)  
-    create! do |user|  
-      user.provider = auth["provider"]  
-      user.uid = auth["uid"]  
-      user.name = auth["user_info"]["name"]  
-    end  
-  end  
+
+  attr_protected :name
+
+  validates_presence_of :name, :timezone
+
+  validates_each :timezone do |user, attr, timezone|
+    unless ActiveSupport::TimeZone[timezone]
+      user.errors.add(:timeone, "Unknown timezone name")
+    end
+  end
 
   def activity
     @activity ||= Activity.new(self)

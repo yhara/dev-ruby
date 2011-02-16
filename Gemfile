@@ -10,6 +10,8 @@ gem 'will_paginate', '3.0.pre2'
 
 gem 'typus', '3.0.6'
 
+gem 'twitter'
+
 # view
 gem 'slim'
 gem "slim-rails"

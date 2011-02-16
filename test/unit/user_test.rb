@@ -1,8 +1,21 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  context "with valid attrs" do
+    should "create a user" do
+      u = User.new(timezone: "Tokyo")
+      u.name = "foo"
+      assert u.valid?
+    end
   end
+
+  context "with invalid attrs" do
+    should "not create a user" do
+      u = User.new(timezone: "----")
+      u.name = "foo"
+      assert !u.valid?
+    end
+  end
+
 end

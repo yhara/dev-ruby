@@ -9,12 +9,20 @@ class SessionsController < ApplicationController
 
   def create  
     auth = request.env["omniauth.auth"]  
-    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)  
-    session[:user_id] = user.id  
-
-    path = path_of(session[:login_required_path])
-
-    redirect_to path, :notice => "Signed in!" 
+    account = Account.find_by_provider_and_uid(auth["provider"],
+                                               auth["uid"])
+    if account and account.user
+      login_as account.user
+      path = path_of(session[:login_required_path] || root_path)
+      redirect_to path, :notice => "Signed in!" 
+    else
+      if account || (account = Account.new_with_omniauth(auth)).save
+        session[:account_id] = account.id
+        redirect_to new_user_path
+      else
+        render text: "failed to create an account"
+      end
+    end
   end  
 
   def destroy  

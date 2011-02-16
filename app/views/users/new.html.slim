@@ -1,0 +1,25 @@
+h2 = "Welcome, #{@account.name}!"
+
+.user_form
+  = form_for(@user) do |f|
+    - if @user.errors.any?
+      #error_explanation
+        h2
+          = pluralize(@user.errors.count, "error")
+          prohibited this translation from being saved:
+        ul
+          - @user.errors.full_messages.each do |msg|
+            li= msg
+
+    img src="#{@profile_image}"
+
+    div
+      = "Name: #{@account.name}"
+
+    .field
+      = f.label :timezone
+      ' :
+      = f.select :timezone, timezones
+
+    .actions
+      = f.submit :value => "Sign up"

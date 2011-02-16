@@ -31,13 +31,16 @@ namespace :blade do
     end
   end
 
-  desc "Create a post from blade (params: DIR=misc/files)"
+  desc "Create a post from blade (params: DIR=misc/files START=nil)"
   task :load => :environment do
+    start = (ENV["START"].to_i || 0)
     dir = File.expand_path(ENV["DIR"] || "misc/files/")
+
     Dir["#{dir}/*"].select{|path|
       File.basename(path) =~ /\A\d+\z/
     }.sort.each{|path|
       n = File.basename(path).to_i
+      next if n < start
 
       if Post.find_by_number(n)
         puts "skipping #{n}"
