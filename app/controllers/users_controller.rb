@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @account = Account.find(session[:account_id])
     @user = User.new(params[:user])
     @user.name = @account.name
-    @profile_image = profile_image_url
+    @profile_image = @user.profile_image_url = profile_image_url
 
     if @user.save
       @account.user = @user

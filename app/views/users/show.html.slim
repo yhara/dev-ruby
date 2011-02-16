@@ -1,5 +1,7 @@
 h1 = @user.name
 
+img src=(@user.profile_image_url)
+
 h2 Requests
 ul
   - @user.requesting_posts.each do |post|

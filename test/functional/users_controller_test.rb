@@ -1,8 +1,10 @@
 require 'test_helper'
 
-url = "https://api.twitter.com/1/users/profile_image/account1.json"
-body = "http://img.twitter.com/a.png"
-FakeWeb.register_uri(:get, url, body: body)
+[1,2].each do |n|
+  url = "https://api.twitter.com/1/users/profile_image/account#{n}.json"
+  body = "http://img.twitter.com/a.png"
+  FakeWeb.register_uri(:get, url, body: body)
+end
 
 class UsersControllerTest < ActionController::TestCase
   context "when has no account" do
