@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  # Associations
   has_many :accounts
   has_many :translations
   has_many :translation_requests
@@ -6,7 +7,11 @@ class User < ActiveRecord::Base
   alias requesting_posts posts
 
   attr_protected :name
+  
+  # Plugins
+  has_friendly_id :name
 
+  # Validations
   validates_presence_of :name, :timezone
   validates_uniqueness_of :name
 
