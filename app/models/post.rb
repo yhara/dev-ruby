@@ -61,8 +61,7 @@ class Post < ActiveRecord::Base
   }
 
   scope :not_translated, lambda{
-    where('(SELECT TRUE FROM "translations"
-            WHERE post_id = posts.id) IS NULL')
+    where('(SELECT COUNT(*) FROM translations WHERE post_id = posts.id) = 0')
   }
 
   scope :has_request, lambda{
