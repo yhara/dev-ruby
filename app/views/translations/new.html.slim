@@ -1,3 +1,7 @@
+h2
+  ' Add translation of 
+  = link_to @post
+
 #translation_main.clearfix
   .left
     #translated_subject
@@ -14,7 +18,7 @@
               li= msg
 
       .field
-        = f.text_area :body, :value => @post.translated_body, rows: 40
+        = f.text_area :body, :value => pre_translate(@post.translated_body), rows: 40
 
       .actions
         = f.submit :value => "Save"
@@ -23,7 +27,7 @@
     #original_subject
       = @post.subject
       
-    pre = @post.body
+    pre = format_body(@post.body)
 
 div
   = link_to 'Back', post_path(@post)

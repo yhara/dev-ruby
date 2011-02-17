@@ -92,6 +92,11 @@ class Post < ActiveRecord::Base
   }
 
   # Instance methods
+
+  def to_s
+    self.number.to_s
+  end
+
   def translation
     if (trs = self.translations)
       trs.max_by{|tr| tr.created_at}

@@ -19,7 +19,7 @@ h2
 
     .left
       - if (tr = post.translation)
-        pre = tr.body
+        pre = format_body(tr.body)
         = link_to 'Refine translation', new_post_translation_path(post.number)
         = " / "
         = link_to "View logs (#{post.translations.size})", post_translations_path(post.number)
@@ -30,7 +30,7 @@ h2
         = link_to 'Add translation', new_post_translation_path(post.number)
 
     .right
-      pre = post.body
+      pre = format_body(post.body)
 
 div
   = link_to 'Back', posts_path
