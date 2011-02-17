@@ -15,6 +15,10 @@ class UserTest < ActiveSupport::TestCase
       u = User.new(timezone: "----")
       u.name = "foo"
       assert !u.valid?
+
+      u = User.new(timezone: "Tokyo")
+      u.name = users(:one).name
+      assert !u.valid?
     end
   end
 

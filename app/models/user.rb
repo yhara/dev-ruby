@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_protected :name
 
   validates_presence_of :name, :timezone
+  validates_uniqueness_of :name
 
   validates_each :timezone do |user, attr, timezone|
     unless ActiveSupport::TimeZone[timezone]
