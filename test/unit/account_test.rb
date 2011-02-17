@@ -6,7 +6,7 @@ class AccountTest < ActiveSupport::TestCase
       auth = {
         "provider" =>  "twitter",
         "uid" =>  "12345",
-        "user_info" => {"name" => "asdf"}
+        "user_info" => {"nickname" => "asdf"}
       }
       account = Account.new_with_omniauth(auth)
       assert_difference "Account.count" do

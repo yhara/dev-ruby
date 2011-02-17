@@ -6,7 +6,7 @@ class SessionsControllerTest < ActionController::TestCase
       @request.env["omniauth.auth"] = {
         "provider" => "twitter",
         "uid" => "12345678",
-        "user_info" => {"name" => "aaaa"}
+        "user_info" => {"nickname" => "aaaa"}
       }
 
       assert_difference "Account.count" do
@@ -14,7 +14,7 @@ class SessionsControllerTest < ActionController::TestCase
       end
 
       assert_redirected_to new_user_path
-      assert_equal Account.last.id, session["account_id"]
+      assert_equal Account.last.id, session[:account_id]
     end
   end
 
@@ -26,14 +26,14 @@ class SessionsControllerTest < ActionController::TestCase
       @request.env["omniauth.auth"] = {
         "provider" => account.provider,
         "uid" => account.uid,
-        "user_info" => {"name" => account.name}
+        "user_info" => {"nickname" => account.name}
       }
       assert_no_difference "Account.count" do
         post :create
       end
 
       assert_redirected_to root_path
-      assert_equal session["user_id"], user.id
+      assert_equal user.id, session[:user_id]
     end
   end
 end

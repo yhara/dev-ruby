@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     else
       if account || (account = Account.new_with_omniauth(auth)).save
         session[:account_id] = account.id
+        session[:profile_image] = auth["user_info"]["image"]
         redirect_to new_user_path
       else
         render text: "failed to create an account"

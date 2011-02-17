@@ -5,6 +5,6 @@ class Account < ActiveRecord::Base
   def self.new_with_omniauth(auth)
     Account.new(provider: auth["provider"],
                 uid: auth["uid"],
-                name: auth["user_info"]["name"])
+                name: auth["user_info"]["nickname"])
   end
 end
