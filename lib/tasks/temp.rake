@@ -6,8 +6,10 @@ task :temp => :environment do
     p ac, ac.save
 
     u = ac.user
-    u.name = ac.name
-    u.profile_image_url = info.profile_image_url
-    p u, u.save
+    if u
+      u.name = ac.name
+      u.profile_image_url = info.profile_image_url
+      p u, u.save
+    end
   end
 end
