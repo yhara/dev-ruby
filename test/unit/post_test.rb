@@ -26,6 +26,15 @@ class PostTest < ActiveSupport::TestCase
   end
 
   context "class method" do
+    should "find requested posts" do
+      Post.destroy_all
+      m1, m2, m3, m4, m5 = *Array.new(5){ Fabricate(:post) }
+      TranslationRequest.create(post_id: m4.id, user: users(:one))
+      TranslationRequest.create(post_id: m2.id, user: users(:two))
+
+      assert_equal [m2, m4], Post.has_request.order(:number)
+    end
+
     should "find recent requested posts" do
       Post.destroy_all
       m1, m2, m3, m4, m5 = *Array.new(5){ Fabricate(:post) }

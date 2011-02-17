@@ -52,8 +52,8 @@ class Post < ActiveRecord::Base
   # scopes
   
   scope :translated, lambda{
-    where('(SELECT TRUE FROM "translations"
-            WHERE post_id = posts.id)')
+    joins(:translations).
+    group(:id)
   }
 
   scope :not_translated, lambda{
@@ -61,18 +61,21 @@ class Post < ActiveRecord::Base
             WHERE post_id = posts.id) IS NULL')
   }
 
+  scope :has_request, lambda{
+    joins(:translation_requests).
+    group(:id)
+  }
+
   scope :recent_requested, lambda{
-    where('(SELECT TRUE FROM "translation_requests"
-           WHERE post_id = posts.id)').
+    has_request.
     order('(SELECT created_at FROM "translation_requests"
             WHERE post_id = posts.id) DESC').
     includes(:translations, {translation_requests: :user})
   }
 
   scope :top_requested, lambda{
+    has_request.
     not_translated.
-    where('(SELECT TRUE FROM "translation_requests"
-           WHERE post_id = posts.id)').
     order('(SELECT COUNT(*) FROM "translation_requests"
             WHERE post_id = posts.id) DESC').
     includes(:translations, {translation_requests: :user})
