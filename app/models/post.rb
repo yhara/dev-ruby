@@ -51,9 +51,13 @@ class Post < ActiveRecord::Base
 
   # scopes
   
+  scope :no_duplicates, lambda {
+    group(column_names.map{|name| "#{table_name}.#{name}" }.join(', '))
+  }
+  
   scope :translated, lambda{
     joins(:translations).
-    group("posts.id")
+    no_duplicates
   }
 
   scope :not_translated, lambda{
@@ -63,7 +67,7 @@ class Post < ActiveRecord::Base
 
   scope :has_request, lambda{
     joins(:translation_requests).
-    group("posts.id")
+    no_duplicates
   }
 
   scope :recent_requested, lambda{
