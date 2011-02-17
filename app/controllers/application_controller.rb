@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def login_as(user)
     session[:user_id] = user.id  
+    reset_session
   end
 
   def require_login

@@ -5,4 +5,6 @@
 admin:
   Post: create, read, update, delete
   Translation: create, read, update, delete
+  TranslationRequest: create, read, update, delete
   User: create, read, update, delete
+  Account: create, read, update, delete

@@ -22,13 +22,32 @@ Translation:
   search: 
   application: dev-ruby
 
+TranslationRequest:
+  fields:
+    default: post_id, user_id
+    form: post_id, user_id
+  order_by: 
+  relationships: post, user
+  filters: 
+  search: 
+  application: dev-ruby
+
 User:
   fields:
-    default: provider, uid, name
-    form: provider, uid, name
+    default: name, timezone, profile_image_url
+    form: name, timezone, profile_image_url
   order_by: 
-  relationships: translations
+  relationships: translations, accounts
   filters: 
   search: name
   application: dev-ruby
 
+Account:
+  fields:
+    default: provider, uid, name, user_id
+    form: provider, uid, name, user_id
+  order_by: 
+  relationships: user
+  filters: 
+  search: name
+  application: dev-ruby

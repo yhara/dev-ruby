@@ -12,8 +12,8 @@ class SessionsController < ApplicationController
     account = Account.find_by_provider_and_uid(auth["provider"],
                                                auth["uid"])
     if account and account.user
-      login_as account.user
       path = path_of(session[:login_required_path] || root_path)
+      login_as account.user
       redirect_to path, :notice => "Signed in!" 
     else
       if account || (account = Account.new_with_omniauth(auth)).save
