@@ -52,17 +52,17 @@ class Post < ActiveRecord::Base
   # scopes
   
   scope :translated, lambda{
-    where('(SELECT 1 FROM "translations"
+    where('(SELECT TRUE FROM "translations"
             WHERE post_id = posts.id)')
   }
 
   scope :not_translated, lambda{
-    where('(SELECT 1 FROM "translations"
+    where('(SELECT TRUE FROM "translations"
             WHERE post_id = posts.id) IS NULL')
   }
 
   scope :recent_requested, lambda{
-    where('(SELECT 1 FROM "translation_requests"
+    where('(SELECT TRUE FROM "translation_requests"
            WHERE post_id = posts.id)').
     order('(SELECT created_at FROM "translation_requests"
             WHERE post_id = posts.id) DESC').
@@ -71,7 +71,7 @@ class Post < ActiveRecord::Base
 
   scope :top_requested, lambda{
     not_translated.
-    where('(SELECT 1 FROM "translation_requests"
+    where('(SELECT TRUE FROM "translation_requests"
            WHERE post_id = posts.id)').
     order('(SELECT COUNT(*) FROM "translation_requests"
             WHERE post_id = posts.id) DESC').
