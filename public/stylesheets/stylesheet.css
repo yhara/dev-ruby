@@ -19,6 +19,13 @@ body {
   margin: 0px;
   padding: 0px; }
 
+pre {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
 #flash {
   border: 1px solid black;
   padding: 1em;
