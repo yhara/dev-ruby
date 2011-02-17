@@ -48,6 +48,9 @@ body {
   float: left;
   width: 45%; }
 
+.quote, .quote a {
+  color: green; }
+
 #header {
   width: 100%;
   background: orange;

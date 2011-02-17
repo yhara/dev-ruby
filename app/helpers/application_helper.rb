@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def format_body(body)
-    (detect_svn_revisions detect_urls h(body)).html_safe
+    (detect_quotes detect_svn_revisions detect_urls h(body)).html_safe
   end
 
   private
@@ -18,9 +18,9 @@ module ApplicationHelper
     txt.gsub(%r{https?://[A-Za-z0-9\/.~:@!\$&'\(\)%-]+}){|match|
       [
         "<a href='",
-        h(match),
+        match,
         "'>",
-        h(match),
+        match,
         "</a>",
       ].join
     }
@@ -32,10 +32,21 @@ module ApplicationHelper
         "<a href='",
         "http://svn.ruby-lang.org/cgi-bin/viewvc.cgi?view=rev&revision=#{$1}",
         "'>",
-        h(match),
+        match,
         "</a>"
       ].join
     }
   end
 
+  QUOTE_LINE = /^(&gt;)+ (.*)$/
+  QUOTE_EMPTY = /^(&gt;)+$/
+  def detect_quotes(txt)
+    txt.gsub(/#{QUOTE_LINE}|#{QUOTE_EMPTY}/){|match|
+      [
+        "<span class='quote'>",
+        match,
+        "</span>"
+      ].join
+    }
+  end
 end
