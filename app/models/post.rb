@@ -53,7 +53,7 @@ class Post < ActiveRecord::Base
   
   scope :translated, lambda{
     joins(:translations).
-    group(:id)
+    group("posts.id")
   }
 
   scope :not_translated, lambda{
@@ -63,7 +63,7 @@ class Post < ActiveRecord::Base
 
   scope :has_request, lambda{
     joins(:translation_requests).
-    group(:id)
+    group("posts.id")
   }
 
   scope :recent_requested, lambda{
