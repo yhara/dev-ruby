@@ -20,17 +20,23 @@
 
     '
 
+    // Existing stars
+
     - post.requesting_users.each do |user|
       - next if user == current_user
       span.black_star title="#{user.name}"
         = link_to black_star, user_path(user)
 
-    - if signed_in?
+    // Star button
+
+    - if current_user 
       - if current_user.requesting?(post)
         span.black_star
           = link_to black_star, post_translation_request_path(post), method: "delete", remote: true, id: "star_#{post.number}"
       - else
         span.white_star
           = link_to white_star, post_translation_request_path(post), method: "post", remote: true, id: "star_#{post.number}"
-
+    - else
+      span.white_star
+        = link_to white_star, login_required_path(path: request.path)
 
