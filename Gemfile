@@ -50,5 +50,5 @@ group :test do
   gem 'turn'
   gem 'fakeweb'
   gem 'shoulda-context'
-  gem 'spork-testunit'
+  gem 'spork'
 end

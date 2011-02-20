@@ -136,8 +136,6 @@ GEM
       tilt (~> 1.2)
     slim-rails (0.1.2)
     spork (0.8.4)
-    spork-testunit (0.0.4)
-      spork (>= 0.6.0)
     sqlite3 (1.3.3)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -181,7 +179,7 @@ DEPENDENCIES
   shoulda-context
   slim
   slim-rails
-  spork-testunit
+  spork
   sqlite3-ruby
   thin
   turn
