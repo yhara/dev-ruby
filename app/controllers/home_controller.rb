@@ -57,14 +57,16 @@ class HomeController < ApplicationController
                      end
                        
         entry.date = item.created_at.to_s
-        entry.description = case item
+        entry.description = "<pre>" +
+                           (case item
                             when Post 
                               item.body
                             when Translation
                               item.body
                             when TranslationRequest
                               item.post.body
-                            end
+                            end) +
+                            "</pre>"
       end
     }.to_s
   end
