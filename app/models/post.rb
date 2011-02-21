@@ -109,6 +109,10 @@ class Post < ActiveRecord::Base
   alias last_translation translation
   alias translated? translation
 
+  def topic_subject
+    self.root.topic.subject
+  end
+
   def translated_body
     translation ? translation.body : body
   end

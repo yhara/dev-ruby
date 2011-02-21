@@ -42,9 +42,9 @@ class HomeController < ApplicationController
                       when Post 
                         "new post: #{item.subject}"
                       when TranslationRequest
-                        "requested: #{item.post.topic.subject}"
+                        "requested: #{item.post.topic_subject}"
                       when Translation
-                        "translated: #{item.post.topic.subject}"
+                        "translated: #{item.post.topic_subject}"
                       end
         entry.link = case item
                      when Post 
