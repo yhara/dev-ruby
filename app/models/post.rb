@@ -93,6 +93,10 @@ class Post < ActiveRecord::Base
 
   # Instance methods
 
+  def created_at
+    self.time
+  end
+
   def to_s
     self.number.to_s
   end

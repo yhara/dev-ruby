@@ -33,6 +33,7 @@ html
 
       h1 = link_to "ruby-dev translation (beta)", root_path
 
+    // Menu
     ul#menu.clearfix
       li = link_to "About", about_path
       li = link_to "Recent posts", posts_path
@@ -41,6 +42,7 @@ html
       - if signed_in?
         li = link_to "Recently requested", posts_path(view: :recent_requested)
         li = link_to "Your activities", activities_path
+      li = link_to "RSS", rss_path
 
     #content
       - if flash[:error] or flash[:notice]
