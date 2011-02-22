@@ -9,13 +9,17 @@ h2
   .post.clearfix
     a name="#{post.number}"
     h3
-      span.post_number = post.number
-      = " "
-      span.post_from = post.from
-      = " "
-      span.post_time = "(#{post.time})"
-      = " "
-      span.post_subject = post.subject
+      span.post_number
+        = link_to post.number, post_path(@root, anchor: post.number)
+      '
+      span.post_from 
+        = post.from
+      '
+      span.post_time
+        = "(#{post.time})"
+      '
+      span.post_subject
+        = post.subject
 
     .left
       - if (tr = post.translation)
