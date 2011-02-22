@@ -17,20 +17,7 @@
 
 h2 = @title
 
-.post_index
-  - @posts.each do |root, tree|
-    ul.post_tree
-      li
-        div class="root #{root.css_class}"
-          = link_to format_subject(root.topic.subject), root
-
-          - if signed_in? and root.topic.needs_subject_translation?
-            '
-            a.edit_subject href="#{edit_topic_path(root.topic)}"
-              | (edit)
-
-        - format_posts(tree) do |post|
-          = render post, with_title: false
+= render "posts/posts_tree", posts: @posts
 
 .more
   = link_to "more...", posts_path
