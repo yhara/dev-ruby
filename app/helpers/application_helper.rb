@@ -38,13 +38,15 @@ module ApplicationHelper
     }
   end
 
-  QUOTE_LINE = /^(&gt;)+ (.*)$/
+  QUOTE_LINE_GT = /^(&gt;)+ (.*)$/
+  QUOTE_LINE_OR = /^\|(.*)$/
+  QUOTE_LINE = /#{QUOTE_LINE_GT}|#{QUOTE_LINE_OR}/
   QUOTE_EMPTY = /^(&gt;)+$/
   def detect_quotes(txt)
     txt.gsub(/#{QUOTE_LINE}|#{QUOTE_EMPTY}/){|match|
       [
         "<span class='quote'>",
-        match,
+        match.chomp,
         "</span>"
       ].join
     }
