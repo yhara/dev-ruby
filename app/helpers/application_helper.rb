@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def format_body(body)
-    (detect_quotes detect_svn_revisions detect_urls h(body)).html_safe
+    (detect_quotes detect_urls detect_svn_revisions detect_ruby_ml_links h(body)).html_safe
   end
 
   private
@@ -28,13 +28,23 @@ module ApplicationHelper
 
   def detect_svn_revisions(txt)
     txt.gsub(/r(\d+)/){|match|
-      [
-        "<a href='",
-        "http://svn.ruby-lang.org/cgi-bin/viewvc.cgi?view=rev&revision=#{$1}",
-        "'>",
-        match,
-        "</a>"
-      ].join
+      url = "http://svn.ruby-lang.org/cgi-bin/viewvc.cgi?view=rev&revision=#{$1}"
+      link_to match, url
+    }
+  end
+
+  ML_NAMES = /ruby\-(?:talk|dev|core|list)/
+  def detect_ruby_ml_links(txt)
+    txt.gsub(/\[(#{ML_NAMES}):(\d+)\]/){|match|
+      ml_name, n = $1, $2
+
+      if ml_name == "ruby-dev"
+        url = post_path(n)
+        "[ruby-dev:#{link_to n, url}]"
+      else
+        url = "http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/#{ml_name}/#{n}"
+        link_to match, url
+      end
     }
   end
 
