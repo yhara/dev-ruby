@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def format_body(body)
-    (detect_quotes detect_urls detect_svn_revisions detect_ruby_ml_links h(body)).html_safe
+    (detect_quotes detect_svn_revisions detect_ruby_ml_links detect_urls h(body)).html_safe
   end
 
   private
