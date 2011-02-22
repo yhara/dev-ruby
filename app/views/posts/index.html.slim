@@ -10,6 +10,12 @@ h2 = @title
   .pagination
     = will_paginate @posts
 
+  - if params[:view] == "top_requested" and @posts.empty?
+    p
+      ' All the 
+      = link_to "requested posts", posts_path(view: "recent_requested")
+      '  are already traslated now :-)
+
 - else
   = render "posts_tree", posts: @posts
 
