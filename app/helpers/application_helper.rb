@@ -9,13 +9,18 @@ module ApplicationHelper
   end
 
   def format_body(body)
-    (detect_quotes detect_svn_revisions detect_ruby_ml_links detect_urls h(body)).html_safe
+    (detect_quotes(
+      detect_svn_revisions(
+        detect_ruby_ml_links(
+          detect_urls(         # this should be applied first.
+            h(body)))))
+    ).html_safe
   end
 
   private
 
   def detect_urls(txt)
-    txt.gsub(%r{https?://[A-Za-z0-9\/.~:@!\$&'\(\)%-]+}){|match|
+    txt.gsub(%r{https?://[A-Za-z0-9\/.~:@!\$&'\(\)%_-]+}){|match|
       [
         "<a href='",
         match,
