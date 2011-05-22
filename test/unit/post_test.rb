@@ -51,7 +51,7 @@ class PostTest < ActiveSupport::TestCase
       TranslationRequest.create(post_id: m2.id, user: users(:one))
       TranslationRequest.create(post_id: m2.id, user: users(:two))
 
-      assert_equal [m2, m4], Post.recent_requested.limit(5)
+      assert_equal [m2, m4], Post.top_requested.limit(5)
     end
 
     should "find recently translated posts" do
