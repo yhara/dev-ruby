@@ -71,7 +71,7 @@ class Post < ActiveRecord::Base
 
   scope :recent_requested, lambda{
     has_request.
-    order('(SELECT created_at FROM "translation_requests"
+    order('(SELECT MAX(created_at) FROM "translation_requests"
             WHERE post_id = posts.id) DESC').
     includes(:translations, {translation_requests: :user})
   }
