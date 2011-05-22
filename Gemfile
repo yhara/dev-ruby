@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.4'
+gem 'rails', '3.0.7'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'ancestry'
@@ -51,4 +51,5 @@ group :test do
   gem 'fakeweb'
   gem 'shoulda-context'
   gem 'spork'
+#  gem 'pg'
 end
