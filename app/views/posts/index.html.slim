@@ -12,9 +12,9 @@ h2 = @title
 
   - if params[:view] == "top_requested" and @posts.empty?
     p
-      ' All the 
+      ' Currently, all
       = link_to "requested posts", posts_path(view: "recent_requested")
-      '  are already traslated now :-)
+      '  have already been translated :-)
 
 - else
   = render "posts_tree", posts: @posts
