@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'rake', '0.8.7'
+
 gem 'rails', '3.0.7'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
@@ -7,8 +9,6 @@ gem 'ancestry'
 gem 'friendly_id'
 gem 'omniauth'
 gem 'will_paginate', '3.0.pre2'
-
-gem 'typus', '3.0.6'
 
 gem 'twitter'
 
@@ -51,5 +51,5 @@ group :test do
   gem 'fakeweb'
   gem 'shoulda-context'
   gem 'spork'
-#  gem 'pg'
+  gem 'pg'
 end

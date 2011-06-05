@@ -47,7 +47,6 @@ GEM
       rack (< 2, >= 1.1.0)
     faraday_middleware (0.6.3)
       faraday (~> 0.6.0)
-    fastercsv (1.5.4)
     friendly_id (3.2.1.1)
       babosa (~> 0.3.0)
     hashie (1.0.0)
@@ -102,6 +101,7 @@ GEM
       oa-more (= 0.2.2)
       oa-oauth (= 0.2.2)
       oa-openid (= 0.2.2)
+    pg (0.11.0)
     polyglot (0.3.1)
     pyu-ruby-sasl (0.0.3.2)
     rack (1.2.2)
@@ -128,8 +128,6 @@ GEM
     rake (0.8.7)
     rash (0.3.0)
       hashie (~> 1.0.0)
-    render_inheritable (1.0.0)
-      rails (~> 3.0)
     rest-client (1.6.1)
       mime-types (>= 1.16)
     ruby-openid (2.1.8)
@@ -167,10 +165,6 @@ GEM
       multi_xml (~> 0.2.0)
       rash (~> 0.3.0)
       simple_oauth (~> 0.1.4)
-    typus (3.0.6)
-      fastercsv (~> 1.5)
-      render_inheritable
-      will_paginate (~> 3.0.pre2)
     tzinfo (0.3.26)
     will_paginate (3.0.pre2)
 
@@ -184,7 +178,9 @@ DEPENDENCIES
   friendly_id
   nokogiri
   omniauth
+  pg
   rails (= 3.0.7)
+  rake (= 0.8.7)
   sass
   shoulda-context
   slim
@@ -194,5 +190,4 @@ DEPENDENCIES
   thin
   turn
   twitter
-  typus (= 3.0.6)
   will_paginate (= 3.0.pre2)
