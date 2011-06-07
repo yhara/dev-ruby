@@ -16,6 +16,7 @@ gem 'twitter'
 gem 'slim'
 gem "slim-rails"
 gem 'sass'
+gem 'jquery-rails', '>= 1.0.3'
 
 # tools
 gem 'nokogiri'
