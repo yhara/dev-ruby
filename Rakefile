@@ -13,5 +13,5 @@ end
 
 desc "start postgres"
 task "start_postgres" do
-  sh "sudo -u postgres /opt/local/lib/postgresql83/bin/postgres -D /opt/local/var/db/postgresql83/defaultdb"
+  sh "postgres -D /usr/local/var/postgres"
 end
