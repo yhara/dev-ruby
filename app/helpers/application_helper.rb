@@ -9,12 +9,12 @@ module ApplicationHelper
   end
 
   def format_body(body)
-    (detect_quotes(
-      detect_svn_revisions(
-        detect_ruby_ml_links(
-          detect_urls(         # this should be applied first.
-            h(body)))))
-    ).html_safe
+    detect_quotes(
+    detect_redmine_ticket_numbers(
+    detect_svn_revisions(
+    detect_ruby_ml_links(
+    detect_urls(         # this should be applied first.
+      h(body)))))).html_safe
   end
 
   private
@@ -34,6 +34,13 @@ module ApplicationHelper
   def detect_svn_revisions(txt)
     txt.gsub(/r(\d+)/){|match|
       url = "http://svn.ruby-lang.org/cgi-bin/viewvc.cgi?view=rev&revision=#{$1}"
+      link_to match, url
+    }
+  end
+
+  def detect_redmine_ticket_numbers(txt)
+    txt.gsub(/#(\d+)/){|match|
+      url = "http://redmine.ruby-lang.org/issues/#{$1}"
       link_to match, url
     }
   end
