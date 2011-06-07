@@ -9,12 +9,13 @@ module ApplicationHelper
   end
 
   def format_body(body)
+   hide_redmine_ticket_description(
     detect_quotes(
     detect_redmine_ticket_numbers(
     detect_svn_revisions(
     detect_ruby_ml_links(
     detect_urls(         # this should be applied first.
-      h(body)))))).html_safe
+      h(body))))))).html_safe
   end
 
   private
@@ -72,5 +73,18 @@ module ApplicationHelper
         "</span>"
       ].join
     }
+  end
+
+  REDMINE_DESC = %r{(.*)(----------------------------------------)(.*http://redmine.ruby-lang.org</a>\n\n)\z}m
+  def hide_redmine_ticket_description(txt)
+    if txt =~ REDMINE_DESC
+      main, _, rest = $1, $2, $3
+      bar = "---(click to toggle ticket description)---"
+      "#{main}<a href='#'>\n<span class='redmine_desc_bar'>#{bar}</span></a><span class='redmine_desc'>#{rest}</span>"
+    else
+      txt
+    end
+
+    # see also: layouts/application
   end
 end

@@ -4,7 +4,7 @@ html
     meta charset="utf-8"
     title ruby-dev translation (beta)
     = stylesheet_link_tag :all
-    = javascript_include_tag :defaults
+    = javascript_include_tag "jquery", "jquery_ujs"
     = csrf_meta_tag
 
     link rel="alternate" type="application/rss+xml" title="RSS (for readers)" href="#{rss_path(view: 'reader')}"
@@ -21,6 +21,24 @@ html
        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
        })();
+      </script>
+
+    // CSS and javascript for hiding redmine's ticket description
+    // see also: application_helper
+    | <style> .redmine_desc{ display: none; }</style>
+      <script>
+        $(function(){
+          var descs = $.makeArray($(".redmine_desc"));
+          // show the desc of the first mail of the thread
+          $(descs[0]).show();
+
+          $(".redmine_desc_bar").each(function(i, elem){
+            $(elem).click(function(){
+              $(descs[i]).toggle();
+              return false;
+            });
+          });
+        });
       </script>
 
   body
