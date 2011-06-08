@@ -11,9 +11,24 @@ h1 Edit subject
           li= msg
 
   .field
-    = f.text_field :subject, value: @topic.subject, size: 100
+    = f.text_field :subject, value: @topic.subject, size: 150
 
   .actions
     = f.submit :value => "Save"
+
+h3
+  span.post_number
+    = link_to @topic.root.number
+  '
+  span.post_from 
+    = @topic.root.from
+  '
+  span.post_time
+    = "(#{@topic.root.time})"
+  br
+  span.post_subject
+    = @topic.root.subject
+
+pre = @topic.root.body
 
 = link_to "back", :back
