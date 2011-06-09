@@ -21,7 +21,7 @@ module ApplicationHelper
   private
 
   def detect_urls(txt)
-    txt.gsub(%r{https?://[A-Za-z0-9\/.~:@!\$&'\(\)%_-]+}){|match|
+    txt.gsub(%r{https?://[A-Za-z0-9\/.~:@!\$&'\(\)%_-#]+}){|match|
       [
         "<a href='",
         match,
