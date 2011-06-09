@@ -1,3 +1,10 @@
+// Renders a tree of posts like:
+//
+// - fix stateless-iso-2022-jp - [Backport92 - Backport #4348]
+//   - 43600 : Yuki Sonoda <yugui yugui.jp> @ 2011-05-31 11:31:23 +0900 (star)
+//   - 43602 : Yuki Sonoda <yugui yugui.jp> @ 2011-05-31 13:47:06 +0900 (star)
+//
+
 .post_index
   - @posts.each do |root, tree|
     ul.post_tree

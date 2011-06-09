@@ -1,0 +1,31 @@
+- posts.each do |post|
+  .post.clearfix
+    a name="#{post.number}"
+    h3
+      span.post_number
+        = link_to post.number, post_path(root, anchor: post.number)
+      '
+      span.post_from 
+        = post.from
+      '
+      span.post_time
+        = "(#{post.time})"
+      '
+      span.post_subject
+        = post.subject
+
+    .left
+      - if (tr = post.translation)
+        pre = format_body(tr.body)
+        = link_to 'Refine translation', new_post_translation_path(post.number)
+        = " / "
+        = link_to "View logs (#{post.translations.size})", post_translations_path(post.number)
+
+      - else
+        pre 
+          | [Translation not available]
+        = link_to 'Add translation', new_post_translation_path(post.number)
+
+    .right
+      pre = format_body(post.body)
+

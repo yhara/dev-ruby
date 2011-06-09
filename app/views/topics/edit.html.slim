@@ -16,19 +16,9 @@ h1 Edit subject
   .actions
     = f.submit :value => "Save"
 
-h3
-  span.post_number
-    = link_to @topic.root.number
-  '
-  span.post_from 
-    = @topic.root.from
-  '
-  span.post_time
-    = "(#{@topic.root.time})"
-  br
-  span.post_subject
-    = @topic.root.subject
+br
+br
 
-pre = @topic.root.body
+= render "posts/posts_thread", posts: [@topic.root] + @topic.root.descendants.includes(:translations), root: @topic.root
 
 = link_to "back", :back
