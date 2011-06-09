@@ -17,7 +17,7 @@ class Activity
   def translated(n)
     Translation.includes(:post).
       where(user_id: @user.id).
-      order(:created_at).
+      order("created_at DESC").
       limit(n).to_a
   end
 
@@ -26,14 +26,14 @@ class Activity
       where("post_id IN (?) AND user_id <> ?",
             translated(n).map{|tr| tr.post.id},
             @user.id).
-      order(:created_at).
+      order("created_at DESC").
       limit(n).to_a
   end
 
   def requested(n)
     TranslationRequest.includes(:post).
       where(user_id: @user.id).
-      order(:created_at).
+      order("created_at DESC").
       limit(n).to_a
   end
 end
