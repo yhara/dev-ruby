@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_friendly_id :name
 
   # prohibit MetaSearch to search using user information
-  attr_unsearchable *User.column_names
+  attr_unsearchable *self.column_names
   assoc_unsearchable :accounts, :translations, :translation_requests, :posts
 
   # Validations
