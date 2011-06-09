@@ -8,7 +8,10 @@
         = link_to post.number, post_path(root, anchor: post.number)
       '
       span.post_from 
-        = post.from
+        = link_to post.from_name, posts_path(:view => "search", :'search[from_contains]' => post.from_name)
+        |  &lt;
+        = post.from_address
+        | &gt;
       '
       span.post_time
         = "(#{post.time})"

@@ -124,4 +124,13 @@ class Post < ActiveRecord::Base
       "not_translated"
     end
   end
+
+  REXP_FROM = /(.*) <(.*)>/
+  def from_name
+    self.from[REXP_FROM, 1]
+  end
+
+  def from_address
+    self.from[REXP_FROM, 2]
+  end
 end

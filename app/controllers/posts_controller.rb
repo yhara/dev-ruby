@@ -19,7 +19,7 @@ class PostsController < ApplicationController
                                                per_page: 20)
       @title = "Recent translated"
     when "search"
-      search = Post.search(params[:search])
+      search = Post.search(params[:search]).order("number DESC")
       @posts = search.paginate(page: params[:page], per_page: 20)
       @title = "Search result"
     else
