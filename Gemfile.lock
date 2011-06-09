@@ -138,6 +138,8 @@ GEM
       ruby-openid (>= 2.1.7)
     rubyntlm (0.1.1)
     sass (3.1.0.alpha.256)
+    searchlogic (2.4.28)
+      activerecord (>= 2.0.0)
     shoulda-context (1.0.0.beta1)
     simple_oauth (0.1.4)
     slim (0.9.4)
@@ -186,6 +188,7 @@ DEPENDENCIES
   rails (= 3.0.7)
   rake (= 0.8.7)
   sass
+  searchlogic
   shoulda-context
   slim
   slim-rails
