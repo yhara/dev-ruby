@@ -42,6 +42,7 @@ html
       </script>
 
   body
+    // Header
     #header
       #user_nav
         - if current_user
@@ -64,7 +65,13 @@ html
         li = link_to "Recently requested", posts_path(view: :recent_requested)
         li = link_to "Your activities", activities_path
       li = link_to "RSS", rss_path
+      li.search
+        = form_for Post.search(params[:search]) do |f|
+          = hidden_field_tag :view, "search"
+          = f.text_field :topic_subject_or_translations_body_contains
+          = submit_tag "Search"
 
+    // Content
     #content
       - if flash[:error] or flash[:notice]
         #flash
@@ -73,6 +80,7 @@ html
 
       = yield
 
+    // Footer
     #footer
       div
         | ruby-dev translation

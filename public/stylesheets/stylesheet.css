@@ -86,6 +86,10 @@ ul#menu {
     ul#menu li a:hover {
       color: orange;
       background: inherit; }
+  ul#menu li.search {
+    float: right; }
+    ul#menu li.search input {
+      height: 100%; }
 
 #footer {
   width: 100%;

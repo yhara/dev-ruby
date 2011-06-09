@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   # Plugins
   has_friendly_id :name
 
+  # prohibit MetaSearch to search using user information
+  attr_unsearchable *User.column_names
+  assoc_unsearchable :accounts, :translations, :translation_requests, :posts
+
   # Validations
   validates_presence_of :name, :timezone
   validates_uniqueness_of :name

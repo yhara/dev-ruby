@@ -18,6 +18,10 @@ class PostsController < ApplicationController
       @posts = Post.recent_translated.paginate(page: params[:page],
                                                per_page: 20)
       @title = "Recent translated"
+    when "search"
+      search = Post.search(params[:search])
+      @posts = search.paginate(page: params[:page], per_page: 20)
+      @title = "Search result"
     else
       @title = "Recent posts"
       @topics = Topic.includes(:root).
