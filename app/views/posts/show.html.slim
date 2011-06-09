@@ -5,7 +5,7 @@ h2
     a.edit_subject href="#{edit_topic_path(@root.topic)}"
       | (edit subject)
 
-= render "posts_thread", posts: @posts, root: @root
+= render "posts_thread", root: @root
 
 div
   = link_to 'Back', posts_path

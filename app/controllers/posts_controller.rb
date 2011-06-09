@@ -39,7 +39,6 @@ class PostsController < ApplicationController
   def show
     if @post.root?
       @root = @post
-      @posts = [@root] + @root.descendants.includes(:translations)
 
       respond_to do |format|
         format.html # show.html.erb

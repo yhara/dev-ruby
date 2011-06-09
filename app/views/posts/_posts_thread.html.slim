@@ -1,3 +1,5 @@
+- posts = [root] + root.descendants.includes(:translations)
+
 - posts.each do |post|
   .post.clearfix
     a name="#{post.number}"
