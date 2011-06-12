@@ -17,6 +17,7 @@ class TopicsControllerTest < ActionController::TestCase
 
       orig = @topic.subject
 
+      request.env["HTTP_REFERER"] = root_url
       put :update, id: @topic.to_param,
                    topic: @topic.attributes.update(subject: "hi")
 

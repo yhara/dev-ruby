@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
 
     if @topic.update_attributes(params[:topic])
-      redirect_to(root_path, :notice => 'Subject was successfully updated.') 
+      redirect_to :back, :notice => 'Subject was successfully updated.'
     else
       render :action => "edit"
     end
