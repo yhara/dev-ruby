@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
+    session[:from] = request.referer
   rescue ActiveRecord::RecordNotFound
     not_found
   end
@@ -11,7 +12,8 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
 
     if @topic.update_attributes(params[:topic])
-      redirect_to :back, :notice => 'Subject was successfully updated.'
+      to = session[:from] || posts_path
+      redirect_to to, :notice => 'Subject was successfully updated.'
     else
       render :action => "edit"
     end
