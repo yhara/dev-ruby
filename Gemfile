@@ -49,7 +49,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'turn'
+#  gem 'turn'
+  gem 'simplecov'
   gem 'fakeweb'
   gem 'shoulda-context'
   gem 'spork'
