@@ -3,7 +3,7 @@ require 'test_helper'
 class ApplicationHelperTest < ActionView::TestCase
   def test_detect_urls
     before = "see also: http://example.com/"
-    after  = "see also: <a href='http://example.com/'>http://example.com/</a>" 
+    after  = "see also: <a href=\"http://example.com/\">http://example.com/</a>" 
     assert_equal after, detect_urls(before)
   end
 
@@ -35,5 +35,45 @@ class ApplicationHelperTest < ActionView::TestCase
     before = "| hello"
     after  = "<span class='quote'>| hello</span>"
     assert_equal after, detect_quotes(before)
+  end
+
+  def test_hide_redmine_ticket_description
+    before = %{
+Issue #5363 has been updated by someone.
+
+Category set to ext
+Target version set to 1.9.3
+
+----------------------------------------
+Bug #1234: test-all fails
+<a href="http://redmine.ruby-lang.org/issues/1234">http://redmine.ruby-lang.org/issues/1234</a>
+
+ticket description
+--------------------------------------------
+some more description
+
+-- 
+<a href="http://redmine.ruby-lang.org">http://redmine.ruby-lang.org</a>
+
+}
+    after = %{
+Issue #5363 has been updated by someone.
+
+Category set to ext
+Target version set to 1.9.3
+
+<a href='#'><span class='redmine_desc_bar'>---(click to toggle ticket description)---</span></a>
+<span class='redmine_desc'>Bug #1234: test-all fails
+<a href="http://redmine.ruby-lang.org/issues/1234">http://redmine.ruby-lang.org/issues/1234</a>
+
+ticket description
+--------------------------------------------
+some more description
+
+-- 
+<a href="http://redmine.ruby-lang.org">http://redmine.ruby-lang.org</a>
+
+</span>}
+    assert_equal after, hide_redmine_ticket_description(before)
   end
 end

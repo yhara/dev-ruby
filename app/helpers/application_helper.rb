@@ -23,9 +23,9 @@ module ApplicationHelper
   def detect_urls(txt)
     txt.gsub(%r{https?://[A-Za-z0-9\/.~:@!\$&'\(\)%_#-]+}){|match|
       [
-        "<a href='",
+        "<a href=\"",
         match,
-        "'>",
+        "\">",
         match,
         "</a>",
       ].join
@@ -75,16 +75,20 @@ module ApplicationHelper
     }
   end
 
-  REDMINE_DESC = %r{(.*)(----------------------------------------)(.*http://redmine.ruby-lang.org</a>\n\n)\z}m
+  # Redmine adds the description of the ticket to every mail.
+  # If a mail includes horizontal bar (----) and ends with link to redmine,
+  # generate tag for folding the description.
+  A_LINE = %r{^[^\n]+\n}
+  TICKET_LINK = %r{<a href=\"http://redmine.ruby-lang.org/issues[^\n]+</a>}
+  REDMINE_DESC = %r{(.*)(-{40})\n(#{A_LINE}#{TICKET_LINK}.*http://redmine.ruby-lang.org</a>\n\n)\z}m
   def hide_redmine_ticket_description(txt)
     if txt =~ REDMINE_DESC
       main, _, rest = $1, $2, $3
       bar = "---(click to toggle ticket description)---"
-      "#{main}<a href='#'>\n<span class='redmine_desc_bar'>#{bar}</span></a><span class='redmine_desc'>#{rest}</span>"
+      "#{main}<a href='#'><span class='redmine_desc_bar'>#{bar}</span></a>\n<span class='redmine_desc'>#{rest}</span>"
     else
       txt
     end
-
-    # see also: layouts/application
+    # see also: JavaScript included in layouts/application
   end
 end
