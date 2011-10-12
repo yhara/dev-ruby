@@ -8,6 +8,6 @@ class Translation < ActiveRecord::Base
   def revision
     Translation.where(post_id: self.post_id).
       order(:created_at).
-      to_a.index(self)
+      to_a.index(self) + 1
   end
 end
