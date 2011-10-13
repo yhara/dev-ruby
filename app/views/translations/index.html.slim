@@ -3,26 +3,37 @@ h2
   = link_to @post.number, @post
   | ]
 
-- @diffs.each do |a, b, (sidea, sideb)|
-  .post.clearfix
-    .left
-      h3 = "Revision #{a.revision}"
-      .translated_by
-        = link_to a.user.name, a.user
-      .translated_at
-        = a.created_at
-      pre
-        == format_diffside(sidea)
+- if @diffs
+  - @diffs.each do |a, b, (sidea, sideb)|
+    .post.clearfix
+      .left
+        h3 = "Revision #{a.revision}"
+        .translated_by
+          = link_to a.user.name, a.user
+        .translated_at
+          = a.created_at
+        pre
+          == format_diffside(sidea)
 
-    .right
-      a name="#{a.revision}"
-      h3 = "Revision #{b.revision}"
-      .translated_by
-        = link_to b.user.name, b.user
-      .translated_at
-        = b.created_at
-      pre
-        == format_diffside(sideb)
+      .right
+        a name="#{a.revision}"
+        h3 = "Revision #{b.revision}"
+        .translated_by
+          = link_to b.user.name, b.user
+        .translated_at
+          = b.created_at
+        pre
+          == format_diffside(sideb)
+- elsif @translation
+  a name="#{@translation.revision}"
+  h3 = "Revision #{@translation.revision}"
+  .translated_by
+    = link_to @translation.user.name, @translation.user
+  .translated_at
+    = @translation.created_at
+  pre
+    = @translation.body
+  
   
 p
   = link_to 'back', @post

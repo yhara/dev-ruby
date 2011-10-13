@@ -4,9 +4,16 @@ class TranslationsController < ApplicationController
 
   def index
     @translations = @post.translations.order("created_at")
-    @diffs = @translations.each_cons(2).map{|tr_a, tr_b|
-      [tr_a, tr_b, tr_b.diff_from(tr_a)]
-    }
+    case @translations.size
+    when 0
+      # assign nothing
+    when 1
+      @translation = @translations.first
+    else
+      @diffs = @translations.each_cons(2).map{|tr_a, tr_b|
+        [tr_a, tr_b, tr_b.diff_from(tr_a)]
+      }
+    end
   end
 
   def new
