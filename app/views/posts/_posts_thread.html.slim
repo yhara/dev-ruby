@@ -23,8 +23,9 @@
       - if (tr = post.translation)
         pre = format_body(tr.body)
         = link_to 'Refine translation', new_post_translation_path(post.number)
-        = " / "
-        = link_to "View logs (#{post.translations.size})", post_translations_path(post.number)
+        - if post.translations.size >= 2
+          = " / "
+          = link_to "View logs (#{post.translations.size})", post_translations_path(post.number)
 
       - else
         pre 
