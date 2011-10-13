@@ -54,7 +54,7 @@ group :test do
   gem 'fakeweb'
   gem 'shoulda-context'
   gem 'spork'
-#  gem 'spork-testunit'
+  gem 'spork-testunit'
 #  gem 'test-unit'
   gem 'pg'
 end
