@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rake', '0.8.7'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.0.10'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'ancestry'
@@ -54,5 +54,7 @@ group :test do
   gem 'fakeweb'
   gem 'shoulda-context'
   gem 'spork'
+#  gem 'spork-testunit'
+#  gem 'test-unit'
   gem 'pg'
 end
