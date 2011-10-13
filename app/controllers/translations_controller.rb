@@ -3,7 +3,10 @@ class TranslationsController < ApplicationController
   before_filter :require_login, :only => [:new, :create]
 
   def index
-    @translations = @post.translations.order("created_at DESC")
+    @translations = @post.translations.order("created_at")
+    @diffs = @translations.each_cons(2).map{|tr_a, tr_b|
+      [tr_a, tr_b, tr_b.diff_from(tr_a)]
+    }
   end
 
   def new

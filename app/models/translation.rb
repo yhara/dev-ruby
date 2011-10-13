@@ -10,4 +10,14 @@ class Translation < ActiveRecord::Base
       order(:created_at).
       to_a.index(self) + 1
   end
+
+  def diff_from(other)
+    a, b = self, other
+
+    diff = Diff::LCS.sdiff(a.body.lines.to_a,
+                           b.body.lines.to_a)
+
+    [diff.map{|item| [item.action, item.old_element]},
+     diff.map{|item| [item.action, item.new_element]}]
+  end
 end

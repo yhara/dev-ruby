@@ -19,4 +19,15 @@ module TranslationsHelper
           format "%04d-%02d-%02d ", $1, $2, $3
         }
   end
+
+  def format_diffside(diffside)
+    diffside.map{|action, line|
+      if action != "="
+        "<b>#{action} #{h line || "\n"}</b>"
+      else
+        "  #{h line}"
+      end
+    }.join
+  end
+
 end

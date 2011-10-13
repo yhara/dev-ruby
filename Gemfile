@@ -10,7 +10,7 @@ gem 'friendly_id'
 gem 'omniauth'
 gem 'will_paginate', '3.0.pre2'
 gem 'meta_search'
-
+gem 'diff-lcs'
 gem 'twitter'
 
 # view
