@@ -40,4 +40,15 @@ class TranslationTest < ActiveSupport::TestCase
       assert_equal false, Translation.new(attrs).valid?
     end
   end
+
+  context "#diff_from" do
+    should "make a diff of two translations" do
+      a = Fabricate(:translation, body: "hello\nworld")
+      b = Fabricate(:translation, body: "Hello\nworld")
+
+      assert_equal [[["!", "hello\n"], ["=", "world"]],
+                    [["!", "Hello\n"], ["=", "world"]]],
+                   a.diff_from(b)
+    end
+  end
 end

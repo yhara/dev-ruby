@@ -13,3 +13,14 @@ Fabricator(:account) do
   name { "account#{Fabricate.sequence(:account_name, 1)}" }
 end
 
+Fabricator(:translation) do
+  post!
+  body { "hellohello" }
+  user!
+end
+
+Fabricator(:user) do
+  name { "user#{Fabricate.sequence(:user, 1)}" }
+  profile_image_url { "http://example.jp/a.png" }
+end
+
