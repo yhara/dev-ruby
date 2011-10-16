@@ -10,12 +10,48 @@ Design
 Model
 -----
 
-* User(name, ..)
-* Mail(number, subject, from, date, inReplyTo, body)
-* Translation(mail, text)
-* Request(user, mail)
+### Related to posts (mails)
 
-* Badged(user, badgeNo)
+* Post
+  * Integer number
+  * String subject, from, body
+  * Datetime time
+  * Post forms trees with help of has_ancestry.
+    * post.parent : parent post
+    * post.root : root of the topic (tree of post)
+    * post.root.topic : topic which post belongs to 
+
+* Topic
+  * String subject
+  * Datetime last_update
+  * topic.root : a post
+
+Topic caches the time of the latest mail in the tree.
+Topic is automatically created when new post is created.
+topic.last_update is automatically updated when new post is added.
+
+
+### Related to translations
+
+* Translation
+  * Text body
+  * Datetime created_at
+  * translation.post : the original post
+
+* TranslationRequest
+  * Datetime created_at, updated_at
+  * translation_request.user : a user
+  * translation_request.post : a post
+
+### Related to users
+
+* User
+  * String name, timezone, profile_image_url
+  * Datetime created_at, updated_at
+  * user.accounts : list of accounts
+
+* Account
+  * String provider, uid, name
 
 URL
 ---

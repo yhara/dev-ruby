@@ -31,8 +31,6 @@ Spork.prefork do
 
   # For debugging
 
-  class Post; def inspect; "#<Post #{self.number}>"; end; end
-
   module Enumerable
     def each_p
       puts "[each_p]"
@@ -40,8 +38,11 @@ Spork.prefork do
       puts "[/each_p]"
     end
   end
+
+  class Post; def inspect; "#<Post #{self.number}>"; end; end
 end
 
 Spork.each_run do
+  load "app/models/topic.rb"
 end
 

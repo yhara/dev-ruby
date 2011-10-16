@@ -9,4 +9,19 @@ class Topic < ActiveRecord::Base
     not self.subject.ascii_only?
   end
 
+  def merge_to(post)
+    raise ArgumentError unless post.is_a?(Post)
+
+    other_topic = post.root.topic
+
+    self.root.parent = post
+    self.root.save!
+
+    if self.last_update > other_topic.last_update
+      other_topic.last_update = self.last_update
+      other_topic.save!
+    end
+
+    self.destroy
+  end
 end
